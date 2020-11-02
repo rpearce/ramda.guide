@@ -18,135 +18,37 @@ body {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*-moz-font-feature-settings: "kern", "liga", "clig", "calt";*/
-  /*-ms-font-feature-settings: "kern", "liga", "clig", "calt";*/
-  /*-webkit-font-feature-settings: "kern", "liga", "clig", "calt";*/
-  /*font-feature-settings: "kern", "liga", "clig", "calt";*/
+  -moz-font-feature-settings: "kern", "liga", "clig", "calt";
+  -ms-font-feature-settings: "kern", "liga", "clig", "calt";
+  -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
+  font-feature-settings: "kern", "liga", "clig", "calt";
 }
-body.dark {
-  --black: #282c34;
-  --blue: #61afef;
-  --cyan: #56b6c2;
-  --green: #98c379;
-  --grey-comment: #5c6370;
-  --grey-gutter: #4b5263;
-  --magenta: #c678dd;
-  --offwhite: #abb2bf;
-  --red-dark: #be5046;
-  --red-light: #e06c75;
-  --yellow-dark: #d19a66;
-  --yellow-light: #e5c07b;
-
-  --a-c-a: var(--blue);
-  --a-c: var(--magenta);
-  --b-bg: var(--magenta);
-  --c-a: var(--grey-comment);
-  --g-c: var(--grey-gutter);
-
-  --css-at: var(--magenta);
-  --css-bu: var(--cyan);
-  --css-default: var(--offwhite);
-  --css-dt: var(--yellow-dark);
-  --css-dv: var(--yellow-dark);
-  --css-fu: var(--cyan);
-  --css-kw: var(--offwhite);
-  --css-in: var(--blue);
-  --html-co: var(--grey-comment);
-  --html-kw: var(--red-light);
-  --html-ot: var(--yellow-dark);
-  --html-st: var(--green);
-
-  background-color: #1e2127;
-  color: #fff;
+body.light {
+  background-color: #fff;
+  color: #201d2c;
 }
-.am a, .a { color: var(--a-c); }
-.am a:active,
-.am a:hover,
-.am a:focus,
-.a:active,
-.a:hover,
-.a:focus {
-  color: var(--a-c-a);
-}
-.am a {
-  text-decoration: none;
-  box-shadow: 0 0.1rem 0 0 currentColor;
-}
-.bl5s { border-left: 5px solid; }
-.blcg { border-left-color: var(--g-c); }
 .bsu { box-shadow: 0 0.1rem 0 0 currentColor; }
-.cw { color: #fff; }
 .di { display: inline; }
 .ffs { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; }
 .ffss { font-family: Tahoma, Arial, sans-serif; }
 .fs { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-.fs14 { font-size: 1.4rem; }
 .fs18 { font-size: 1.8rem; }
 .fs24 { font-size: 2.4rem; }
 .fs32 { font-size: 3.2rem; }
 .fs40 { font-size: 4rem; }
-.fwb { font-weight: bold; }
+.fsi { font-style: italic; }
 .ha { hyphens: auto; }
 .lh11 { line-height: 1.1; }
 .lh14 { line-height: 1.4; }
 .lsn { list-style: none; }
 .m0 { margin: 0; }
-.ma { margin: auto; }
 .mb24 { margin-bottom: 2.4rem; }
-.mb5 { margin-bottom: 0.5rem; }
-.ml10 { margin-left: 1rem; }
 .ml20 { margin-left: 2rem; }
 .mr20 { margin-right: 2rem; }
 .mw120ch { max-width: 120ch; }
 .p0 { padding: 0; }
-.pl20 { padding-left: 2rem; }
 .tdn { text-decoration: none; }
 .wrbw { word-wrap: break-word; }
-
-pre.sourceCode { min-width: 100%; overflow: auto; }
-pre.sourceCode > code {
-  counter-reset: source-line 0;
-  -webkit-overflow-scrolling: touch;
-  overflow: auto;
-  word-wrap: normal;
-}
-pre.sourceCode > code > span { counter-increment: source-line; }
-pre.sourceCode > code > span > a {
-  text-decoration: none;
-  box-shadow: none;
-}
-pre.sourceCode > code > span > a:first-child::before {
-  content: counter(source-line) "|";
-  position: relative;
-  left: -2ch;
-  text-align: right;
-  vertical-align: baseline;
-  border: none;
-  display: inline-block;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  width: 5ch;
-  color: var(--c-a);
-}
-.css,
-.html {
-  color: var(--css-default);
-}
-.css .at /* Attribute */ { color: var(--css-at); }
-.css .bu /* BuiltIn */ { color: var(--css-bu); }
-.css .dt /* DataType */ { color: var(--css-dt); }
-.css .dv /* DecVal */ { color: var(--css-dv); }
-.css .fu /* Function */ { color: var(--css-fu); }
-.css .kw /* Keyword */ { color: var(--css-kw); }
-.css .in /* Information */ { color: var(--css-in); }
-.html .co /* Comment */ { color: var(--html-co); }
-.html .kw /* Keyword */ { color: var(--html-kw); }
-.html .ot /* Other */ { color: var(--html-ot); }
-.html .st  /* String */ { color: var(--html-st); }
 @media (min-width: 120ch) {
   .m880-mla { margin-left: auto; }
   .m880-mra { margin-right: auto; }
