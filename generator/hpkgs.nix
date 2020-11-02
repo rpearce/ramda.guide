@@ -1,7 +1,6 @@
 { compiler ? "ghc884"
 , pkgs
 }:
-
 let
   inherit (pkgs.lib.trivial) flip pipe;
   inherit (pkgs.haskell.lib) appendPatch appendConfigureFlags dontCheck;
@@ -18,13 +17,13 @@ let
             (flip appendConfigureFlags hakyllFlags)
           ];
 
-      my-site = hpNew.callCabal2nix "my-site" ./. {};
+      ramda-guide = hpNew.callCabal2nix "ramda-guide" ./. { };
 
       # because hakyll is marked as broken in nixpkgs
-      hslua = dontCheck (hpNew.callHackage "hslua" "1.0.3.2" {});
-      jira-wiki-markup = dontCheck (hpNew.callHackage "jira-wiki-markup" "1.1.4" {});
-      pandoc = dontCheck (hpNew.callHackage "pandoc" "2.9.2.1" {});
-      pandoc-types = dontCheck (hpNew.callHackage "pandoc-types" "1.20" {});
+      hslua = dontCheck (hpNew.callHackage "hslua" "1.0.3.2" { });
+      jira-wiki-markup = dontCheck (hpNew.callHackage "jira-wiki-markup" "1.1.4" { });
+      pandoc = dontCheck (hpNew.callHackage "pandoc" "2.9.2.1" { });
+      pandoc-types = dontCheck (hpNew.callHackage "pandoc-types" "1.20" { });
     };
   };
 in
