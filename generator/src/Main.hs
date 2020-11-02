@@ -20,7 +20,7 @@ import Text.Pandoc
 
 root :: String
 root =
-  "https://rpearce.github.io/hakyll-nix-template"
+  "https://ramda.guide"
 
 siteName :: String
 siteName =
