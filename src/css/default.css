@@ -58,6 +58,7 @@ body.light {
 .an { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
 .bn { border: none; }
 .btn { background-color: var(--btn-bgc); color: var(--btn-c); }
+.br0 { border-radius: 0; }
 .cp { cursor: pointer; }
 .df { display: flex; }
 .di { display: inline; }
