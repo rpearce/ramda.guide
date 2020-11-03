@@ -15,13 +15,12 @@ body {
 }
 body {
   font-kerning: normal;
+  font-family: Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+  font-feature-settings: "kern", "liga", "clig", "calt";
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   -moz-font-feature-settings: "kern", "liga", "clig", "calt";
   -ms-font-feature-settings: "kern", "liga", "clig", "calt";
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
-  font-feature-settings: "kern", "liga", "clig", "calt";
 }
 body.light {
   --a-c: #046b99;
@@ -40,8 +39,7 @@ body.light {
 .a:hover { color: var(--a-c-h); }
 .bsu { box-shadow: 0 0.1rem 0 0 currentColor; }
 .di { display: inline; }
-.ffs { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; }
-.ffss { font-family: Tahoma, Arial, sans-serif; }
+.fi { font: inherit; }
 .fs { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .fs14 { font-size: 1.4rem; }
 .fs18 { font-size: 1.8rem; }
