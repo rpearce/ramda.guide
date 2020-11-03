@@ -24,14 +24,26 @@ body {
   font-feature-settings: "kern", "liga", "clig", "calt";
 }
 body.light {
+  --a-c: #046b99;
+  --a-c-a: #111819;
+  --a-c-h: #00547a;
+  --a-c-v: #54278f;
+  --a-o-f-bc: #2491ff;
+
   background-color: #fff;
   color: #201d2c;
 }
+.a { color: var(--a-c); }
+.a:visited { color: var(--a-c-v); }
+.a:active { color: var(--a-c-a); }
+.a:focus { outline: 0.36rem solid var(--a-o-f-bc); outline-offset: 0; }
+.a:hover { color: var(--a-c-h); }
 .bsu { box-shadow: 0 0.1rem 0 0 currentColor; }
 .di { display: inline; }
 .ffs { font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; }
 .ffss { font-family: Tahoma, Arial, sans-serif; }
 .fs { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.fs14 { font-size: 1.4rem; }
 .fs18 { font-size: 1.8rem; }
 .fs24 { font-size: 2.4rem; }
 .fs32 { font-size: 3.2rem; }
