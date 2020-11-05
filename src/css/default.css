@@ -75,7 +75,7 @@ body.light {
 .fs32 { font-size: 3.2rem; }
 .fs60 { font-size: 6rem; }
 .fsi { font-style: italic; }
-.ha { hyphens: auto; }
+.ha { -webkit-hyphens: auto; -ms-hyphens: auto; hyphens: auto; }
 .ipt-t { border: 1px solid var(--ipt-t-bc); }
 .lh11 { line-height: 1.1; }
 .lh14 { line-height: 1.4; }

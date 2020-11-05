@@ -114,7 +114,6 @@ feedCtx =
     <> postCtx
     <> bodyField "description"
 
-
 postCtx :: Context String
 postCtx =
   constField "root" root
