@@ -65,8 +65,8 @@ main = hakyllWith config $ do
     route $ metadataRoute titleRoute
     compile $
       pandocCompilerCustom
-        >>= loadAndApplyTemplate "templates/post.html" ctx
         >>= saveSnapshot "content"
+        >>= loadAndApplyTemplate "templates/post.html" ctx
         >>= loadAndApplyTemplate "templates/default.html" ctx
 
   match "index.html" $ do
