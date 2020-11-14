@@ -4,21 +4,21 @@ lang: "en"
 title: "Ramda Ramp-Up Guide"
 ---
 
-<header class="m880-mla m880-mra ml20 mr20 mw120ch">
-  <h1 class="fs60 lh11 mb32 mt48">Ramda Ramp-Up Guide</h1>
+<header class="m880-mla m880-mra ml20 mr20 mw68ch">
+  <h1 class="fs111 fwn lh11 mb32 mt48 spc1">Ramda Ramp-Up Guide</h1>
 </header>
 <main>
-  <section class="m880-mla m880-mra ml20 mr20 mw120ch">
-    <h2 class="fs32 lh11 mb32 mt48">What is this?</h2>
-    <p class="fs18 lh14">
+  <section class="m880-mla m880-mra ml20 mr20 mw68ch">
+    <h2 class="fs56 fwn lh11 mb32 mt48 spc2">What is this?</h2>
+    <p>
       This will be an in-depth guide to help get you mostly adequate with
       <a class="a fo foo0" href="https://ramdajs.com/">ramda.js</a>: &ldquo;a
       practical functional library for JavaScript programmers&rdquo;.
     </p>
   </section>
-  <section class="m880-mla m880-mra ml20 mr20 mw120ch">
-    <h2 class="fs32 lh11 mb32 mt48">Outline (work in progress)</h2>
-    <ol class="fs18 lh14">
+  <section class="m880-mla m880-mra ml20 mr20 mw68ch">
+    <h2 class="fs56 fwn lh11 mb32 mt48 spc2">Outline (work in progress)</h2>
+    <ol>
       <li>
         Preface
         <ol>
@@ -51,14 +51,14 @@ title: "Ramda Ramp-Up Guide"
         </ol>
       </li>
       <li>
-        Our First Dive Into Ramda: Accessing Objects
+        Our First Dive Into Ramda: Accessing &amp; Testing Objects
         <ol>
           <li>
             Reading Shallow Object Properties
             (<code>prop</code>, <code>propOr</code>, <code>props</code>, <code>pick</code>)
           </li>
           <li>
-            Evaluating Shallow Object Properties
+            Testing Shallow Object Properties
             (<code>has</code>, <code>propEq</code>, <code>propIs</code>, <code>propSatisfies</code>)
           </li>
           <li>
@@ -66,7 +66,7 @@ title: "Ramda Ramp-Up Guide"
             (<code>path</code>, <code>pathOr</code>, <code>paths</code>)
           </li>
           <li>
-            Evaluating Deeply Nested Object Properties
+            Testing Deeply Nested Object Properties
             (<code>hasPath</code>, <code>pathEq</code>, <code>pathSatisfies</code>)
           </li>
         </ol>
@@ -116,7 +116,7 @@ title: "Ramda Ramp-Up Guide"
         </ol>
       </li>
       <li>
-        More on Accessing &amp; Updating Objects
+        More on Object Manipulation
         <ol>
           <li>
             Setting Key/Value Pairs On An Object
@@ -131,6 +131,26 @@ title: "Ramda Ramp-Up Guide"
             (<code>mergeRight</code>, <code>mergeDeepRight</code>, <code>mergeLeft</code>, <code>mergeWith</code>)
           </li>
           <li>Updating Values If They Exist (<code>evolve</code>)</li>
+        </ol>
+      </li>
+      <li>
+        Strings: Tying Up Some Loose Ends
+        <ol>
+          <li>
+            Uppercasing &amp; Lowercasing Text
+            (<code>toUpper</code>, <code>toLower</code>)
+          </li>
+          <li>Scanning Text for Matches (<code>match</code>)</li>
+          <li>
+            Sanitizing Hashtag Text
+            (<code>replace</code>, <code>trim</code>, <code>test</code>, <code>split</code>)
+          </li>
+        </ol>
+      </li>
+      <li>
+        Lists: <code>map</code>ping the Landscape
+        <ol>
+          <li></li>
         </ol>
       </li>
       <li>?</li>
@@ -169,13 +189,13 @@ title: "Ramda Ramp-Up Guide"
   </section>
 </main>
 <footer>
-  <section class="ml20 mr20 m880-mla m880-mra mw120ch">
-    <h2 class="fs32 lh11 mb32 mt48">Keep learning ramda</h2>
-    <p class="fs18 lh14">
+  <section class="ml20 mr20 m880-mla m880-mra mw68ch">
+    <h2 class="fs56 fwn lh11 mb32 mt48 spc2">Keep learning ramda</h2>
+    <p>
       I’ll notify you when new content is available that will take your ramda
       skills to the next level.
     </p>
-    <p class="fs18 lh14">Get notified by subscribing below.</p>
+    <p>Get notified by subscribing below.</p>
     <form
       action="https://app.convertkit.com/forms/1788376/subscriptions"
       method="post"
@@ -183,23 +203,23 @@ title: "Ramda Ramp-Up Guide"
       <div class="df">
         <input
           aria-label="Email address"
-          class="an br0 f100-1-auto fi fo foo0 fs18 ipt-t lh14 mr10 p12"
+          class="an br0 f100-1-auto fi fo foo0 ipt-t lhi mr10 p12"
           name="email_address"
           placeholder="Email address"
           required=""
           type="email"
         />
         <button
-          class="btn an bn cp f1-1-auto fi fo foo4 fs fs18 lh14 p12"
+          class="btn an bn cp f1-1-auto fi fo foo4 fs lhi p12"
           type="submit"
         >
           Subscribe
         </button>
       </div>
-      <div class="fs14 lh14 mt5">
+      <div class="fs16 lh14 mt5">
         I won't send you spam. Unsubscribe at any time.
         <a
-          class="a fo foo0 fs14 lh14"
+          class="a fo foo0"
           href="https://convertkit.com?utm_source=dynamic&amp;utm_medium=referral&amp;utm_campaign=poweredby&amp;utm_content=form"
           rel="noopener noreferrer"
           target="_blank"
@@ -209,11 +229,11 @@ title: "Ramda Ramp-Up Guide"
       </div>
     </form>
     <ul class="lsn mb24 p0" role="list">
-      <li class="di fs18" role="listitem">
-        <a class="a fo foo0 fs18 lh14" href="./rss.xml">RSS</a>
+      <li class="di" role="listitem">
+        <a class="a fo foo0" href="./rss.xml">RSS</a>
       </li>
-      <li class="di fs18" role="listitem">
-        <a class="a fo foo0 fs18 lh14" href="./atom.xml">Atom</a>
+      <li class="di" role="listitem">
+        <a class="a fo foo0 " href="./atom.xml">Atom</a>
       </li>
     </ul>
   </section>
