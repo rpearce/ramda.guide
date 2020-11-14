@@ -70,6 +70,7 @@ body.light {
 .di { display: inline; }
 .f1-1-auto { flex: 1 1 auto; }
 .f100-1-auto { flex: 100 1 auto; }
+.fdc { flex-direction: column; }
 .fi { font: inherit; }
 .fo:focus { outline: 0.36rem solid var(--a-o-f-bc); }
 .foo0:focus { outline-offset: 0; }
@@ -87,6 +88,7 @@ body.light {
 .lhi { line-height: inherit; }
 .lsn { list-style: none; }
 .m0 { margin: 0; }
+.mb10 { margin-bottom: 1rem; }
 .mb24 { margin-bottom: 2.4rem; }
 .ml20 { margin-left: 2rem; }
 .mr10 { margin-right: 1rem; }
@@ -98,6 +100,11 @@ body.light {
 .spc1 { margin: var(--spc-1-t) 0 var(--spc-1); }
 .spc2 { margin: var(--spc-2-t) 0 var(--spc-2); }
 .wrbw { word-wrap: break-word; }
+@media (min-width: 68ch) {
+  .m68ch-fdr { flex-direction: row; }
+  .m68ch-mb0 { margin-bottom: 0; }
+  .m68ch-mr10 { margin-right: 1rem; }
+}
 @media (min-width: 120ch) {
   .m120ch-mla { margin-left: auto; }
   .m120ch-mra { margin-right: auto; }
