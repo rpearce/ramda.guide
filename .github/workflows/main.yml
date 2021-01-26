@@ -9,33 +9,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        # Nix flakes don't work on shallow clones
-        fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          # Nix flakes don't work on shallow clones
+          fetch-depth: 0
 
-    - name: Install Nix
-      uses: cachix/install-nix-action@v12
-      with:
-        install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20200618_377345e/install
-        extra_nix_config: |
-          experimental-features = nix-command flakes
+      - name: Install Nix
+        uses: cachix/install-nix-action@v12
+        with:
+          install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20200618_377345e/install
+          extra_nix_config: |
+            experimental-features = nix-command flakes
 
-    #- name: Build with cachix
-    #  uses: cachix/cachix-action@v8
-    #  with:
-    #    name: ramda-guide
-    #    signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
-    #    #authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      #- name: Build with cachix
+      #  uses: cachix/cachix-action@v8
+      #  with:
+      #    name: ramda-guide
+      #    signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+      #    #authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-    - run: nix flake check
-    - run: nix build
+      - run: nix flake check
+      - run: nix build
 
-    - name: Artifact pages
-      uses: actions/upload-artifact@v2
-      with:
-        name: pages
-        path: web
+      - name: Artifact pages
+        uses: actions/upload-artifact@v2
+        with:
+          name: pages
+          path: web
 
   deploy:
     if: github.ref == 'refs/heads/main'
