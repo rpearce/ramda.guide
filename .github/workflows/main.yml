@@ -30,7 +30,7 @@ jobs:
 
       - run: nix flake check
       - run: nix build
-      - run: nix run nixpkgs#mdbook build
+      - run: nix run . -- build
 
       - name: Artifact pages
         uses: actions/upload-artifact@v2
