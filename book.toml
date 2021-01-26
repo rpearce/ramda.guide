@@ -1,0 +1,17 @@
+[book]
+authors = ["Robert Pearce"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Ramda Guide"
+
+[build]
+create-missing = false
+build-dir = "./web/book"
+
+[output.html]
+default-theme = "navy"
+preferred-dark-theme = "navy"
+
+[output.html.playground]
+editable = false
