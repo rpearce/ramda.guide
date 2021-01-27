@@ -11,17 +11,22 @@
       "i686-linux"
       "aarch64-linux"
     ] (system:
-        let pkgs = nixpkgs.legacyPackages.${system}; in
-        {
-          checks = {};
-
-          devShell = import ./shell.nix { inherit pkgs; };
-
-          defaultPackage = pkgs.mdbook;
-
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in rec {
           packages = flake-utils.lib.flattenTree {
             mdbook = pkgs.mdbook;
           };
+
+          defaultPackage = pkgs.mdbook;
+
+          apps.book = flake-utils.lib.mkApp {
+            drv = pkgs.mdbook;
+          };
+
+          defaultApp = apps.book;
+
+          devShell = import ./shell.nix { inherit pkgs; };
         }
       );
 }
