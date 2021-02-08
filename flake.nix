@@ -1,25 +1,65 @@
 {
-  description = "test-mdbook";
+  description = "ramda.guide";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
+    naersk = {
+      url = "github:nmattia/naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    utils = {
+      url = "github:numtide/flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
-  outputs = { self, flake-utils, nixpkgs }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in rec {
-        packages = flake-utils.lib.flattenTree {
+  outputs = { naersk, nixpkgs, rust-overlay, self, utils }:
+    utils.lib.eachDefaultSystem (system:
+      let
+        rust-overlay' = import rust-overlay;
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ rust-overlay' ];
+        };
+        rust = (pkgs.rustChannelOf {
+          date = "2021-01-28";
+          channel = "nightly";
+        }).rust;
+        naersk-lib = naersk.lib."${system}".override {
+          cargo = rust;
+          rustc = rust;
+        };
+      in rec {
+        packages = utils.lib.flattenTree {
           mdbook = pkgs.mdbook;
+          news = naersk-lib.buildPackage {
+            pname = "news";
+            root = ./src/news;
+          };
         };
 
         defaultPackage = pkgs.mdbook;
 
-        apps.book = flake-utils.lib.mkApp {
+        apps.book = utils.lib.mkApp {
           drv = pkgs.mdbook;
         };
 
+        apps.news = utils.lib.mkApp {
+          drv = packages.news;
+        };
+
+        # @TODO: combine builds into defaultApp
         defaultApp = apps.book;
 
-        devShell = import ./shell.nix { inherit pkgs; };
+        devShell = pkgs.mkShell {
+          buildInputs = [ pkgs.mdbook ];
+          nativeBuildInputs = [ rust ];
+        };
       }
     );
 }

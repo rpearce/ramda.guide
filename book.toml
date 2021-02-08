@@ -2,7 +2,7 @@
 authors = ["Robert Pearce"]
 language = "en"
 multilingual = false
-src = "book_src"
+src = "src/book"
 title = "Ramda Guide"
 
 [build]
