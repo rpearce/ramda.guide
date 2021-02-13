@@ -1,0 +1,20 @@
+[posts]
+source = "./src/news"
+output = "./web/news"
+
+[sitemap]
+enabled = true
+output = "./web/sitemap.xml"
+
+[feeds]
+  [feeds.atom]
+  enabled = true
+  output = "./web/atom.xml"
+
+  [feeds.json]
+  enabled = true
+  output = "./web/json.xml"
+
+  [feeds.rss]
+  enabled = true
+  output = "./web/rss.xml"

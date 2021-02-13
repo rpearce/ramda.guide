@@ -1,13 +1,41 @@
 use handlebars::Handlebars;
+use mdbook::config::Config as MDBookConfig;
+use mdbook::MDBook;
 use pulldown_cmark;
 use serde::{Deserialize, Serialize};
 //use std::env;
-use std::{fs, io};
+use std::{fs, io, str::FromStr};
 use std::{
     path::{Path, PathBuf},
     process::exit,
 };
 use toml;
+
+#[derive(Debug, Deserialize)]
+struct HullConfigPost {
+    source: String,
+    output: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct HullConfigBasic {
+    enabled: bool,
+    output: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct HullConfigFeeds {
+    atom: HullConfigBasic,
+    json: HullConfigBasic,
+    rss: HullConfigBasic,
+}
+
+#[derive(Debug, Deserialize)]
+struct HullConfig {
+    feeds: HullConfigFeeds,
+    posts: HullConfigPost,
+    sitemap: HullConfigBasic,
+}
 
 #[derive(Debug, Default, Deserialize, Serialize)]
 struct Page {
@@ -51,42 +79,58 @@ fn default_fm_str() -> String {
 }
 
 fn main() -> io::Result<()> {
-    // Arguments
-    //let args: Vec<String> = env::args().collect();
-    //let dir = &args[1];
+    // Book
 
-    let out_path = Path::new("./web/news/");
-
-    // Reset output dir
-
-    if out_path.exists() {
-        match fs::remove_dir_all(out_path) {
-            Ok(_) => println!("Removed {:#?}", out_path),
-            Err(_) => {
-                println!("Failed to remove {:#?}", out_path);
+    match MDBook::load("./src/book") {
+        Ok(mdbook) => match mdbook.build() {
+            Ok(_) => println!("Wrote {:#?}", "./web/book"),
+            Err(err) => {
+                println!("{:#?}", err);
+                println!("Failed to create book");
                 println!("Exiting...");
                 exit(1)
             }
-        };
+        },
+        Err(err) => {
+            println!("{:#?}", err);
+            println!("Failed to load book data");
+            println!("Exiting...");
+            exit(1)
+        }
     }
 
-    match fs::create_dir(out_path) {
-        Ok(_) => println!("Created {:#?}", out_path),
-        Err(_) => {
-            println!("Failed to create {:#?}", out_path);
+    // Load config
+
+    let hull_opts: HullConfig = match fs::read_to_string("./hull.toml") {
+        Ok(content) => toml::from_str(content.as_str())?,
+        Err(err) => {
+            println!("{:#?}", err);
+            println!("Failed to read hull.toml");
             println!("Exiting...");
             exit(1)
         }
     };
 
-    // Markdown
+    // Establish paths
 
-    let mut md_opts = pulldown_cmark::Options::empty();
-    md_opts.insert(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
+    let posts_source = Path::new(hull_opts.posts.source.as_str());
+    let posts_output = Path::new(hull_opts.posts.output.as_str());
+    let sitemap_output = Path::new(hull_opts.sitemap.output.as_str());
+    let feed_atom_output = Path::new(hull_opts.feeds.atom.output.as_str());
+    let feed_json_output = Path::new(hull_opts.feeds.json.output.as_str());
+    let feed_rss_output = Path::new(hull_opts.feeds.rss.output.as_str());
 
-    // Load template files
+    // Setup Markdown
 
-    let t_dir = Path::new("./src/news/src/templates");
+    let md_opts = get_md_opts();
+
+    // TODO: Do I really need handlebars? Just use String?
+    //       * https://www.steadylearner.com/blog/read/How-to-automate-building-sitemaps-with-Rust
+    //       * https://docs.rs/mdbook/0.4.6/mdbook/
+
+    // Handlebars templates
+
+    let t_dir = Path::new("./src/templates");
     let template_default = fs::read_to_string(t_dir.join("default.hbs"))?;
     let template_index = fs::read_to_string(t_dir.join("index.hbs"))?;
     let template_post = fs::read_to_string(t_dir.join("post.hbs"))?;
@@ -105,11 +149,87 @@ fn main() -> io::Result<()> {
         .register_template_string("t_post", template_post)
         .unwrap();
 
+    // Recreate posts output dir
+
+    if posts_output.exists() {
+        match fs::remove_dir_all(posts_output) {
+            Ok(_) => println!("Removed {:#?}", posts_output),
+            Err(err) => {
+                println!("{:#?}", err);
+                println!("Failed to remove {:#?}", posts_output);
+                println!("Exiting...");
+                exit(1)
+            }
+        };
+    }
+
+    match fs::create_dir(posts_output) {
+        Ok(_) => println!("Created {:#?}", posts_output),
+        Err(err) => {
+            println!("{:#?}", err);
+            println!("Failed to create {:#?}", posts_output);
+            println!("Exiting...");
+            exit(1)
+        }
+    };
+
+    // Remove sitemap if enabled
+
+    if hull_opts.sitemap.enabled && sitemap_output.exists() {
+        match fs::remove_file(sitemap_output) {
+            Ok(_) => println!("Removed {:#?}", sitemap_output),
+            Err(err) => {
+                println!("{:#?}", err);
+                println!("Failed to remove {:#?}", sitemap_output);
+                println!("Exiting...");
+                exit(1)
+            }
+        };
+    }
+
+    // Remove feeds if each is enabled
+
+    if hull_opts.feeds.atom.enabled && feed_atom_output.exists() {
+        match fs::remove_file(feed_atom_output) {
+            Ok(_) => println!("Removed {:#?}", feed_atom_output),
+            Err(err) => {
+                println!("{:#?}", err);
+                println!("Failed to remove {:#?}", feed_atom_output);
+                println!("Exiting...");
+                exit(1)
+            }
+        };
+    }
+
+    if hull_opts.feeds.json.enabled && feed_json_output.exists() {
+        match fs::remove_file(feed_json_output) {
+            Ok(_) => println!("Removed {:#?}", feed_json_output),
+            Err(err) => {
+                println!("{:#?}", err);
+                println!("Failed to remove {:#?}", feed_json_output);
+                println!("Exiting...");
+                exit(1)
+            }
+        };
+    }
+
+    if hull_opts.feeds.rss.enabled && feed_rss_output.exists() {
+        match fs::remove_file(feed_rss_output) {
+            Ok(_) => println!("Removed {:#?}", feed_rss_output),
+            Err(err) => {
+                println!("{:#?}", err);
+                println!("Failed to remove {:#?}", feed_rss_output);
+                println!("Exiting...");
+                exit(1)
+            }
+        };
+    }
+
     // Load Posts
 
     let mut posts: Vec<Post> = vec![];
 
-    for entry in fs::read_dir("./src/news/src/posts")? {
+    for entry in fs::read_dir(posts_source)? {
         let entry = entry?;
         let path = entry.path();
 
@@ -119,7 +239,10 @@ fn main() -> io::Result<()> {
 
         match parse_post(&path, md_opts) {
             Ok(post) => posts.push(post),
-            Err(_) => println!("Failed to get post: {:#?}", path),
+            Err(err) => {
+                println!("{:#?}", err);
+                println!("Failed to get post: {:#?}", path)
+            }
         };
     }
 
@@ -129,6 +252,7 @@ fn main() -> io::Result<()> {
         .render("t_index", &posts)
         .unwrap_or_else(|err| err.to_string());
 
+    // TODO: get data from somewhere so this is generic
     let index_page = Page {
         author: "Robert W. Pearce".to_string(),
         content_html: news_html,
@@ -147,11 +271,12 @@ fn main() -> io::Result<()> {
         .render("t_default", &index_page)
         .unwrap_or_else(|err| err.to_string());
 
-    let index_path = out_path.join("index.html");
+    let index_path = posts_output.join("index.html");
 
     match fs::write(&index_path, &news_page_html) {
         Ok(_) => println!("Wrote {:#?}", index_path),
-        Err(_) => {
+        Err(err) => {
+            println!("{:#?}", err);
             println!("Failed to write {:#?}", index_path);
             println!("Exiting...");
             exit(1)
@@ -182,11 +307,12 @@ fn main() -> io::Result<()> {
             .render("t_default", &post_page)
             .unwrap_or_else(|err| err.to_string());
 
-        let post_path = out_path.join(format!("{}.html", post.data.slug));
+        let post_path = posts_output.join(format!("{}.html", post.data.slug));
 
         match fs::write(&post_path, &post_page_html) {
             Ok(_) => println!("Wrote {:#?}", post_path),
-            Err(_) => {
+            Err(err) => {
+                println!("{:#?}", err);
                 println!("Failed to write {:#?}", post_path);
                 println!("Exiting...");
                 exit(1)
@@ -194,9 +320,18 @@ fn main() -> io::Result<()> {
         };
     }
 
-    // TODO: RSS & Atom feeds
+    // TODO sitemap
+    // TODO rss
+    // TODO atom
+    // TODO json
 
     Ok(())
+}
+
+fn get_md_opts() -> pulldown_cmark::Options {
+    let mut md_opts = pulldown_cmark::Options::empty();
+    md_opts.insert(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
+    md_opts
 }
 
 fn parse_post(path: &PathBuf, md_opts: pulldown_cmark::Options) -> Result<Post, io::Error> {

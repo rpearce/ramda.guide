@@ -1,12 +1,13 @@
 [package]
-name = "news"
+name = "hull"
 version = "0.1.0"
 authors = ["Robert Pearce <me@robertwpearce.com>"]
 edition = "2018"
 
 [dependencies]
-handlebars = "3.5"
+handlebars = "3.5.2"
+mdbook = "0.4.6"
 pulldown-cmark = "0.8.0"
-rss = "1.0"
+#rss = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-toml = "0.5"
+toml = "0.5.8"

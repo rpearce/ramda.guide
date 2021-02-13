@@ -27,7 +27,7 @@
           overlays = [ rust-overlay' ];
         };
         rust = (pkgs.rustChannelOf {
-          date = "2021-01-28";
+          date = "2021-02-12";
           channel = "nightly";
         }).rust;
         naersk-lib = naersk.lib."${system}".override {
@@ -36,28 +36,22 @@
         };
       in rec {
         packages = utils.lib.flattenTree {
-          mdbook = pkgs.mdbook;
-          news = naersk-lib.buildPackage {
-            pname = "news";
-            root = ./src/news;
+          hull = naersk-lib.buildPackage {
+            pname = "hull";
+            root = ./.;
           };
         };
 
-        defaultPackage = pkgs.mdbook;
+        defaultPackage = packages.hull;
 
-        apps.book = utils.lib.mkApp {
-          drv = pkgs.mdbook;
+        apps.hull = utils.lib.mkApp {
+          drv = packages.hull;
         };
 
-        apps.news = utils.lib.mkApp {
-          drv = packages.news;
-        };
-
-        # @TODO: combine builds into defaultApp
-        defaultApp = apps.book;
+        defaultApp = apps.hull;
 
         devShell = pkgs.mkShell {
-          buildInputs = [ pkgs.mdbook ];
+          buildInputs = [ ];
           nativeBuildInputs = [ rust ];
         };
       }
