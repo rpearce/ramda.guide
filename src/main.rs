@@ -1,10 +1,10 @@
+use chrono;
 use handlebars::Handlebars;
-use mdbook::config::Config as MDBookConfig;
 use mdbook::MDBook;
 use pulldown_cmark;
 use serde::{Deserialize, Serialize};
 //use std::env;
-use std::{fs, io, str::FromStr};
+use std::{fs, io};
 use std::{
     path::{Path, PathBuf},
     process::exit,
@@ -35,6 +35,14 @@ struct HullConfig {
     feeds: HullConfigFeeds,
     posts: HullConfigPost,
     sitemap: HullConfigBasic,
+}
+
+#[derive(Debug, Default)]
+struct HullSitemapEntry {
+    loc: String,
+    lastmod: String,
+    changefreq: String,
+    priority: String,
 }
 
 #[derive(Debug, Default, Deserialize, Serialize)]
@@ -81,23 +89,9 @@ fn default_fm_str() -> String {
 fn main() -> io::Result<()> {
     // Book
 
-    match MDBook::load("./src/book") {
-        Ok(mdbook) => match mdbook.build() {
-            Ok(_) => println!("Wrote {:#?}", "./web/book"),
-            Err(err) => {
-                println!("{:#?}", err);
-                println!("Failed to create book");
-                println!("Exiting...");
-                exit(1)
-            }
-        },
-        Err(err) => {
-            println!("{:#?}", err);
-            println!("Failed to load book data");
-            println!("Exiting...");
-            exit(1)
-        }
-    }
+    let book = MDBook::load("./src/book").expect("Failed to load book data");
+    book.build().expect("Failed to create book");
+    println!("Wrote {:#?}", "./web/book");
 
     // Load config
 
@@ -125,8 +119,7 @@ fn main() -> io::Result<()> {
     let md_opts = get_md_opts();
 
     // TODO: Do I really need handlebars? Just use String?
-    //       * https://www.steadylearner.com/blog/read/How-to-automate-building-sitemaps-with-Rust
-    //       * https://docs.rs/mdbook/0.4.6/mdbook/
+    //       https://www.steadylearner.com/blog/read/How-to-automate-building-sitemaps-with-Rust
 
     // Handlebars templates
 
@@ -321,6 +314,65 @@ fn main() -> io::Result<()> {
     }
 
     // TODO sitemap
+
+    let now = chrono::prelude::Utc::now().to_string();
+    let mut sitemap_entries: Vec<HullSitemapEntry> = vec![];
+
+    sitemap_entries.push(HullSitemapEntry {
+        loc: "https://ramda.guide".to_string(),
+        lastmod: now.clone(),
+        changefreq: "weekly".to_string(),
+        priority: "1.0".to_string(),
+    });
+
+    book.iter()
+        .filter_map(|x| match *x {
+            mdbook::book::BookItem::Chapter(ref chapter) => chapter.path.clone(),
+            mdbook::book::BookItem::Separator => None,
+            mdbook::book::BookItem::PartTitle(_) => None,
+        })
+        .for_each(|x| {
+            let stem = x.file_stem().unwrap().to_str().unwrap().to_string();
+            let loc = format!("https://ramda.guide/book/{}.html", stem);
+
+            sitemap_entries.push(HullSitemapEntry {
+                loc,
+                lastmod: now.clone(),
+                changefreq: "weekly".to_string(),
+                priority: "0.8".to_string(),
+            });
+        });
+
+    let sitemap_book_items: String = sitemap_entries
+        .iter()
+        .map(|x| {
+            format!(
+                r#"
+<url>
+  <loc>{}</loc>
+  <lastmod>{}<lastmod>
+  <changefreq>{}</changefreq>
+  <priority>{}</priority>
+</url>
+"#,
+                x.loc, x.lastmod, x.changefreq, x.priority
+            )
+        })
+        .collect();
+
+    //let sitemap_post_items: String =
+
+    let sitemap_xml = format!(
+        r#"<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {}
+</urlset>
+"#,
+        sitemap_book_items
+    );
+
+    println!("{:#?}", sitemap_xml);
+
     // TODO rss
     // TODO atom
     // TODO json
