@@ -11,6 +11,9 @@ use std::{
 };
 use toml;
 
+mod sitemap;
+use sitemap::HullSitemapEntry;
+
 #[derive(Debug, Deserialize)]
 struct HullConfigPost {
     source: String,
@@ -35,14 +38,6 @@ struct HullConfig {
     feeds: HullConfigFeeds,
     posts: HullConfigPost,
     sitemap: HullConfigBasic,
-}
-
-#[derive(Debug, Default)]
-struct HullSitemapEntry {
-    loc: String,
-    lastmod: String,
-    changefreq: String,
-    priority: String,
 }
 
 #[derive(Debug, Default, Deserialize, Serialize)]
@@ -119,7 +114,6 @@ fn main() -> io::Result<()> {
     let md_opts = get_md_opts();
 
     // TODO: Do I really need handlebars? Just use String?
-    //       https://www.steadylearner.com/blog/read/How-to-automate-building-sitemaps-with-Rust
 
     // Handlebars templates
 
@@ -313,7 +307,7 @@ fn main() -> io::Result<()> {
         };
     }
 
-    // TODO sitemap
+    // Generate sitemap.xml
 
     let now = chrono::prelude::Utc::now().to_string();
     let mut sitemap_entries: Vec<HullSitemapEntry> = vec![];
@@ -343,33 +337,10 @@ fn main() -> io::Result<()> {
             });
         });
 
-    let sitemap_book_items: String = sitemap_entries
-        .iter()
-        .map(|x| {
-            format!(
-                r#"
-<url>
-  <loc>{}</loc>
-  <lastmod>{}<lastmod>
-  <changefreq>{}</changefreq>
-  <priority>{}</priority>
-</url>
-"#,
-                x.loc, x.lastmod, x.changefreq, x.priority
-            )
-        })
-        .collect();
+    // TODO: add news entries to sitemap, too
 
-    //let sitemap_post_items: String =
-
-    let sitemap_xml = format!(
-        r#"<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {}
-</urlset>
-"#,
-        sitemap_book_items
-    );
+    let sitemap_xml: String = sitemap::build(&sitemap_entries);
+    // TODO: save sitemap.xml
 
     println!("{:#?}", sitemap_xml);
 
