@@ -1,3 +1,6 @@
+use std::path::{Path, PathBuf};
+use std::{fs, io};
+
 #[derive(Debug, Default)]
 pub struct HullSitemapEntry {
     pub loc: String,
@@ -35,4 +38,19 @@ fn to_entry(entry: &HullSitemapEntry) -> String {
 "#,
         entry.loc, entry.lastmod, entry.changefreq, entry.priority
     )
+}
+
+pub fn clear(src: &str, enabled: bool) -> Result<(), io::Error> {
+    if !enabled {
+        return Ok(());
+    }
+
+    let path = Path::new(src);
+
+    if path.exists() {
+        fs::remove_file(path).expect("Failed to remove sitemap output");
+        println!("Removed... {:#?}", path);
+    }
+
+    Ok(())
 }

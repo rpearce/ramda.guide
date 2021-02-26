@@ -1,44 +1,17 @@
 use chrono;
 use handlebars::Handlebars;
-use mdbook::MDBook;
 use pulldown_cmark;
 use serde::{Deserialize, Serialize};
-//use std::env;
 use std::{fs, io};
-use std::{
-    path::{Path, PathBuf},
-    process::exit,
-};
-use toml;
+use std::{path::Path, process::exit};
 
+mod book;
+mod config;
+mod feed;
+mod posts;
 mod sitemap;
+use posts::Post;
 use sitemap::HullSitemapEntry;
-
-#[derive(Debug, Deserialize)]
-struct HullConfigPost {
-    source: String,
-    output: String,
-}
-
-#[derive(Debug, Deserialize)]
-struct HullConfigBasic {
-    enabled: bool,
-    output: String,
-}
-
-#[derive(Debug, Deserialize)]
-struct HullConfigFeeds {
-    atom: HullConfigBasic,
-    json: HullConfigBasic,
-    rss: HullConfigBasic,
-}
-
-#[derive(Debug, Deserialize)]
-struct HullConfig {
-    feeds: HullConfigFeeds,
-    posts: HullConfigPost,
-    sitemap: HullConfigBasic,
-}
 
 #[derive(Debug, Default, Deserialize, Serialize)]
 struct Page {
@@ -59,61 +32,23 @@ struct Page {
     url: String,
 }
 
-#[derive(Debug, Default, Deserialize, Serialize)]
-struct FrontMatter {
-    description: String,
-    #[serde(default = "default_fm_str")]
-    keywords: String,
-    published_at: String,
-    slug: String,
-    title: String,
-    #[serde(default = "default_fm_str")]
-    updated_at: String,
-}
-
-#[derive(Debug, Default, Deserialize, Serialize)]
-struct Post {
-    content_html: String,
-    data: FrontMatter,
-}
-
-fn default_fm_str() -> String {
-    String::new()
-}
-
 fn main() -> io::Result<()> {
     // Book
-
-    let book = MDBook::load("./src/book").expect("Failed to load book data");
-    book.build().expect("Failed to create book");
-    println!("Wrote {:#?}", "./web/book");
+    let book = book::load("./src/book")?;
 
     // Load config
-
-    let hull_opts: HullConfig = match fs::read_to_string("./hull.toml") {
-        Ok(content) => toml::from_str(content.as_str())?,
-        Err(err) => {
-            println!("{:#?}", err);
-            println!("Failed to read hull.toml");
-            println!("Exiting...");
-            exit(1)
-        }
-    };
+    let hull_opts = config::load("./hull.toml")?;
 
     // Establish paths
 
     let posts_source = Path::new(hull_opts.posts.source.as_str());
     let posts_output = Path::new(hull_opts.posts.output.as_str());
-    let sitemap_output = Path::new(hull_opts.sitemap.output.as_str());
-    let feed_atom_output = Path::new(hull_opts.feeds.atom.output.as_str());
-    let feed_json_output = Path::new(hull_opts.feeds.json.output.as_str());
-    let feed_rss_output = Path::new(hull_opts.feeds.rss.output.as_str());
+    //let sitemap_output = Path::new(hull_opts.sitemap.output.as_str());
+    let feed_output = Path::new(hull_opts.feed.output.as_str());
 
     // Setup Markdown
 
     let md_opts = get_md_opts();
-
-    // TODO: Do I really need handlebars? Just use String?
 
     // Handlebars templates
 
@@ -137,80 +72,13 @@ fn main() -> io::Result<()> {
         .unwrap();
 
     // Recreate posts output dir
+    posts::setup(&hull_opts.posts.output)?;
 
-    if posts_output.exists() {
-        match fs::remove_dir_all(posts_output) {
-            Ok(_) => println!("Removed {:#?}", posts_output),
-            Err(err) => {
-                println!("{:#?}", err);
-                println!("Failed to remove {:#?}", posts_output);
-                println!("Exiting...");
-                exit(1)
-            }
-        };
-    }
+    // Recreate sitemap output file
+    sitemap::clear(&hull_opts.sitemap.output, hull_opts.sitemap.enabled)?;
 
-    match fs::create_dir(posts_output) {
-        Ok(_) => println!("Created {:#?}", posts_output),
-        Err(err) => {
-            println!("{:#?}", err);
-            println!("Failed to create {:#?}", posts_output);
-            println!("Exiting...");
-            exit(1)
-        }
-    };
-
-    // Remove sitemap if enabled
-
-    if hull_opts.sitemap.enabled && sitemap_output.exists() {
-        match fs::remove_file(sitemap_output) {
-            Ok(_) => println!("Removed {:#?}", sitemap_output),
-            Err(err) => {
-                println!("{:#?}", err);
-                println!("Failed to remove {:#?}", sitemap_output);
-                println!("Exiting...");
-                exit(1)
-            }
-        };
-    }
-
-    // Remove feeds if each is enabled
-
-    if hull_opts.feeds.atom.enabled && feed_atom_output.exists() {
-        match fs::remove_file(feed_atom_output) {
-            Ok(_) => println!("Removed {:#?}", feed_atom_output),
-            Err(err) => {
-                println!("{:#?}", err);
-                println!("Failed to remove {:#?}", feed_atom_output);
-                println!("Exiting...");
-                exit(1)
-            }
-        };
-    }
-
-    if hull_opts.feeds.json.enabled && feed_json_output.exists() {
-        match fs::remove_file(feed_json_output) {
-            Ok(_) => println!("Removed {:#?}", feed_json_output),
-            Err(err) => {
-                println!("{:#?}", err);
-                println!("Failed to remove {:#?}", feed_json_output);
-                println!("Exiting...");
-                exit(1)
-            }
-        };
-    }
-
-    if hull_opts.feeds.rss.enabled && feed_rss_output.exists() {
-        match fs::remove_file(feed_rss_output) {
-            Ok(_) => println!("Removed {:#?}", feed_rss_output),
-            Err(err) => {
-                println!("{:#?}", err);
-                println!("Failed to remove {:#?}", feed_rss_output);
-                println!("Exiting...");
-                exit(1)
-            }
-        };
-    }
+    // Recreate feed output file
+    feed::clear(&hull_opts.feed.output, hull_opts.feed.enabled)?;
 
     // Load Posts
 
@@ -224,7 +92,7 @@ fn main() -> io::Result<()> {
             continue;
         }
 
-        match parse_post(&path, md_opts) {
+        match posts::parse(&path, md_opts) {
             Ok(post) => posts.push(post),
             Err(err) => {
                 println!("{:#?}", err);
@@ -260,15 +128,8 @@ fn main() -> io::Result<()> {
 
     let index_path = posts_output.join("index.html");
 
-    match fs::write(&index_path, &news_page_html) {
-        Ok(_) => println!("Wrote {:#?}", index_path),
-        Err(err) => {
-            println!("{:#?}", err);
-            println!("Failed to write {:#?}", index_path);
-            println!("Exiting...");
-            exit(1)
-        }
-    };
+    fs::write(&index_path, &news_page_html).expect("Failed to write posts index file");
+    println!("Wrote {:#?}...", index_path);
 
     // Build post pages
 
@@ -344,9 +205,7 @@ fn main() -> io::Result<()> {
 
     println!("{:#?}", sitemap_xml);
 
-    // TODO rss
-    // TODO atom
-    // TODO json
+    // TODO feed
 
     Ok(())
 }
@@ -355,38 +214,4 @@ fn get_md_opts() -> pulldown_cmark::Options {
     let mut md_opts = pulldown_cmark::Options::empty();
     md_opts.insert(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
     md_opts
-}
-
-fn parse_post(path: &PathBuf, md_opts: pulldown_cmark::Options) -> Result<Post, io::Error> {
-    let file_content = fs::read_to_string(path)?;
-    let (front_matter, content) = parse_front_matter(file_content)?;
-    let content_html = parse_markdown(&content, md_opts);
-
-    let post = Post {
-        content_html,
-        data: front_matter,
-    };
-
-    Ok(post)
-}
-
-fn parse_front_matter(file_content: String) -> Result<(FrontMatter, String), io::Error> {
-    let split: Vec<&str> = file_content
-        .split("+++")
-        .filter(|&x| x != "")
-        .map(|x| x.trim())
-        .collect();
-
-    let front_matter: FrontMatter = toml::from_str(split[0])?;
-    let content = split[1];
-
-    Ok((front_matter, content.to_string()))
-}
-
-fn parse_markdown(content: &str, md_opts: pulldown_cmark::Options) -> String {
-    let md_parser = pulldown_cmark::Parser::new_ext(content, md_opts);
-    let mut html = String::new();
-    pulldown_cmark::html::push_html(&mut html, md_parser);
-
-    html
 }

@@ -6,15 +6,6 @@ output = "./web/news"
 enabled = true
 output = "./web/sitemap.xml"
 
-[feeds]
-  [feeds.atom]
-  enabled = true
-  output = "./web/atom.xml"
-
-  [feeds.json]
-  enabled = true
-  output = "./web/json.xml"
-
-  [feeds.rss]
-  enabled = true
-  output = "./web/rss.xml"
+[feed]
+enabled = true
+output = "./web/feed.xml"
