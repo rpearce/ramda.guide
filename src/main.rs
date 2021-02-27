@@ -4,13 +4,9 @@ use std::path::Path;
 use std::{fs, io};
 
 mod book;
-mod config;
-mod feed;
-mod pages;
-mod posts;
-mod sitemap;
-use pages::Page;
-use sitemap::HullSitemapEntry;
+mod hull;
+use hull::pages::Page as HullPage;
+use hull::sitemap::Entry as HullSitemapEntry;
 
 fn main() -> io::Result<()> {
     // Book
@@ -19,7 +15,7 @@ fn main() -> io::Result<()> {
 
     // Load config
 
-    let hull_opts = config::load("./hull.toml")?;
+    let hull_opts = hull::config::load("./hull.toml")?;
 
     // Handlebars templates
 
@@ -44,23 +40,23 @@ fn main() -> io::Result<()> {
 
     // Recreate posts output dir
 
-    posts::setup(&hull_opts.posts.output)?;
+    hull::posts::setup(&hull_opts.posts.output)?;
 
     // Recreate sitemap output file
 
     if hull_opts.sitemap.enabled {
-        sitemap::clear(&hull_opts.sitemap.output)?;
+        hull::sitemap::clear(&hull_opts.sitemap.output)?;
     }
 
     // Recreate feed output file
 
     if hull_opts.feed.enabled {
-        feed::clear(&hull_opts.feed.output)?;
+        hull::feed::clear(&hull_opts.feed.output)?;
     }
 
     // Load Posts
 
-    let posts = posts::load(&hull_opts.posts.source)?;
+    let posts = hull::posts::load(&hull_opts.posts.source)?;
 
     // Build index page
 
@@ -69,7 +65,7 @@ fn main() -> io::Result<()> {
         .unwrap_or_else(|err| err.to_string());
 
     // TODO: get data from somewhere so this is generic
-    let index_page = Page {
+    let index_page = HullPage {
         author: "Robert W. Pearce".to_string(),
         content_html: news_html,
         description: "News and updates about Ramda Guide".to_string(),
@@ -99,7 +95,7 @@ fn main() -> io::Result<()> {
             .render("t_post", &post)
             .unwrap_or_else(|err| err.to_string());
 
-        let post_page = Page {
+        let post_page = HullPage {
             author: post.data.author,
             content_html: post_html,
             description: post.data.description,
@@ -153,7 +149,7 @@ fn main() -> io::Result<()> {
 
     // TODO: add news entries to sitemap, too
 
-    let sitemap_xml: String = sitemap::build(&sitemap_entries);
+    let sitemap_xml: String = hull::sitemap::build(&sitemap_entries);
     // TODO: save sitemap.xml
 
     println!("{:#?}", sitemap_xml);

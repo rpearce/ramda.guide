@@ -1,15 +1,15 @@
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use std::{fs, io};
 
 #[derive(Debug, Default)]
-pub struct HullSitemapEntry {
+pub struct Entry {
     pub loc: String,
     pub lastmod: String,
     pub changefreq: String,
     pub priority: String,
 }
 
-pub fn build(entries: &Vec<HullSitemapEntry>) -> String {
+pub fn build(entries: &Vec<Entry>) -> String {
     let items: String = entries.iter().map(to_entry).collect();
 
     to_sitemap(items)
@@ -26,7 +26,7 @@ fn to_sitemap(content: String) -> String {
     )
 }
 
-fn to_entry(entry: &HullSitemapEntry) -> String {
+fn to_entry(entry: &Entry) -> String {
     format!(
         r#"
 <url>
