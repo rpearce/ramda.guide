@@ -1,9 +1,12 @@
+use pulldown_cmark;
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 use std::{fs, io};
 
 #[derive(Debug, Default, Deserialize, Serialize)]
 pub struct PostFrontMatter {
+    pub author: String,
+    pub author_twitter: String,
     pub description: String,
     #[serde(default = "default_fm_str")]
     pub keywords: String,
@@ -24,7 +27,36 @@ fn default_fm_str() -> String {
     String::new()
 }
 
-pub fn parse(path: &PathBuf, md_opts: pulldown_cmark::Options) -> Result<Post, io::Error> {
+pub fn load(src: &str) -> Result<Vec<Post>, io::Error> {
+    // Setup Markdown
+    let md_opts = get_md_opts();
+
+    let path = Path::new(src);
+    let mut posts: Vec<Post> = vec![];
+
+    for entry in fs::read_dir(path)? {
+        let entry = entry?;
+        let path = entry.path();
+
+        if !path.is_file() || path.extension().unwrap() != "md" {
+            continue;
+        }
+
+        let post = parse(&path, md_opts).expect(&format!("Failed to get post: {:#?}", path));
+
+        posts.push(post);
+    }
+
+    return Ok(posts);
+}
+
+fn get_md_opts() -> pulldown_cmark::Options {
+    let mut md_opts = pulldown_cmark::Options::empty();
+    md_opts.insert(pulldown_cmark::Options::ENABLE_STRIKETHROUGH);
+    md_opts
+}
+
+fn parse(path: &PathBuf, md_opts: pulldown_cmark::Options) -> Result<Post, io::Error> {
     let file_content = fs::read_to_string(path)?;
     let (front_matter, content) = parse_front_matter(file_content)?;
     let content_html = parse_markdown(&content, md_opts);

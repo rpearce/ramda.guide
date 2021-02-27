@@ -2,9 +2,16 @@ use serde::Deserialize;
 use std::{fs, io};
 
 #[derive(Debug, Deserialize)]
+pub struct HullConfigMeta {
+    pub title: String,
+    pub url: String,
+}
+
+#[derive(Debug, Deserialize)]
 pub struct HullConfigPost {
     pub source: String,
     pub output: String,
+    pub meta: HullConfigMeta,
 }
 
 #[derive(Debug, Deserialize)]

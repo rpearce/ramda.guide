@@ -1,6 +1,9 @@
 [posts]
 source = "./src/news"
 output = "./web/news"
+  [posts.meta]
+  title = "Ramda Guide News"
+  url = "https://ramda.guide/news"
 
 [sitemap]
 enabled = true

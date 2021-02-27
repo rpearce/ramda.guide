@@ -1,11 +1,7 @@
 use std::path::Path;
 use std::{fs, io};
 
-pub fn clear(src: &str, enabled: bool) -> Result<(), io::Error> {
-    if !enabled {
-        return Ok(());
-    }
-
+pub fn clear(src: &str) -> Result<(), io::Error> {
     let path = Path::new(src);
 
     if path.exists() {
