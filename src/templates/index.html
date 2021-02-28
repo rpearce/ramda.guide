@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block author %}Robert W. Pearce{% endblock author %}
+{% block description %}News and updates about Ramda Guide{% endblock description %}
+{% block keywords %}ramda, ramda guide, javascript, rss, atom, feed, news, functional programming{% endblock description %}
+{% block site %}Ramda Guide{% endblock site %}
+{% block title %}Ramda Guide - News{% endblock title %}
+{% block twitter_author %}RobertWPearce{% endblock description %}
+{% block type %}website{% endblock type %}
+{% block url %}https://ramda.guide/news/index.html{% endblock url %}
+{% block content %}
+<nav>
+  <ul>
+    <li>
+      <a href="../index.html">Home</a>
+    </li>
+    <li>
+      <a href="../book/index.html">The Book</a>
+    </li>
+  </ul>
+</nav>
+
+<h1>Ramda Guide - News</h1>
+<ul>
+  {% for post in posts %}
+  <li>
+    <a href="./{{post.data.slug}}.html">{{post.data.title}}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content %}
