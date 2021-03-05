@@ -27,7 +27,7 @@
           overlays = [ rust-overlay' ];
         };
         rust = (pkgs.rustChannelOf {
-          date = "2021-02-17";
+          date = "2021-03-04";
           channel = "nightly";
         }).rust;
         naersk-lib = naersk.lib."${system}".override {
