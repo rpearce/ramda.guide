@@ -8,21 +8,11 @@ lazy_static! {
         match Tera::new("src/templates/**/*") {
             Ok(t) => t,
             Err(e) => {
-                println!("Hull template parsing error(s): {}", e);
+                println!("Hull: template parsing error(s): {}", e);
                 exit(1)
             }
         }
     };
-}
-
-pub fn register(glob: &str) -> Tera {
-    match Tera::new(glob) {
-        Ok(t) => t,
-        Err(e) => {
-            println!("Hull template parsing error(s): {}", e);
-            exit(1)
-        }
-    }
 }
 
 pub fn render<A: Serialize>(template: &str, data: Vec<(&str, A)>) -> Result<String, io::Error> {
@@ -35,7 +25,7 @@ pub fn render<A: Serialize>(template: &str, data: Vec<(&str, A)>) -> Result<Stri
     match HULL_TEMPLATES.render(template, &ctx) {
         Ok(x) => Ok(x),
         Err(err) => {
-            println!("Hull template error: {:#?}", err);
+            println!("Hull: template error: {:#?}", err);
             exit(1)
         }
     }

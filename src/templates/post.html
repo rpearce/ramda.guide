@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block author %}{{author}}{% endblock author %}
+{% block description %}{{description}}{% endblock description %}
+{% block keywords %}{{keywords}}{% endblock description %}
+{% block site %}Ramda Guide{% endblock site %}
+{% block title %}{{title}}{% endblock title %}
+{% block twitter_author %}{{twitter_author}}{% endblock description %}
+{% block type %}article{% endblock type %}
+{% block url %}{{url}}{% endblock url %}
+{% block content %}
+<nav>
+  <ul>
+    <li>
+      <a href="../index.html">Home</a>
+    </li>
+    <li>
+      <a href="../book/index.html">The Book</a>
+    </li>
+    <li>
+      <a href="./index.html">News</a>
+    </li>
+  </ul>
+</nav>
+{{content_html | safe}}
+{% endblock content %}

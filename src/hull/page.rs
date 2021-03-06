@@ -27,7 +27,7 @@ lazy_static! {
         match Tera::new("src/templates/**/*") {
             Ok(t) => t,
             Err(e) => {
-                println!("Hull template parsing error(s): {}", e);
+                println!("Hull: template parsing error(s): {}", e);
                 exit(1)
             }
         }

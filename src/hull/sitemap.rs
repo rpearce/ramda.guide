@@ -1,3 +1,4 @@
+use super::config::HullConfig;
 use std::path::Path;
 use std::{fs, io};
 
@@ -40,12 +41,13 @@ fn to_entry(entry: &Entry) -> String {
     )
 }
 
-pub fn remove(src: &str) -> Result<(), io::Error> {
+pub fn remove(hull_opts: &HullConfig) -> Result<(), io::Error> {
+    let src = &hull_opts.sitemap.output;
     let path = Path::new(src);
 
     if path.exists() {
-        fs::remove_file(path).expect("Failed to remove sitemap output");
-        println!("Removed... {:#?}", path);
+        fs::remove_file(path).expect("Hull: failed to remove sitemap output");
+        println!("Hull: removed {:#?}", path);
     }
 
     Ok(())

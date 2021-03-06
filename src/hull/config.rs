@@ -28,8 +28,8 @@ pub struct HullConfig {
 }
 
 pub fn load(src: &str) -> Result<HullConfig, io::Error> {
-    let cfg_content = fs::read_to_string(src).expect("Failed to read hull config file");
-    let cfg = toml::from_str(cfg_content.as_str()).expect("Failed to parse hull config");
+    let cfg_content = fs::read_to_string(src).expect("Hull: failed to read hull config file");
+    let cfg = toml::from_str(cfg_content.as_str()).expect("Hull: failed to parse hull config");
 
     Ok(cfg)
 }

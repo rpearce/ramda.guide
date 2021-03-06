@@ -12,61 +12,31 @@ fn main() -> io::Result<()> {
 
     // Recreate posts output dir
 
-    hull::post::setup(&hull_opts.posts.output)?;
+    hull::post::setup(&hull_opts)?;
 
     // Remove sitemap output file
 
     if hull_opts.sitemap.enabled {
-        hull::sitemap::remove(&hull_opts.sitemap.output)?;
+        hull::sitemap::remove(&hull_opts)?;
     }
 
     // Remove feed output file
 
     if hull_opts.feed.enabled {
-        hull::feed::remove(&hull_opts.feed.output)?;
+        hull::feed::remove(&hull_opts)?;
     }
 
     // Load Posts
 
-    let posts = hull::post::load(&hull_opts.posts.source)?;
+    let posts = hull::post::load(&hull_opts)?;
 
     // Create Posts Index Page
 
-    let index_path = Path::new(&hull_opts.posts.output).join("index.html");
-    let news_html = hull::template::render("index.html", vec![("posts", &posts)])
-        .and_then(hull::minify::html)?;
+    hull::post::create_index(&hull_opts, &posts)?;
 
-    fs::write(&index_path, &news_html).expect(&format!("Failed to write {:#?}", index_path));
-    println!("Wrote {:#?}...", index_path);
+    // Build post pages
 
-    //// Build post pages
-
-    //for post in posts {
-    //    let post_html = handlebars
-    //        .render("t_post", &post)
-    //        .unwrap_or_else(|err| err.to_string());
-
-    //    let post_page = HullPage {
-    //        author: post.data.author,
-    //        content_html: post_html,
-    //        description: post.data.description,
-    //        page_type: "article".to_string(),
-    //        site: hull_opts.posts.meta.title.to_string(),
-    //        title: post.data.title,
-    //        twitter_author: post.data.author_twitter.to_string(),
-    //        updated_at: post.data.updated_at.to_string(),
-    //        url: format!("{}/{}.html", hull_opts.posts.meta.url, post.data.slug),
-    //        ..Default::default()
-    //    };
-
-    //    let post_page_html = handlebars
-    //        .render("t_default", &post_page)
-    //        .unwrap_or_else(|err| err.to_string());
-
-    //    let post_path = Path::new(&hull_opts.posts.output).join(format!("{}.html", post.data.slug));
-    //    fs::write(&post_path, &post_page_html).expect(&format!("Failed to write {:#?}", post_path));
-    //    println!("Wrote {:#?}", post_path);
-    //}
+    hull::post::create_posts(&hull_opts, &posts)?;
 
     //// Generate sitemap.xml
 

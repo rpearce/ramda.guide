@@ -1,3 +1,6 @@
+use super::config::HullConfig;
+use super::minify;
+use super::template;
 use pulldown_cmark;
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
@@ -27,10 +30,63 @@ fn default_fm_str() -> String {
     String::new()
 }
 
-pub fn load(src: &str) -> Result<Vec<Post>, io::Error> {
-    // Setup Markdown
-    let md_opts = get_md_opts();
+pub fn setup(hull_opts: &HullConfig) -> Result<(), io::Error> {
+    let dir = &hull_opts.posts.output;
+    let path = Path::new(dir);
 
+    if path.exists() {
+        fs::remove_dir_all(path).expect("Hull: failed to remove posts output");
+        println!("Hull: removed {:#?}", path);
+    }
+
+    fs::create_dir(path).expect("Hull: failed to create posts output");
+    println!("Hull: created {:#?}", path);
+
+    Ok(())
+}
+
+pub fn create_index(hull_opts: &HullConfig, posts: &Vec<Post>) -> Result<(), io::Error> {
+    let out_dir = &hull_opts.posts.output;
+    let path = Path::new(out_dir).join("index.html");
+    let data = vec![("posts", posts)];
+    let html = template::render("index.html", data).and_then(minify::html)?;
+
+    fs::write(&path, &html).expect(&format!("Hull: failed to write {:#?}", path));
+    println!("Hull: wrote {:#?}", path);
+
+    Ok(())
+}
+
+pub fn create_posts(hull_opts: &HullConfig, posts: &Vec<Post>) -> Result<(), io::Error> {
+    let out_dir = &hull_opts.posts.output;
+    let base_url = &hull_opts.posts.meta.url;
+
+    for post in posts {
+        let path = Path::new(&out_dir).join(format!("{}.html", post.data.slug));
+        let url = format!("{}/{}.html", base_url, post.data.slug);
+        let data = vec![
+            ("author", &post.data.author),
+            ("content_html", &post.content_html),
+            ("description", &post.data.description),
+            ("keywords", &post.data.keywords),
+            ("site", &hull_opts.posts.meta.title),
+            ("title", &post.data.title),
+            ("twitter_author", &post.data.author_twitter),
+            ("updated_at", &post.data.updated_at),
+            ("url", &url),
+        ];
+        let html = template::render("post.html", data).and_then(minify::html)?;
+
+        fs::write(&path, &html).expect(&format!("Hull: failed to write {:#?}", path));
+        println!("Hull: wrote {:#?}", path);
+    }
+
+    Ok(())
+}
+
+pub fn load(hull_opts: &HullConfig) -> Result<Vec<Post>, io::Error> {
+    let src = &hull_opts.posts.source;
+    let md_opts = get_md_opts();
     let path = Path::new(src);
     let mut posts: Vec<Post> = vec![];
 
@@ -42,7 +98,7 @@ pub fn load(src: &str) -> Result<Vec<Post>, io::Error> {
             continue;
         }
 
-        let post = parse(&path, md_opts).expect(&format!("Failed to get post: {:#?}", path));
+        let post = parse(&path, md_opts).expect(&format!("Hull: failed to get post: {:#?}", path));
 
         posts.push(post);
     }
@@ -88,18 +144,4 @@ fn parse_markdown(content: &str, md_opts: pulldown_cmark::Options) -> String {
     pulldown_cmark::html::push_html(&mut html, md_parser);
 
     html
-}
-
-pub fn setup(dir: &str) -> Result<(), io::Error> {
-    let path = Path::new(dir);
-
-    if path.exists() {
-        fs::remove_dir_all(path).expect("Failed to remove posts output");
-        println!("Removed... {:#?}", path);
-    }
-
-    fs::create_dir(path).expect("Failed to create posts output");
-    println!("Created {:#?}...", path);
-
-    Ok(())
 }

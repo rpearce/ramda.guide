@@ -14,7 +14,7 @@ pub fn html(html: String) -> Result<String, io::Error> {
             Ok(res) => Ok(res[..len].to_string()),
             Err(err) => {
                 println!(
-                    "Hull failed to convert minified HTML bytes to string: {}",
+                    "Hull: failed to convert minified HTML bytes to string: {}",
                     err
                 );
                 exit(1)
@@ -26,7 +26,7 @@ pub fn html(html: String) -> Result<String, io::Error> {
             code_context,
         }) => {
             println!(
-                "Hull failed to minify HTML at {}: {}\n{}",
+                "Hull: failed to minify HTML at {}: {}\n{}",
                 position, message, code_context
             );
             exit(1)
