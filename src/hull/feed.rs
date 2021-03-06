@@ -1,7 +1,7 @@
 use std::path::Path;
 use std::{fs, io};
 
-pub fn clear(src: &str) -> Result<(), io::Error> {
+pub fn remove(src: &str) -> Result<(), io::Error> {
     let path = Path::new(src);
 
     if path.exists() {

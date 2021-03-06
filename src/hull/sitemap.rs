@@ -40,7 +40,7 @@ fn to_entry(entry: &Entry) -> String {
     )
 }
 
-pub fn clear(src: &str) -> Result<(), io::Error> {
+pub fn remove(src: &str) -> Result<(), io::Error> {
     let path = Path::new(src);
 
     if path.exists() {

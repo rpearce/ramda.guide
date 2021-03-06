@@ -1,49 +1,29 @@
 use chrono;
-use lazy_static::lazy_static;
 use std::{fs, io, path::Path, process::exit};
-use tera::{Context as TeraContext, Tera};
 
 mod book;
 mod hull;
 use hull::sitemap::Entry as HullSitemapEntry;
 
-lazy_static! {
-    pub static ref HULL_TEMPLATES: Tera = {
-        match Tera::new("src/templates/**/*") {
-            Ok(t) => t,
-            Err(e) => {
-                println!("Hull template parsing error(s): {}", e);
-                exit(1)
-            }
-        }
-    };
-}
-
 fn main() -> io::Result<()> {
     let now = chrono::prelude::Utc::now();
-
-    // Book
-
     let book = book::load("./src/book")?;
-
-    // Load config
-
     let hull_opts = hull::config::load("./hull.toml")?;
 
     // Recreate posts output dir
 
     hull::post::setup(&hull_opts.posts.output)?;
 
-    // Recreate sitemap output file
+    // Remove sitemap output file
 
     if hull_opts.sitemap.enabled {
-        hull::sitemap::clear(&hull_opts.sitemap.output)?;
+        hull::sitemap::remove(&hull_opts.sitemap.output)?;
     }
 
-    // Recreate feed output file
+    // Remove feed output file
 
     if hull_opts.feed.enabled {
-        hull::feed::clear(&hull_opts.feed.output)?;
+        hull::feed::remove(&hull_opts.feed.output)?;
     }
 
     // Load Posts
@@ -52,23 +32,11 @@ fn main() -> io::Result<()> {
 
     // Create Posts Index Page
 
-    let mut news_idx_ctx = TeraContext::new();
-    news_idx_ctx.insert("posts", &posts);
-
-    let news_html = match HULL_TEMPLATES.render("index.html", &news_idx_ctx) {
-        Ok(x) => x,
-        Err(err) => {
-            println!("Hull template error: {:#?}", err);
-            exit(1)
-        }
-    };
-
-    let news_html_min = hull::minify::html(news_html)?;
-
     let index_path = Path::new(&hull_opts.posts.output).join("index.html");
+    let news_html = hull::template::render("index.html", vec![("posts", &posts)])
+        .and_then(hull::minify::html)?;
 
-    fs::write(&index_path, &news_html_min).expect(&format!("Failed to write {:#?}", index_path));
-
+    fs::write(&index_path, &news_html).expect(&format!("Failed to write {:#?}", index_path));
     println!("Wrote {:#?}...", index_path);
 
     //// Build post pages

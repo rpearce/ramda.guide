@@ -11,4 +11,4 @@ output = "./web/sitemap.xml"
 
 [feed]
 enabled = true
-output = "./web/feed.xml"
+output = "./web/feed.atom"

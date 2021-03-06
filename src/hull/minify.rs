@@ -1,4 +1,4 @@
-use minify_html::{with_friendly_error, Cfg};
+use minify_html::{with_friendly_error, Cfg, FriendlyError};
 use std::{io, process::exit, str::from_utf8};
 
 pub fn html(html: String) -> Result<String, io::Error> {
@@ -20,10 +20,14 @@ pub fn html(html: String) -> Result<String, io::Error> {
                 exit(1)
             }
         },
-        Err(err) => {
+        Err(FriendlyError {
+            position,
+            message,
+            code_context,
+        }) => {
             println!(
                 "Hull failed to minify HTML at {}: {}\n{}",
-                err.position, err.message, err.code_context
+                position, message, code_context
             );
             exit(1)
         }
