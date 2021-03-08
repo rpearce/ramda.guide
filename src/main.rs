@@ -42,7 +42,7 @@ fn main() -> io::Result<()> {
     // Generate sitemap.xml
 
     let mut sitemap_entries = vec![HullSitemapEntry {
-        loc: hull_opts.site.url.to_string(),
+        loc: hull_opts.site.url.clone(),
         lastmod: now.to_string(),
         changefreq: "weekly".to_string(),
         priority: "0.6".to_string(),
