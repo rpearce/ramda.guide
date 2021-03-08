@@ -1,6 +1,6 @@
 use chrono;
 use mdbook::book::BookItem;
-use std::{fs, io, path::Path, process::exit};
+use std::io;
 
 mod book;
 mod hull;
@@ -27,11 +27,11 @@ fn main() -> io::Result<()> {
         hull::feed::remove(&hull_opts)?;
     }
 
-    // Load Posts
+    // Load posts
 
     let posts = hull::post::load(&hull_opts)?;
 
-    // Create Posts Index Page
+    // Create posts index page
 
     hull::post::create_index(&hull_opts, &posts)?;
 
@@ -39,7 +39,7 @@ fn main() -> io::Result<()> {
 
     hull::post::create_posts(&hull_opts, &posts)?;
 
-    // Generate sitemap.xml
+    // Generate sitemap
 
     let mut sitemap_entries = vec![HullSitemapEntry {
         loc: hull_opts.site.url.clone(),
