@@ -1,4 +1,4 @@
-use super::config::HullConfig;
+use super::config::Config;
 use super::minify;
 use super::template;
 use pulldown_cmark;
@@ -30,7 +30,7 @@ fn default_fm_str() -> String {
     String::new()
 }
 
-pub fn setup(hull_opts: &HullConfig) -> Result<(), io::Error> {
+pub fn setup(hull_opts: &Config) -> Result<(), io::Error> {
     let dir = &hull_opts.posts.output;
     let path = Path::new(dir);
 
@@ -45,7 +45,7 @@ pub fn setup(hull_opts: &HullConfig) -> Result<(), io::Error> {
     Ok(())
 }
 
-pub fn create_index(hull_opts: &HullConfig, posts: &Vec<Post>) -> Result<(), io::Error> {
+pub fn create_index(hull_opts: &Config, posts: &Vec<Post>) -> Result<(), io::Error> {
     let out_dir = &hull_opts.posts.output;
     let path = Path::new(out_dir).join("index.html");
     let data = vec![("posts", posts)];
@@ -57,7 +57,7 @@ pub fn create_index(hull_opts: &HullConfig, posts: &Vec<Post>) -> Result<(), io:
     Ok(())
 }
 
-pub fn create_posts(hull_opts: &HullConfig, posts: &Vec<Post>) -> Result<(), io::Error> {
+pub fn create_posts(hull_opts: &Config, posts: &Vec<Post>) -> Result<(), io::Error> {
     let out_dir = &hull_opts.posts.output;
     let base_url = &hull_opts.posts.meta.url;
 
@@ -84,7 +84,7 @@ pub fn create_posts(hull_opts: &HullConfig, posts: &Vec<Post>) -> Result<(), io:
     Ok(())
 }
 
-pub fn load(hull_opts: &HullConfig) -> Result<Vec<Post>, io::Error> {
+pub fn load(hull_opts: &Config) -> Result<Vec<Post>, io::Error> {
     let src = &hull_opts.posts.source;
     let md_opts = get_md_opts();
     let path = Path::new(src);

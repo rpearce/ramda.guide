@@ -1,3 +1,6 @@
+[site]
+url = "https://ramda.guide"
+
 [posts]
 source = "./src/news"
 output = "./web/news"
@@ -8,6 +11,9 @@ output = "./web/news"
 [sitemap]
 enabled = true
 output = "./web/sitemap.xml"
+  [sitemap.posts]
+  changefreq = "daily"
+  priority = "0.7"
 
 [feed]
 enabled = true

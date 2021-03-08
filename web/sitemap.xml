@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+<url>
+  <loc>https://ramda.guide</loc>
+  <lastmod>2021-03-08 03:00:11.485813 UTC</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+<url>
+  <loc>https://ramda.guide/book/intro.html</loc>
+  <lastmod>2021-03-08 03:00:11.485813 UTC</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://ramda.guide/news/my-first-post.html</loc>
+  <lastmod>2021-01-30</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://ramda.guide/news/my-second-post.html</loc>
+  <lastmod>2021-01-31</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
+</url>
+
+</urlset>

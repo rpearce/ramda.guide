@@ -1,4 +1,5 @@
 use chrono;
+use mdbook::book::BookItem;
 use std::{fs, io, path::Path, process::exit};
 
 mod book;
@@ -38,43 +39,45 @@ fn main() -> io::Result<()> {
 
     hull::post::create_posts(&hull_opts, &posts)?;
 
-    //// Generate sitemap.xml
+    // Generate sitemap.xml
 
-    //let mut sitemap_entries: Vec<HullSitemapEntry> = vec![];
+    let mut sitemap_entries = vec![HullSitemapEntry {
+        loc: hull_opts.site.url.to_string(),
+        lastmod: now.to_string(),
+        changefreq: "weekly".to_string(),
+        priority: "0.6".to_string(),
+    }];
 
-    //sitemap_entries.push(HullSitemapEntry {
-    //    loc: "https://ramda.guide".to_string(),
-    //    lastmod: now.clone(),
-    //    changefreq: "weekly".to_string(),
-    //    priority: "1.0".to_string(),
-    //});
+    let book_entries: Vec<HullSitemapEntry> = book
+        .iter()
+        .filter_map(|x| match *x {
+            BookItem::Chapter(ref chapter) => chapter.path.clone(),
+            BookItem::Separator => None,
+            BookItem::PartTitle(_) => None,
+        })
+        .map(|x| HullSitemapEntry {
+            loc: format!(
+                "{}/book/{}.html",
+                &hull_opts.site.url,
+                x.file_stem().unwrap().to_str().unwrap().to_string()
+            ),
+            lastmod: now.to_string(),
+            changefreq: "daily".to_string(),
+            priority: "0.9".to_string(),
+        })
+        .collect();
 
-    //book.iter()
-    //    .filter_map(|x| match *x {
-    //        mdbook::book::BookItem::Chapter(ref chapter) => chapter.path.clone(),
-    //        mdbook::book::BookItem::Separator => None,
-    //        mdbook::book::BookItem::PartTitle(_) => None,
-    //    })
-    //    .for_each(|x| {
-    //        let stem = x.file_stem().unwrap().to_str().unwrap().to_string();
-    //        let loc = format!("https://ramda.guide/book/{}.html", stem);
+    let post_entries: Vec<HullSitemapEntry> = posts
+        .iter()
+        .map(|x| hull::sitemap::entry_from_post(&hull_opts, &x))
+        .collect();
 
-    //        sitemap_entries.push(HullSitemapEntry {
-    //            loc,
-    //            lastmod: now.clone(),
-    //            changefreq: "weekly".to_string(),
-    //            priority: "0.8".to_string(),
-    //        });
-    //    });
+    sitemap_entries.extend(book_entries);
+    sitemap_entries.extend(post_entries);
 
-    //// TODO: add news entries to sitemap, too
+    hull::sitemap::create_sitemap(&hull_opts, &sitemap_entries)?;
 
-    //let sitemap_xml: String = hull::sitemap::build(&sitemap_entries);
-    //// TODO: save sitemap.xml
-
-    //println!("{:#?}", sitemap_xml);
-
-    //// TODO feed
+    // TODO feed
 
     Ok(())
 }

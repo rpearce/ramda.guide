@@ -1,4 +1,4 @@
-use super::config::HullConfig;
+use super::{config::Config, post::Post};
 use std::path::Path;
 use std::{fs, io};
 
@@ -8,6 +8,17 @@ pub struct Entry {
     pub lastmod: String,
     pub changefreq: String,
     pub priority: String,
+}
+
+pub fn create_sitemap(hull_opts: &Config, entries: &Vec<Entry>) -> Result<(), io::Error> {
+    let src = &hull_opts.sitemap.output;
+    let path = Path::new(src);
+    let xml = build(&entries);
+
+    fs::write(&path, &xml).expect(&format!("Hull: failed to write {:#?}", path));
+    println!("Hull: wrote {:#?}", path);
+
+    Ok(())
 }
 
 pub fn build(entries: &Vec<Entry>) -> String {
@@ -32,7 +43,7 @@ fn to_entry(entry: &Entry) -> String {
         r#"
 <url>
   <loc>{}</loc>
-  <lastmod>{}<lastmod>
+  <lastmod>{}</lastmod>
   <changefreq>{}</changefreq>
   <priority>{}</priority>
 </url>
@@ -41,7 +52,7 @@ fn to_entry(entry: &Entry) -> String {
     )
 }
 
-pub fn remove(hull_opts: &HullConfig) -> Result<(), io::Error> {
+pub fn remove(hull_opts: &Config) -> Result<(), io::Error> {
     let src = &hull_opts.sitemap.output;
     let path = Path::new(src);
 
@@ -51,4 +62,19 @@ pub fn remove(hull_opts: &HullConfig) -> Result<(), io::Error> {
     }
 
     Ok(())
+}
+
+pub fn entry_from_post(hull_opts: &Config, post: &Post) -> Entry {
+    let lastmod = if post.data.published_at.is_empty() {
+        post.data.updated_at.clone()
+    } else {
+        post.data.published_at.clone()
+    };
+
+    Entry {
+        loc: format!("{}/{}.html", &hull_opts.posts.meta.url, post.data.slug),
+        lastmod,
+        changefreq: hull_opts.sitemap.posts.changefreq.clone(),
+        priority: hull_opts.sitemap.posts.priority.clone(),
+    }
 }
