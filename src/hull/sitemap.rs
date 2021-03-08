@@ -1,8 +1,9 @@
-use super::{config::Config, post::Post};
+use super::{config::Config, post::Post, template};
+use serde::Serialize;
 use std::path::Path;
 use std::{fs, io};
 
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Serialize)]
 pub struct Entry {
     pub loc: String,
     pub lastmod: String,
@@ -13,43 +14,13 @@ pub struct Entry {
 pub fn create_sitemap(hull_opts: &Config, entries: &Vec<Entry>) -> Result<(), io::Error> {
     let src = &hull_opts.sitemap.output;
     let path = Path::new(src);
-    let xml = build(&entries);
+    let data = vec![("entries", entries)];
+    let xml = template::render("sitemap.xml", data)?;
 
     fs::write(&path, &xml).expect(&format!("Hull: failed to write {:#?}", path));
     println!("Hull: wrote {:#?}", path);
 
     Ok(())
-}
-
-pub fn build(entries: &Vec<Entry>) -> String {
-    let items: String = entries.iter().map(to_entry).collect();
-
-    to_sitemap(items)
-}
-
-fn to_sitemap(content: String) -> String {
-    format!(
-        r#"<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {}
-</urlset>
-"#,
-        content
-    )
-}
-
-fn to_entry(entry: &Entry) -> String {
-    format!(
-        r#"
-<url>
-  <loc>{}</loc>
-  <lastmod>{}</lastmod>
-  <changefreq>{}</changefreq>
-  <priority>{}</priority>
-</url>
-"#,
-        entry.loc, entry.lastmod, entry.changefreq, entry.priority
-    )
 }
 
 pub fn remove(hull_opts: &Config) -> Result<(), io::Error> {
