@@ -6,7 +6,7 @@ source = "./src/news"
 output = "./web/news"
   [posts.meta]
   title = "Ramda Guide News"
-  url = "https://ramda.guide/news"
+  path = "news"
 
 [sitemap]
 enabled = true
@@ -18,3 +18,8 @@ output = "./web/sitemap.xml"
 [feed]
 enabled = true
 output = "./web/feed.atom"
+  [feed.meta]
+  title = "Ramda Guide"
+  subtitle = "A guided, practical approach to learning ramda. By Robert W. Pearce"
+  rights = "Copyright © 2021, Robert W. Pearce"
+  domain = "ramda.guide"

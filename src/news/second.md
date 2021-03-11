@@ -1,13 +1,14 @@
 +++
 title = "My Second Post"
 description = "My second post desc"
-author = "Robert W. Pearce"
-author_twitter = "RobertWPearce"
-published_at = "2021-01-31"
+keywords = ""
 slug = "my-second-post"
-updated_at = "2021-01-31"
+published_at = "2021-01-31T12:00:00Z"
+updated_at = "2021-01-31T14:00:00Z"
+author = "Robert W. Pearce"
+author_email = "me@robertwpearce.com"
+author_twitter = "RobertWPearce"
+author_uri = "https://rwp.im"
 +++
-
-# My Second Post
 
 This is my second post!

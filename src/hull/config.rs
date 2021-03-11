@@ -2,22 +2,31 @@ use serde::Deserialize;
 use std::{fs, io};
 
 #[derive(Debug, Deserialize)]
-pub struct ConfigMeta {
+pub struct ConfigPostMeta {
     pub title: String,
-    pub url: String,
+    pub path: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct ConfigPost {
     pub source: String,
     pub output: String,
-    pub meta: ConfigMeta,
+    pub meta: ConfigPostMeta,
 }
 
 #[derive(Debug, Deserialize)]
-pub struct ConfigBasic {
+pub struct ConfigFeedMeta {
+    pub title: String,
+    pub subtitle: String,
+    pub rights: String,
+    pub domain: String,
+}
+
+#[derive(Debug, Deserialize)]
+pub struct ConfigFeed {
     pub enabled: bool,
     pub output: String,
+    pub meta: ConfigFeedMeta,
 }
 
 #[derive(Debug, Deserialize)]
@@ -40,7 +49,7 @@ pub struct ConfigSitemap {
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    pub feed: ConfigBasic,
+    pub feed: ConfigFeed,
     pub posts: ConfigPost,
     pub site: ConfigSite,
     pub sitemap: ConfigSitemap,

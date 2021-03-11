@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Ramda Guide</title>
-  <subtitle>A guided, practical approach to learning ramda. By Robert W. Pearce</subtitle>
-  <link rel="alternate" type="text/html" href="https://ramda.guide/news/feed.atom"/>
-  <link rel="self" type="application/atom+xml" href="https://ramda.guide/news/feed.atom"/>
-  <id>https://ramda.guide/news/feed.atom</id>
+  <title>{{title | safe}}</title>
+  <subtitle>{{subtitle | safe}}</subtitle>
+  <link rel="alternate" type="text/html" href="{{site | safe}}"/>
+  <link rel="self" type="application/atom+xml" href="{{site | safe}}/feed.atom"/>
+  <id>tag:{{domain}},{{start_year}}:/news</id>
   <updated>{{last_updated_at}}</updated>
-  <rights>Copyright © 2021, Robert W. Pearce</rights>
-  {% for entry in entries %}
-  <entry xmlns="http://www.w3.org/2005/Atom">
+  <rights>{{rights}}</rights>
+  {% for entry in entries %}<entry xmlns="http://www.w3.org/2005/Atom">
     <title>{{entry.title | safe}}</title>
     <link rel="alternate" type="text/html" href="{{entry.link | safe}}"/>
-    <id>{{entry.id}}</id>
+    <id>tag:{{domain}},{{entry.published_at_year}}:{{entry.uri | safe}}</id>
     <published>{{entry.published_at}}</published>
     <updated>{{entry.updated_at}}</updated>
     <author>
       <name>{{entry.author_name}}</name>
-      <email>{{entry.author_email}}</email>
-      <uri>{{entry.author_uri}}</uri>
+      {% if entry.author_email %}<email>{{entry.author_email}}</email>{% endif %}
+      {% if entry.author_uri %}<uri>{{entry.author_uri | safe}}</uri>{% endif %}
     </author>
     <content type="html">{{entry.content_html}}</content>
-  </entry>
-  {% endfor %}
+  </entry>{% endfor %}
 </feed>

@@ -5,18 +5,19 @@ use pulldown_cmark;
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
 use std::{fs, io};
+use tera::Context as TeraContext;
 
 #[derive(Debug, Default, Deserialize, Serialize)]
 pub struct PostFrontMatter {
     pub author: String,
+    pub author_email: String,
     pub author_twitter: String,
+    pub author_uri: String,
     pub description: String,
-    #[serde(default = "default_fm_str")]
     pub keywords: String,
     pub published_at: String,
     pub slug: String,
     pub title: String,
-    #[serde(default = "default_fm_str")]
     pub updated_at: String,
 }
 
@@ -26,9 +27,10 @@ pub struct Post {
     pub data: PostFrontMatter,
 }
 
-fn default_fm_str() -> String {
-    String::new()
-}
+//#[serde(default = "default_fm_str")]
+//fn default_fm_str() -> String {
+//    String::new()
+//}
 
 pub fn setup(hull_opts: &Config) -> Result<(), io::Error> {
     let dir = &hull_opts.posts.output;
@@ -47,38 +49,43 @@ pub fn setup(hull_opts: &Config) -> Result<(), io::Error> {
 
 pub fn create_index(hull_opts: &Config, posts: &Vec<Post>) -> Result<(), io::Error> {
     let out_dir = &hull_opts.posts.output;
-    let path = Path::new(out_dir).join("index.html");
-    let data = vec![("posts", posts)];
-    let html = template::render("index.html", data).and_then(minify::html)?;
+    let out_path = Path::new(out_dir).join("index.html");
 
-    fs::write(&path, &html).expect(&format!("Hull: failed to write {:#?}", path));
-    println!("Hull: wrote {:#?}", path);
+    let mut ctx = TeraContext::new();
+    ctx.insert("posts", &posts);
+
+    let html = template::render("index.html", &ctx).and_then(minify::html)?;
+
+    fs::write(&out_path, &html).expect(&format!("Hull: failed to write {:#?}", out_path));
+    println!("Hull: wrote {:#?}", out_path);
 
     Ok(())
 }
 
 pub fn create_posts(hull_opts: &Config, posts: &Vec<Post>) -> Result<(), io::Error> {
+    let domain = &hull_opts.site.url;
     let out_dir = &hull_opts.posts.output;
-    let base_url = &hull_opts.posts.meta.url;
+    let path = &hull_opts.posts.meta.path;
 
     for post in posts {
-        let path = Path::new(&out_dir).join(format!("{}.html", post.data.slug));
-        let url = format!("{}/{}.html", base_url, post.data.slug);
-        let data = vec![
-            ("author", &post.data.author),
-            ("content_html", &post.content_html),
-            ("description", &post.data.description),
-            ("keywords", &post.data.keywords),
-            ("site", &hull_opts.posts.meta.title),
-            ("title", &post.data.title),
-            ("twitter_author", &post.data.author_twitter),
-            ("updated_at", &post.data.updated_at),
-            ("url", &url),
-        ];
-        let html = template::render("post.html", data).and_then(minify::html)?;
+        let out_path = Path::new(&out_dir).join(format!("{}.html", post.data.slug));
+        let url = format!("{}/{}/{}.html", domain, path, post.data.slug);
 
-        fs::write(&path, &html).expect(&format!("Hull: failed to write {:#?}", path));
-        println!("Hull: wrote {:#?}", path);
+        let mut ctx = TeraContext::new();
+        ctx.insert("author", &post.data.author);
+        ctx.insert("content_html", &post.content_html);
+        ctx.insert("description", &post.data.description);
+        ctx.insert("keywords", &post.data.keywords);
+        ctx.insert("site", &hull_opts.posts.meta.title);
+        ctx.insert("title", &post.data.title);
+        ctx.insert("author_twitter", &post.data.author_twitter);
+        ctx.insert("updated_at", &post.data.updated_at);
+        ctx.insert("url", &url);
+
+        let html = template::render("post.html", &ctx).and_then(minify::html)?;
+
+        fs::write(&out_path, &html).expect(&format!("Hull: failed to write {:#?}", out_path));
+        println!("Hull: wrote {:#?}", out_path);
     }
 
     Ok(())

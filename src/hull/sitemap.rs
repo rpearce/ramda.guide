@@ -2,6 +2,7 @@ use super::{config::Config, post::Post, template};
 use serde::Serialize;
 use std::path::Path;
 use std::{fs, io};
+use tera::Context as TeraContext;
 
 #[derive(Debug, Default, Serialize)]
 pub struct Entry {
@@ -11,11 +12,14 @@ pub struct Entry {
     pub priority: String,
 }
 
-pub fn create_sitemap(hull_opts: &Config, entries: &Vec<Entry>) -> Result<(), io::Error> {
+pub fn create(hull_opts: &Config, entries: &Vec<Entry>) -> Result<(), io::Error> {
     let src = &hull_opts.sitemap.output;
     let path = Path::new(src);
-    let data = vec![("entries", entries)];
-    let xml = template::render("sitemap.xml", data)?;
+
+    let mut ctx = TeraContext::new();
+    ctx.insert("entries", &entries);
+
+    let xml = template::render("sitemap.xml", &ctx)?;
 
     fs::write(&path, &xml).expect(&format!("Hull: failed to write {:#?}", path));
     println!("Hull: wrote {:#?}", path);
@@ -36,6 +40,10 @@ pub fn remove(hull_opts: &Config) -> Result<(), io::Error> {
 }
 
 pub fn entry_from_post(hull_opts: &Config, post: &Post) -> Entry {
+    let domain = &hull_opts.site.url;
+    let path = &hull_opts.posts.meta.path;
+    let loc = format!("{}/{}/{}.html", domain, path, post.data.slug);
+
     let lastmod = if post.data.published_at.is_empty() {
         post.data.updated_at.clone()
     } else {
@@ -43,7 +51,7 @@ pub fn entry_from_post(hull_opts: &Config, post: &Post) -> Entry {
     };
 
     Entry {
-        loc: format!("{}/{}.html", &hull_opts.posts.meta.url, post.data.slug),
+        loc,
         lastmod,
         changefreq: hull_opts.sitemap.posts.changefreq.clone(),
         priority: hull_opts.sitemap.posts.priority.clone(),

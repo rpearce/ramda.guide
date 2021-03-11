@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Ramda Guide</title>
+  <subtitle>A guided, practical approach to learning ramda. By Robert W. Pearce</subtitle>
+  <link rel="alternate" type="text/html" href="https://ramda.guide"/>
+  <link rel="self" type="application/atom+xml" href="https://ramda.guide/feed.atom"/>
+  <id>tag:ramda.guide,2021:/news</id>
+  <updated>2021-01-31T14:00:00Z</updated>
+  <rights>Copyright © 2021, Robert W. Pearce</rights>
+  <entry xmlns="http://www.w3.org/2005/Atom">
+    <title>My Second Post</title>
+    <link rel="alternate" type="text/html" href="https://ramda.guide/news/my-second-post.html"/>
+    <id>tag:ramda.guide,2021:news/my-second-post.html</id>
+    <published>2021-01-31T12:00:00Z</published>
+    <updated>2021-01-31T14:00:00Z</updated>
+    <author>
+      <name>Robert W. Pearce</name>
+      <email>me@robertwpearce.com</email>
+      <uri>https://rwp.im</uri>
+    </author>
+    <content type="html">&lt;p&gt;This is my second post!&lt;&#x2F;p&gt;
+</content>
+  </entry><entry xmlns="http://www.w3.org/2005/Atom">
+    <title>My First Post</title>
+    <link rel="alternate" type="text/html" href="https://ramda.guide/news/my-first-post.html"/>
+    <id>tag:ramda.guide,2021:news/my-first-post.html</id>
+    <published>2021-01-30T12:00:00Z</published>
+    <updated>2021-01-30T12:00:00Z</updated>
+    <author>
+      <name>Robert W. Pearce</name>
+      <email>me@robertwpearce.com</email>
+      <uri>https://rwp.im</uri>
+    </author>
+    <content type="html">&lt;p&gt;This is my first post!&lt;&#x2F;p&gt;
+</content>
+  </entry>
+</feed>

@@ -1,12 +1,14 @@
 +++
 title = "My First Post"
 description = "My first post desc"
-author = "Robert W. Pearce"
-author_twitter = "RobertWPearce"
-published_at = "2021-01-30"
+keywords = ""
 slug = "my-first-post"
+published_at = "2021-01-30T12:00:00Z"
+updated_at = ""
+author = "Robert W. Pearce"
+author_email = "me@robertwpearce.com"
+author_twitter = "RobertWPearce"
+author_uri = "https://rwp.im"
 +++
-
-# My First Post
 
 This is my first post!
