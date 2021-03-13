@@ -10,56 +10,40 @@ fn main() -> io::Result<()> {
     let book_data = book::load("./src/book")?;
     let hull_opts = hull::config::load("./hull.toml")?;
 
-    // Load posts
+    // Load posts and create output
 
-    let posts = hull::post::load(&hull_opts)?;
-
-    // Recreate posts output dir
-
-    hull::post::setup(&hull_opts)?;
-
-    // Create posts index page
-
-    hull::post::create_index(&hull_opts, &posts)?;
-
-    // Build post pages
-
-    hull::post::create_posts(&hull_opts, &posts)?;
+    let posts = hull::post::create_all(&hull_opts)?;
 
     // Generate sitemap
 
     if hull_opts.sitemap.enabled {
-        hull::sitemap::remove(&hull_opts)?;
-
-        let mut sitemap_entries = vec![HullSitemapEntry {
+        let mut entries = vec![HullSitemapEntry {
             loc: hull_opts.site.url.clone(),
             lastmod: now.to_string(),
             changefreq: "weekly".to_string(),
             priority: "0.6".to_string(),
         }];
 
-        let sitemap_book_entries: Vec<HullSitemapEntry> = book::get_chapter_paths(book_data)
+        let book_entries: Vec<HullSitemapEntry> = book::get_chapter_paths(book_data)
             .iter()
             .map(|x| book::to_sitemap_entry(&hull_opts, x, now.to_string()))
             .collect();
 
-        let sitemap_post_entries: Vec<HullSitemapEntry> = posts
+        let post_entries: Vec<HullSitemapEntry> = posts
             .iter()
             .map(|x| hull::sitemap::entry_from_post(&hull_opts, &x))
             .collect();
 
-        sitemap_entries.extend(sitemap_book_entries);
-        sitemap_entries.extend(sitemap_post_entries);
+        entries.extend(book_entries);
+        entries.extend(post_entries);
 
-        hull::sitemap::create(&hull_opts, &sitemap_entries)?;
+        hull::sitemap::recreate(&hull_opts, &entries)?;
     }
 
     // Generate feed
 
     if hull_opts.feed.enabled {
-        hull::feed::remove(&hull_opts)?;
-
-        hull::feed::create(&hull_opts, &posts)?;
+        hull::feed::recreate(&hull_opts, &posts)?;
     }
 
     Ok(())

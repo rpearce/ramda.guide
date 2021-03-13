@@ -12,6 +12,13 @@ pub struct Entry {
     pub priority: String,
 }
 
+pub fn recreate(hull_opts: &Config, entries: &Vec<Entry>) -> Result<(), io::Error> {
+    remove(&hull_opts)?;
+    create(&hull_opts, &entries)?;
+
+    Ok(())
+}
+
 pub fn create(hull_opts: &Config, entries: &Vec<Entry>) -> Result<(), io::Error> {
     let src = &hull_opts.sitemap.output;
     let path = Path::new(src);

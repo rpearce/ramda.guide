@@ -32,6 +32,15 @@ pub struct Post {
 //    String::new()
 //}
 
+pub fn create_all(hull_opts: &Config) -> Result<Vec<Post>, io::Error> {
+    let posts = load(&hull_opts)?;
+    setup(&hull_opts)?;
+    create_index(&hull_opts, &posts)?;
+    create_posts(&hull_opts, &posts)?;
+
+    Ok(posts)
+}
+
 pub fn setup(hull_opts: &Config) -> Result<(), io::Error> {
     let dir = &hull_opts.posts.output;
     let path = Path::new(dir);

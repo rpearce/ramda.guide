@@ -32,6 +32,13 @@ pub struct Entry {
     pub uri: String,
 }
 
+pub fn recreate(hull_opts: &Config, posts: &Vec<Post>) -> Result<(), io::Error> {
+    remove(&hull_opts)?;
+    create(&hull_opts, &posts)?;
+
+    Ok(())
+}
+
 pub fn create(hull_opts: &Config, posts: &Vec<Post>) -> Result<(), io::Error> {
     let out_path = Path::new(&hull_opts.feed.output);
     let path = &hull_opts.posts.meta.path;
