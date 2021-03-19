@@ -82,12 +82,13 @@ pub fn create_posts(hull_opts: &Config, posts: &Vec<Post>) -> Result<(), io::Err
 
         let mut ctx = TeraContext::new();
         ctx.insert("author", &post.data.author);
+        ctx.insert("author_twitter", &post.data.author_twitter);
         ctx.insert("content_html", &post.content_html);
         ctx.insert("description", &post.data.description);
         ctx.insert("keywords", &post.data.keywords);
         ctx.insert("site", &hull_opts.posts.meta.title);
         ctx.insert("title", &post.data.title);
-        ctx.insert("author_twitter", &post.data.author_twitter);
+        ctx.insert("published_at", &post.data.published_at);
         ctx.insert("updated_at", &post.data.updated_at);
         ctx.insert("url", &url);
 

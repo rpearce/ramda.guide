@@ -8,23 +8,34 @@
 {% block type %}website{% endblock type %}
 {% block url %}https://ramda.guide/news/index.html{% endblock url %}
 {% block content %}
-<nav>
-  <ul>
-    <li>
+<nav class="m120ch-mla m120ch-mra ml20 mr20 mw68ch">
+  <ul class="df lsn p0" role="list">
+    <li role="listitem">
       <a href="../index.html">Home</a>
     </li>
-    <li>
-      <a href="../book/index.html">The Book</a>
+    <li role="listitem">
+      <a class="ml20" href="../book/index.html">The Book</a>
+    </li>
+    <li role="listitem">
+      <a aria-current="page" class="ml20" href="./index.html">
+        News
+      </a>
     </li>
   </ul>
 </nav>
-
-<h1>Ramda Guide - News</h1>
-<ul>
-  {% for post in posts %}
-  <li>
-    <a href="./{{post.data.slug}}.html">{{post.data.title}}</a>
-  </li>
-  {% endfor %}
-</ul>
+<main class="m120ch-mla m120ch-mra ml20 mr20 mw68ch">
+  <h1 class="fs60 lh11 mb32 mt48">Ramda Guide - News</h1>
+  <section>
+    <h2 class="fs32 lh13 mb32 mt48">Posts</h2>
+    <ul>
+      {% for post in posts %}
+      <li>
+        <a href="./{{post.data.slug}}.html">
+          {{post.data.published_at | date(format="%Y-%m-%d")}} - {{post.data.title}}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</main>
 {% endblock content %}

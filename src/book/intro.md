@@ -13,12 +13,11 @@ programmers".
 
 ## Book Status
 
-_Updated: 2021-02-05_
+_Updated: 2021-03-18_
 
 As you can see from the navigation links, this is a work in progress. I will
-post updates to the [RSS](https://ramda.guide/rss.xml) and
-[atom](https://ramda.guide/atom.xml) feeds as new groups of content are
-available, you can subscribe for email updates on [the
+post updates to the [feed](https://ramda.guide/feed.atom) as new groups of
+content are available, you can subscribe for email updates on [the
 website](https://ramda.guide), or you can check the [News
 page](../news/index.html).
 

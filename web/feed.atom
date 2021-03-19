@@ -5,20 +5,45 @@
   <link rel="alternate" type="text/html" href="https://ramda.guide"/>
   <link rel="self" type="application/atom+xml" href="https://ramda.guide/feed.atom"/>
   <id>tag:ramda.guide,2021:/news</id>
-  <updated>2021-01-30T12:00:00Z</updated>
+  <updated>2021-03-19T01:45:00Z</updated>
   <rights>Copyright © 2021, Robert W. Pearce</rights>
   <entry xmlns="http://www.w3.org/2005/Atom">
-    <title>My First Post</title>
-    <link rel="alternate" type="text/html" href="https://ramda.guide/news/my-first-post.html"/>
-    <id>tag:ramda.guide,2021:news/my-first-post.html</id>
-    <published>2021-01-30T12:00:00Z</published>
-    <updated>2021-01-30T12:00:00Z</updated>
+    <title>Ramda Guide's Build System</title>
+    <link rel="alternate" type="text/html" href="https://ramda.guide/news/ramda-guides-build-system.html"/>
+    <id>tag:ramda.guide,2021:news/ramda-guides-build-system.html</id>
+    <published>2021-03-19T01:45:00Z</published>
+    <updated>2021-03-19T01:45:00Z</updated>
     <author>
       <name>Robert W. Pearce</name>
       <email>me@robertwpearce.com</email>
       <uri>https://rwp.im</uri>
     </author>
-    <content type="html">&lt;p&gt;This is my first post!&lt;&#x2F;p&gt;
+    <content type="html">&lt;p&gt;Ramda Guide is officially in the works now!&lt;&#x2F;p&gt;
+&lt;p&gt;&amp;quot;Why the delay?&amp;quot;&lt;&#x2F;p&gt;
+&lt;p&gt;Apart from having a little girl 5 months ago, battling illness, managing other
+open source projects, and trying to study computer science so I can attempt a
+Masters program next year, I wanted to expand my coding horizons and
+opportunities by learning Rust.&lt;&#x2F;p&gt;
+&lt;p&gt;For this project, I wanted to:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;have something that generates a book website for me&lt;&#x2F;li&gt;
+&lt;li&gt;write posts like this and have it build out an index page and XML (Atom) feed&lt;&#x2F;li&gt;
+&lt;li&gt;have a sitemap of all book pages &lt;em&gt;and&lt;&#x2F;em&gt; news posts&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Naturally, I was slightly disatisfied with everything I came across for my use
+case (although &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;getzola&#x2F;zola&quot;&gt;zola&lt;&#x2F;a&gt; was nearly there), and
+I decided to write a static site generator, &lt;code&gt;hull&lt;&#x2F;code&gt;, in Rust to handle everything
+I needed.&lt;&#x2F;p&gt;
+&lt;p&gt;I haven&#x27;t abstracted &lt;code&gt;hull&lt;&#x2F;code&gt; to a standalone project yet, but you can see the
+source code at &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rpearce&#x2F;ramda.guide&#x2F;&quot;&gt;github.com&#x2F;rpearce&#x2F;ramda.guide&#x2F;&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;There is still work to be done, though, but at least I can begin!&lt;&#x2F;p&gt;
+&lt;p&gt;In addition to writing, some &amp;quot;to dos&amp;quot;:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;identify the &amp;quot;Basics Track&amp;quot; in the outline&lt;&#x2F;li&gt;
+&lt;li&gt;implement runnable JS code examples&lt;&#x2F;li&gt;
+&lt;li&gt;style the posts better&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
 </content>
   </entry>
 </feed>
