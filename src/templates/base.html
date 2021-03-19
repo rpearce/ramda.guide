@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}{% endblock title %}</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="{% block description %}{% endblock description %}" />
+    <meta name="author" content="{% block author %}{% endblock author %}" />
+    <meta name="keywords" content="{% block keywords %}{% endblock keywords %}" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    {#<meta property="og:site_name" content="{% block site %}{% endblock site %}" />#}
+    {#<meta property="og:title" content="{% block title %}{% endblock title %}" />#}
+    {#<meta property="og:url" content="{% block url %}{% endblock url %}" />#}
+    {#<meta property="og:description" content="{% block description %}{% endblock description %}" />#}
+
+    {#<meta property="og:image" content="{% block og_image_src %}{% endblock og_image_src %}" />#}
+    {#<meta property="og:image:alt" content="{% block og_image_alt %}{% endblock og_image_alt %}" />#}
+    {#<meta property="og:type" content="{% block type %}{% endblock type %}" />#}
+
+    {#<meta property="twitter:card" content="summary_large_image" />#}
+    {#<meta property="twitter:site" content="{% block site %}{% endblock site %}" />#}
+    {#<meta property="twitter:title" content="{% block title %}{% endblock title %}" />#}
+    {#<meta property="twitter:description" content="{% block description %}{% endblock description %}" />#}
+    {#<meta property="twitter:image" content="{% block twitter_image_src %}{% endblock twitter_image_src %}" />#}
+    {#<meta property="twitter:creator" content="{% block twitter_author %}{% endblock twitter_author %}" />#}
+
+    <link rel="canonical" href="{% block url %}{% endblock url %}" />
+    <!-- <link rel="shortcut icon" href="./favicon.ico"> -->
+    <link rel="stylesheet" href="../css/default.css" />
+
+    {% block extra_head %}{% endblock extra_head %}
+  </head>
+  <body class="fs fs18 ha lh15 light m0 wrbw">
+    {% block content %}
+    {% endblock content %}
+  </body>
+</html>

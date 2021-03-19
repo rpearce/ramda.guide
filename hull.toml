@@ -1,0 +1,25 @@
+[site]
+url = "https://ramda.guide"
+
+[posts]
+source = "./src/news"
+output = "./web/news"
+  [posts.meta]
+  title = "Ramda Guide News"
+  path = "news"
+
+[sitemap]
+enabled = true
+output = "./web/sitemap.xml"
+  [sitemap.posts]
+  changefreq = "daily"
+  priority = "0.7"
+
+[feed]
+enabled = true
+output = "./web/feed.atom"
+  [feed.meta]
+  title = "Ramda Guide"
+  subtitle = "A guided, practical approach to learning ramda. By Robert W. Pearce"
+  rights = "Copyright © 2021, Robert W. Pearce"
+  domain = "ramda.guide"

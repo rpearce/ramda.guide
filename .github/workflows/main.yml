@@ -28,9 +28,9 @@ jobs:
       #    signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
       #    #authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - run: nix flake check
+      #- run: nix flake check
       - run: nix build
-      - run: nix run .#book build
+      - run: nix run .#hull
 
       - name: Artifact pages
         uses: actions/upload-artifact@v2

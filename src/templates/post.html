@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block author %}{{author}}{% endblock author %}
+{% block author_twitter %}{{author_twitter}}{% endblock description %}
+{% block description %}{{description}}{% endblock description %}
+{% block keywords %}{{keywords}}{% endblock description %}
+{% block site %}{{site}}{% endblock site %}
+{% block title %}{{title}}{% endblock title %}
+{% block type %}article{% endblock type %}
+{% block url %}{{url}}{% endblock url %}
+{% block content %}
+<nav class="m120ch-mla m120ch-mra ml20 mr20 mw68ch">
+  <ul class="df lsn p0" role="list">
+    <li role="listitem">
+      <a href="../index.html">Home</a>
+    </li>
+    <li role="listitem">
+      <a class="ml20" href="../book/index.html">The Book</a>
+    </li>
+    <li role="listitem">
+      <a class="ml20" href="./index.html">News</a>
+    </li>
+  </ul>
+</nav>
+<main class="m120ch-mla m120ch-mra ml20 mr20 mw68ch">
+  <header>
+    <h1 class="fs60 lh11 mb32 mt48">{{title}}</h1>
+    <div class="fsti">Published at {{published_at}}</div>
+    {% if updated_at %}
+    <div class="fsti">Updated at {{updated_at}}</div>
+    {% endif %}
+  </header>
+  <section>
+    {{content_html | safe}}
+  </section>
+</main>
+{% endblock content %}

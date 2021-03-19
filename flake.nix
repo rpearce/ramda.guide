@@ -1,25 +1,59 @@
 {
-  description = "test-mdbook";
+  description = "ramda.guide";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
-  inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/master";
+    naersk = {
+      url = "github:nmattia/naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    utils = {
+      url = "github:numtide/flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
-  outputs = { self, flake-utils, nixpkgs }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in rec {
-        packages = flake-utils.lib.flattenTree {
-          mdbook = pkgs.mdbook;
+  outputs = { naersk, nixpkgs, rust-overlay, self, utils }:
+    utils.lib.eachDefaultSystem (system:
+      let
+        rust-overlay' = import rust-overlay;
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ rust-overlay' ];
+        };
+        rust = (pkgs.rustChannelOf {
+          date = "2021-03-04";
+          channel = "nightly";
+        }).rust;
+        naersk-lib = naersk.lib."${system}".override {
+          cargo = rust;
+          rustc = rust;
+        };
+      in rec {
+        packages = utils.lib.flattenTree {
+          hull = naersk-lib.buildPackage {
+            pname = "hull";
+            root = ./.;
+          };
         };
 
-        defaultPackage = pkgs.mdbook;
+        defaultPackage = packages.hull;
 
-        apps.book = flake-utils.lib.mkApp {
-          drv = pkgs.mdbook;
+        apps.hull = utils.lib.mkApp {
+          drv = packages.hull;
         };
 
-        defaultApp = apps.book;
+        defaultApp = apps.hull;
 
-        devShell = import ./shell.nix { inherit pkgs; };
+        devShell = pkgs.mkShell {
+          buildInputs = [ ];
+          nativeBuildInputs = [ rust ];
+        };
       }
     );
 }
