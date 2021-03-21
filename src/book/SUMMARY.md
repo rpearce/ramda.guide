@@ -1,10 +1,8 @@
-# Summary
-
 - [Ramda Guide](./intro.md)
 
 # Preface
 
-- [What is Ramda?]()
+- [What is Ramda?](./what-is-ramda.md)
 - [Suggested Prerequisite Knowledge]()
 - [How to Use This Guide]()
 - [Why Ramda?]()

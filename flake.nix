@@ -51,7 +51,7 @@
         defaultApp = apps.hull;
 
         devShell = pkgs.mkShell {
-          buildInputs = [ ];
+          buildInputs = [ pkgs.cargo-watch ];
           nativeBuildInputs = [ rust ];
         };
       }

@@ -1,6 +1,6 @@
 # Ramda Guide
 
-This is an in-depth guide to help get you mostly adequate[1] with
+This is a guide to help get you mostly adequate[1] with
 [ramda.js](https://ramdajs.com), "a practical functional library for JavaScript
 programmers".
 
@@ -13,12 +13,12 @@ programmers".
 
 ## Book Status
 
-_Updated: 2021-03-18_
+_Updated: 2021-03-20_
 
 As you can see from the navigation links, this is a work in progress. I will
 post updates to the [feed](https://ramda.guide/feed.atom) as new groups of
 content are available, you can subscribe for email updates on [the
-website](https://ramda.guide), or you can check the [News
+website](https://ramda.guide), or you can check the [news
 page](../news/index.html).
 
 [1]: https://github.com/MostlyAdequate/mostly-adequate-guide
