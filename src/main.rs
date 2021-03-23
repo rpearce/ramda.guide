@@ -19,14 +19,14 @@ fn main() -> io::Result<()> {
     if hull_opts.sitemap.enabled {
         let mut entries = vec![HullSitemapEntry {
             loc: hull_opts.site.url.clone(),
-            lastmod: now.to_string(),
+            lastmod: format!("{:?}", now),
             changefreq: "weekly".to_string(),
             priority: "0.6".to_string(),
         }];
 
         let book_entries: Vec<HullSitemapEntry> = book::get_chapter_paths(book_data)
             .iter()
-            .map(|x| book::to_sitemap_entry(&hull_opts, x, now.to_string()))
+            .map(|x| book::to_sitemap_entry(&hull_opts, x, format!("{:?}", now)))
             .collect();
 
         let post_entries: Vec<HullSitemapEntry> = posts
