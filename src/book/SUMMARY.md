@@ -3,7 +3,7 @@
 # Preface
 
 - [What is Ramda?](./what-is-ramda.md)
-- [Suggested Prerequisite Knowledge]()
+- [Suggested Prerequisite Knowledge](./prerequisites.md)
 - [How to Use This Guide]()
 - [Why Ramda?]()
 
