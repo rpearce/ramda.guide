@@ -8,5 +8,7 @@ some cool principles baked into every function:
 * allow users to build new functions from old ones by not supplying all of a
   function's parameters
 
-These ideas are thoroughly explored in the `Core Ramda Ideas` section that
-starts with [the "Same Input → Same Output" chapter](./core_idempotency.md).
+These ideas — regardless of what library or even language we use — allow us to
+write safer, more extendable code, and they are thoroughly explored in the `Core
+Ramda Ideas` section that starts with [the "Same Input → Same Output"
+chapter](./core_idempotency.md).
