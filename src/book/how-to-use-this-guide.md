@@ -5,7 +5,7 @@
 This guide's content consists of chapters grouped into related sections. Each
 section has a theme that is based on the data we use as examples.
 
-Here are some example data we will work with:
+Here are some example data we'll work with:
 
 * Weather
 * The International Space Station's location
@@ -13,10 +13,8 @@ Here are some example data we will work with:
 * Internationalization (i18n)
 * Observatories
 
-### Explaining Code
-
 Many examples include explanations _outside_ and _inside_ code blocks; the
-latter are done via code comments. Here is an example of that:
+latter are done via code comments.
 
 ### Advanced Content
 
@@ -29,7 +27,7 @@ contained.
 This guide is generated via [mdBook](https://github.com/rust-lang/mdBook). Here
 are some quick tips:
 
-* Open & close the sidebar by mashing on the three vertical lines (hamburger)
+* Open & close the sidebar by mashing on the three horizontal lines (hamburger)
   icon above
 * Change the theme by mashing on the paint brush icon above
 * Do a text search through the entire guide by mashing on the magnifying glass
@@ -37,7 +35,7 @@ are some quick tips:
 * Not a fan of reading on the web? Mash the printer icon above and print it or
   save to PDF
 * Want to link to a specific heading? Each heading is a link you can mash, and
-  then share the URL with the world
+  then you can share the URL with the world
 
 ## Disclaimer / Personal Note
 
