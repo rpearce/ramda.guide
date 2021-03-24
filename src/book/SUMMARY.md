@@ -4,7 +4,7 @@
 
 - [What is Ramda?](./what-is-ramda.md)
 - [Suggested Prerequisite Knowledge](./prerequisites.md)
-- [How to Use This Guide]()
+- [How to Use This Guide](./how-to-use-this-guide.md)
 - [Why Ramda?]()
 
 # A Tour of Ramda

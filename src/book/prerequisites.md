@@ -1,7 +1,17 @@
 # Suggested Prerequisite Knowledge
 
-The presentation of concepts in this guide assumes the reader knows JS
-fundamentals, so if you're comfortable with the code below, you'll do just fine!
+The presentation of concepts in this guide assumes the reader is familiar with
+some JS fundamentals, so take a look below and see how comfortable you are with
+the concepts.
+
+If you're not comfortable with them, each section has a link to more information
+about its topic, and if that's not enough, here are some resources for learning
+more JS:
+
+* [Scrimba's Courses](https://scrimba.com/topic/javascript)
+* [Codecademy's Courses](https://www.codecademy.com/catalog/language/javascript)
+* [Wes Bos' Courses](https://wesbos.com/courses)
+* [Egghead's Courses](https://egghead.io/q/javascript)
 
 ## Arrow Functions
 
