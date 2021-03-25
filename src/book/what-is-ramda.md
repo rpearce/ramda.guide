@@ -9,6 +9,6 @@ some cool principles baked into every function:
   function's parameters
 
 These ideas — regardless of what library or even language we use — allow us to
-write safer, more extendable code, and they are thoroughly explored in the `Core
+write safe, extendable code, and the ideas are explored further in the `Core
 Ramda Ideas` section that starts with [the "Same Input → Same Output"
 chapter](./core_idempotency.md).
