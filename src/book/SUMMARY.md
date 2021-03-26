@@ -9,7 +9,7 @@
 
 # A Tour of Ramda
 
-- [Including Ramda In Your Project]()
+- [Including Ramda In A Project](./including-ramda.md)
 - [Documentation, REPL, Source Code, & Cookbook]()
 - [Community Resources]()
 - [Where We're Going]()
