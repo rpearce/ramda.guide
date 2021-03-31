@@ -12,7 +12,7 @@
 - [Including Ramda In A Project](./including-ramda.md)
 - [Documentation, Source Code, REPL, & Cookbook](./documentation.md)
 - [Community Resources](./community-resources.md)
-- [Where We're Going]()
+- [Where We're Going](./where-were-going.md)
 
 # Weathering Our First Ramda Experience
 
