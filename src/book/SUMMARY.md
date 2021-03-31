@@ -10,8 +10,8 @@
 # A Tour of Ramda
 
 - [Including Ramda In A Project](./including-ramda.md)
-- [Documentation, REPL, Source Code, & Cookbook]()
-- [Community Resources]()
+- [Documentation, Source Code, REPL, & Cookbook](./documentation.md)
+- [Community Resources](./community-resources.md)
 - [Where We're Going]()
 
 # Weathering Our First Ramda Experience
