@@ -17,7 +17,7 @@ more JS:
 
 [MDN: Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#arrow_functions)
 
-```js
+```javascript
 const add = (a, b) => a + b
 
 add(4, 5) // 9
@@ -27,7 +27,7 @@ add(4, 5) // 9
 
 [MDN: Nested Functions and Closures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#nested_functions_and_closures)
 
-```js
+```javascript
 const addExpr = a => b => a + b
 
 addExpr(4)(5) // 9
@@ -47,7 +47,7 @@ addFn(4)(5) // 9
 
 [MDN: First-Class Function](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function)
 
-```js
+```javascript
 const log = x => console.log(x)
 
 [1, 2, 3].forEach(log)
@@ -62,7 +62,7 @@ MDN: [`map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 [`filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Filter),
 and [`reduce`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
 
-```js
+```javascript
 [1, 2, 3].map(x => x * 2)                      // [2, 4, 6]
 
 [1, 2, 3].filter(x => x % 2 !== 0)             // [1, 3]
@@ -74,7 +74,7 @@ and [`reduce`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 
 [MDN: Calling Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#calling_functions)
 
-```js
+```javascript
 const add5    = x => x + 5
 const times10 = x => x * 10
 const div2    = x => x / 2
