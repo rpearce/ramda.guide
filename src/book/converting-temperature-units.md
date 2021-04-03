@@ -13,7 +13,7 @@ different ways, interesting patterns may emerge that can expand our
 understanding.
 
 Let's get introduced to some perfectly fine conversion functions — one of which
-are going to rip apart and make anew.
+we are going to rip apart and make anew.
 
 ```javascript
 function celsiusToFahrenheit(celsius) {
@@ -166,7 +166,7 @@ f2(f1(value))
 link(f2, f1)(value)
 ```
 
-With that desired outcome in mind, let's try to write `link`!"
+With that desired outcome in mind, let's try to write `link`!
 
 ```javascript
 const link = (f2, f1) => value =>
@@ -270,7 +270,7 @@ We'll cover function composition a bit more in the "Core Ramda Ideas" section.
 
 Can you convert the remaining temperature conversion functions to use Ramda
 functions? Give them a try in [a pre-loaded Ramda
-REPL](https://tinyurl.com/yfbeblpj).
+REPL](https://tinyurl.com/ygbkvfj4).
 
 Here they are again, in case that link doesn't work:
 
@@ -286,7 +286,76 @@ function easyCelsiusToFahrenheit(celsius) {
 function easyFahrenheitToCelsius(fahrenheit) {
   return (fahrenheit - 30) / 2
 }
+
+const result = () => ({
+  '212F = 100C': fahrenheitToCelsius(212),
+  '25C ≈ 80F': easyCelsiusToFahrenheit(25),
+  '60F ≈ 15C': easyFahrenheitToCelsius(60),
+})
+
+result()
 ```
+
+When you're done, compare them against [my
+solutions](https://tinyurl.com/yhe4pm2w)!
+
+<details>
+  <summary>Expand this to see my solutions if the link doesn't work</summary>
+
+```javascript
+//function fahrenheitToCelsius(fahrenheit) {
+//  return 5 / 9 * (fahrenheit - 32)
+//}
+
+// This is the best I could do before I had to cheat... see below!
+//const fahrenheitToCelsius = fahrenheit =>
+//  multiply(divide(5, 9), subtract(fahrenheit, 32))
+
+// If you're feeling clever, check this out:
+// https://ramdajs.com/docs/#__
+const fahrenheitToCelsius =
+  compose(multiply(divide(5, 9)), subtract(__, 32))
+
+// ===============================================================
+
+//function easyCelsiusToFahrenheit(celsius) {
+//  return celsius * 2 + 30
+//}
+
+// Step 1:
+//const easyCelsiusToFahrenheit = celsius =>
+//  add(30, multiply(2, celsius))
+
+// Step 2:
+const easyCelsiusToFahrenheit =
+  compose(add(30), multiply(2))
+
+// ===============================================================
+
+//function easyFahrenheitToCelsius(fahrenheit) {
+//  return (fahrenheit - 30) / 2
+//}
+
+// This is the best I could do before I had to cheat... see below!
+//const easyFahrenheitToCelsius = fahrenheit =>
+//  divide(subtract(fahrenheit, 30), 2)
+
+// If you're feeling clever, check this out:
+// https://ramdajs.com/docs/#__
+const easyFahrenheitToCelsius =
+  compose(divide(__, 2), subtract(__, 30))
+
+// ===============================================================
+
+const result = () => ({
+  '212F = 100C': fahrenheitToCelsius(212),
+  '25C ≈ 80F': easyCelsiusToFahrenheit(25),
+  '60F ≈ 15C': easyFahrenheitToCelsius(60),
+})
+
+result()
+```
+</details>
 
 ## Wrapping Up
 

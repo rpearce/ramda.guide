@@ -13,7 +13,7 @@ programmers".
 
 ## Book Status
 
-_Updated: 2021-04-01_
+_Updated: 2021-04-03_
 
 As you can see from the navigation links, this is a work in progress. I will
 post updates to the [feed](https://ramda.guide/feed.atom) as new groups of
@@ -22,3 +22,7 @@ website](https://ramda.guide), or you can check the [news
 page](../news/index.html).
 
 [1]: https://github.com/MostlyAdequate/mostly-adequate-guide
+
+## Special Thanks
+
+* Steve Purr (review, ideas) ([GitHub](https://github.com/PurrBiscuit))

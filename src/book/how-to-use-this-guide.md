@@ -19,7 +19,7 @@ latter are done via code comments.
 ### Advanced Content
 
 Content that I deemed to be advanced and perhaps not immediately relevant for
-newcomers is marked as "Adanced" in chapters where the advanced material is
+newcomers is marked as "Advanced" in chapters where the advanced material is
 contained.
 
 ## Meta

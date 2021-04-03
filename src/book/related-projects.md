@@ -9,7 +9,7 @@ Each of these projects below include some amount of [algebraic data
 types (ADTs)](https://en.wikipedia.org/wiki/Algebraic_data_type) for safety and
 expressiveness.
 
-It should also be said that that are numerous great projects out there, so
+It should also be said that there are numerous great projects out there, so
 please [open an issue](https://github.com/rpearce/ramda.guide/issues) if you'd
 like to see others listed below.
 
@@ -29,7 +29,7 @@ Ramda](https://sanctuary.js.org/#section:ramda) to read about the differences.
 functions, but it goes much deeper than Ramda by providing a variety of ADTs
 and functions for working with them.
 
-It is worth checking out at least for it's [`Async`
+It is worth checking out at least for its [`Async`
 ADT](https://crocks.dev/docs/crocks/Async.html) (goodbye, `Promise`)!
 
 ## Folktale
