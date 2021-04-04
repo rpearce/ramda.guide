@@ -2,7 +2,7 @@
 
 > Life is far too important a thing ever to talk seriously about.
 >
-> — <cite>Oscar Wilde, _Lady Windermere's Fan_</cite>
+> — <cite>Oscar Wilde, Lady Windermere's Fan</cite>
 
 To kick off our Ramda journey, we're going to do something ridiculous: transform
 very clear temperature conversion functions that use JS math operators to use

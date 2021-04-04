@@ -3,84 +3,91 @@
   
   <url>
     <loc>https://ramda.guide</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/intro.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/how-to-use-this-guide.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/what-is-ramda.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/prerequisites.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/related-projects.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/including-ramda.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/documentation.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/community-resources.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/where-were-going.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/converting-temperature-units.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://ramda.guide/book/comparing-two-temperatures.html</loc>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://ramda.guide/book/introducing-fp-at-work.html</loc>
-    <lastmod>2021-04-03T02:06:46.314785Z</lastmod>
+    <lastmod>2021-04-04T03:40:20.585059Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>

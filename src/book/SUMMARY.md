@@ -17,7 +17,7 @@
 # Weathering Our First Ramda Experience
 
 - [Converting Temperature Units (add, multiply, divide)](./converting-temperature-units.md)
-- [Finding the Min & Max Betwixt Two Temperatures (min, max)]()
+- [Comparing Two Temperatures (min, minBy, max, maxBy)](./comparing-two-temperatures.md)
 
 # Keep Looking Up (Object Properties)
 
