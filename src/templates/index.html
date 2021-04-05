@@ -28,7 +28,7 @@
   <section>
     <h2 class="fs32 lh13 mb32 mt48">Posts</h2>
     <ul>
-      {% for post in posts %}
+      {% for post in posts | reverse %}
       <li>
         <a href="./{{post.data.slug}}.html">
           {{post.data.published_at | date(format="%Y-%m-%d")}} - {{post.data.title}}

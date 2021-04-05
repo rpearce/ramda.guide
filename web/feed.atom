@@ -5,9 +5,43 @@
   <link rel="alternate" type="text/html" href="https://ramda.guide"/>
   <link rel="self" type="application/atom+xml" href="https://ramda.guide/feed.atom"/>
   <id>tag:ramda.guide,2021:/news</id>
-  <updated>2021-03-19T01:45:00Z</updated>
+  <updated>2021-04-05T12:00:00Z</updated>
   <rights>Copyright © 2021, Robert W. Pearce</rights>
   <entry xmlns="http://www.w3.org/2005/Atom">
+    <title>First Few Ramda Guide Sections Completed</title>
+    <link rel="alternate" type="text/html" href="https://ramda.guide/news/first-chapters-completed.html"/>
+    <id>tag:ramda.guide,2021:news/first-chapters-completed.html</id>
+    <published>2021-04-05T12:00:00Z</published>
+    <updated>2021-04-05T12:00:00Z</updated>
+    <author>
+      <name>Robert W. Pearce</name>
+      <email>me@robertwpearce.com</email>
+      <uri>https://rwp.im</uri>
+    </author>
+    <content type="html">&lt;p&gt;The following sections and chapters are now available for reading! If you have
+any feedback, please &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rpearce&#x2F;ramda.guide&#x2F;issues&quot;&gt;open an
+issue&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;h2&gt;Preface&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;how-to-use-this-guide.html&quot;&gt;How to Use This Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;what-is-ramda.html&quot;&gt;What is Ramda?&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;prerequisites.html&quot;&gt;Suggested Prerequisite Knowledge&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;related-projects.html&quot;&gt;Related Projects&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2&gt;A Tour of Ramda&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;including-ramda.html&quot;&gt;Including Ramda In A Project&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;documentation.html&quot;&gt;Documentation, Source Code, REPL, &amp;amp; Cookbook&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;community-resources.html&quot;&gt;Community Resources&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;where-were-going.html&quot;&gt;Where We&#x27;re Going&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2&gt;Weathering Our First Ramda Experience&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;converting-temperature-units.html&quot;&gt;Converting Temperature Units (add, multiply, divide)&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;..&#x2F;book&#x2F;comparing-two-temperatures.html&quot;&gt;Comparing Two Temperatures (min, minBy, max, maxBy)&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+  </entry><entry xmlns="http://www.w3.org/2005/Atom">
     <title>Ramda Guide's Build System</title>
     <link rel="alternate" type="text/html" href="https://ramda.guide/news/ramda-guides-build-system.html"/>
     <id>tag:ramda.guide,2021:news/ramda-guides-build-system.html</id>
