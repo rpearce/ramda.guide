@@ -7,7 +7,7 @@ use std::path::{Path, PathBuf};
 use std::{fs, io};
 use tera::Context as TeraContext;
 
-#[derive(Debug, Default, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct PostFrontMatter {
     pub author: String,
     pub author_email: String,
@@ -21,7 +21,7 @@ pub struct PostFrontMatter {
     pub updated_at: String,
 }
 
-#[derive(Debug, Default, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 pub struct Post {
     pub content_html: String,
     pub data: PostFrontMatter,
