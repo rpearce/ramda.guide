@@ -22,7 +22,7 @@ maxTemperature(100, 200) // 200
 ```
 
 Once we share that solution, we are reminded that task is to compare
-_any two temperatures_; for example, `100`, `200`, `'50F'`, `25C`.
+_any two temperatures_; for example, `100`, `200`, `'50F'`, `'25C'`.
 
 Dangit... now we look silly. Okay, let's try this again to make it handle
 strings:
@@ -58,7 +58,7 @@ But what could we have missed?
 > Compare any two temperatures.
 
 Oh, no... They might not be part of the same measurement system! This
-means that `50F` could be compared with `15C`! Luckily, we're told that we don't
+means that `'50F'` could be compared with `'15C'`! Luckily, we're told that we don't
 have to worry about Kelvin, Rankine, nor Réaumur; we only care about Celsius
 and Fahrenheit. There will also _never_ be any unit-less numbers, so we can
 ignore that case.
@@ -167,7 +167,7 @@ whereas `2 * 2` is `4`, so since `9 > 4`, `-3` is our result.
 Let's refactor our functions:
 
 ```javascript
-import { maxBy, minBy } from 'ramda'0
+import { maxBy, minBy } from 'ramda'
 
 const asF = x => {
   if (x.slice(-1) === 'C') {
@@ -274,14 +274,14 @@ Cool, right?
 Fear not! We'll cover [`when`](https://ramdajs.com/docs/#when) in the
 "Unshakeable Logic" section, [`slice`](https://ramdajs.com/docs/#when) in the
 "All About ['L','i','s','t','s']" section, and the pseudo-type signatures in the
-"Core Ramda Ideas" section, but you should know they are optional, not exact,
-and aren't a substitute for tools like [jsdoc](https://jsdoc.app).
+"Core Ramda Ideas" section, but you should know the pseudo-types are optional,
+not exact, and aren't a substitute for tools like [jsdoc](https://jsdoc.app).
 
 ## Wrapping Up
 
 The person who requested these functions is going to be blown away!
 
-What started as a simple "which temperature is smaller or bigger?" question
+What started as a simple "which temperature is smaller or larger?" question
 turned out to be an exercise in asking good questions about requirements up
 front.
 
