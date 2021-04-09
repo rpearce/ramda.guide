@@ -21,7 +21,7 @@
 
 # Keep Looking Up (Object Properties)
 
-- [Our Data: The ISS' Location]()
+- [Our Data: The ISS' Location](./data-iss-location.md)
 - [Reading Shallow Object Properties (prop, propOr, props, pick)]()
 - [Testing Shallow Object Properties (has, propEq, propIs, propSatisfies)]()
 - [Reading Deeply Nested Object Properties (path, pathOr, paths)]()
