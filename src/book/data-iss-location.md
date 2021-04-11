@@ -1,5 +1,9 @@
 # Our Data: The ISS' Location
 
+> In life, and in the universe, it's always best to keep looking up.
+>
+> — <cite>Neil deGrasse Tyson</cite>
+
 In this section, we're going to _look up_ object properties in all sorts of
 ways, and what better data could we ask for than data for something that is
 orbiting our world?
