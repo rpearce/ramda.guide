@@ -9,7 +9,6 @@
     };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
-      flake = false;
       inputs.nixpkgs.follows = "nixpkgs";
     };
     utils = {
@@ -24,15 +23,20 @@
         rust-overlay' = import rust-overlay;
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ rust-overlay' ];
+          overlays = [ rust-overlay' naersk.overlay ];
         };
-        rust = (pkgs.rustChannelOf {
-          date = "2021-03-04";
-          channel = "nightly";
-        }).rust;
-        naersk-lib = naersk.lib."${system}".override {
-          cargo = rust;
+        rust = pkgs.rust-bin.stable.latest.rust;
+        naersk-lib = pkgs.naersk.override {
+          cargo = pkgs.rust-bin.nightly.latest.cargo;
           rustc = rust;
+        };
+        rust-dev = rust.override {
+          extensions = [
+            "clippy-preview"
+            "rust-src"
+            "rustc-dev"
+            "rustfmt-preview"
+          ];
         };
       in rec {
         packages = utils.lib.flattenTree {
@@ -51,8 +55,11 @@
         defaultApp = apps.hull;
 
         devShell = pkgs.mkShell {
-          buildInputs = [ pkgs.cargo-watch ];
-          nativeBuildInputs = [ rust ];
+          buildInputs = [
+            pkgs.rust-analyzer
+            pkgs.cargo-watch
+          ];
+          nativeBuildInputs = [ rust-dev ];
         };
       }
     );
