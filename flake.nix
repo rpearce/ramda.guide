@@ -20,12 +20,14 @@
   outputs = { naersk, nixpkgs, rust-overlay, self, utils }:
     utils.lib.eachDefaultSystem (system:
       let
-        rust-overlay' = import rust-overlay;
+        overlays = [
+          (import rust-overlay)
+          naersk.overlay
+        ];
         pkgs = import nixpkgs {
-          inherit system;
-          overlays = [ rust-overlay' naersk.overlay ];
+          inherit system overlays;
         };
-        rust = pkgs.rust-bin.stable.latest.rust;
+        rust = pkgs.rust-bin.stable.latest.default;
         naersk-lib = pkgs.naersk.override {
           cargo = pkgs.rust-bin.nightly.latest.cargo;
           rustc = rust;
@@ -57,7 +59,7 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.rust-analyzer
-            pkgs.cargo-watch
+            #pkgs.cargo-watch
           ];
           nativeBuildInputs = [ rust-dev ];
         };
