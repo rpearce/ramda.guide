@@ -11,14 +11,14 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    utils = {
+    flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { naersk, nixpkgs, rust-overlay, self, utils }:
-    utils.lib.eachDefaultSystem (system:
+  outputs = { naersk, nixpkgs, rust-overlay, self, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [
           (import rust-overlay)
@@ -41,7 +41,7 @@
           ];
         };
       in rec {
-        packages = utils.lib.flattenTree {
+        packages = flake-utils.lib.flattenTree {
           hull = naersk-lib.buildPackage {
             pname = "hull";
             root = ./.;
@@ -50,7 +50,7 @@
 
         defaultPackage = packages.hull;
 
-        apps.hull = utils.lib.mkApp {
+        apps.hull = flake-utils.lib.mkApp {
           drv = packages.hull;
         };
 
