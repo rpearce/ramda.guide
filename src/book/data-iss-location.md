@@ -23,8 +23,8 @@ Station is right now:
   "message": "success",
   "timestamp": 1617930803,
   "iss_position": {
-    "longitude": "133.2581",
-    "latitude": "27.7270"
+    "latitude": "27.7270",
+    "longitude": "133.2581"
   }
 }
 ```
