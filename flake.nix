@@ -27,7 +27,8 @@
         pkgs = import nixpkgs {
           inherit system overlays;
         };
-        rust = pkgs.rust-bin.stable.latest.default;
+        #rust = pkgs.rust-bin.stable.latest.default;
+        rust = pkgs.rust-bin.stable.latest.rust;
         naersk-lib = pkgs.naersk.override {
           cargo = pkgs.rust-bin.nightly.latest.cargo;
           rustc = rust;
@@ -59,7 +60,7 @@
         devShell = pkgs.mkShell {
           buildInputs = [
             pkgs.rust-analyzer
-            #pkgs.cargo-watch
+            pkgs.cargo-watch
           ];
           nativeBuildInputs = [ rust-dev ];
         };
