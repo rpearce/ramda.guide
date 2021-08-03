@@ -17,7 +17,7 @@ _In development_
 1. `λ nix build`
 1. `λ nix run .#hull`
 1. `λ nix develop`
-    1. `$ cargo watch -w src/ -i src/book/book.toml -x run`
+    1. `[nix]λ cargo watch -w src/ -i src/book/book.toml -x run`
 
 ### Terminal 2
 

@@ -5,7 +5,7 @@
   <link rel="alternate" type="text/html" href="https://ramda.guide"/>
   <link rel="self" type="application/atom+xml" href="https://ramda.guide/feed.atom"/>
   <id>tag:ramda.guide,2021:/news</id>
-  <updated>2021-04-05T12:00:00Z</updated>
+  <updated>2021-08-03T12:00:00Z</updated>
   <rights>Copyright © 2021, Robert W. Pearce</rights>
   <entry xmlns="http://www.w3.org/2005/Atom">
     <title>First Few Ramda Guide Sections Completed</title>
@@ -78,6 +78,31 @@ source code at &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;rpearce&#x2F;r
 &lt;li&gt;implement runnable JS code examples&lt;&#x2F;li&gt;
 &lt;li&gt;style the posts better&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
+</content>
+  </entry><entry xmlns="http://www.w3.org/2005/Atom">
+    <title>Getting Back to Writing</title>
+    <link rel="alternate" type="text/html" href="https://ramda.guide/news/getting-back-to-writing.html"/>
+    <id>tag:ramda.guide,2021:news/getting-back-to-writing.html</id>
+    <published>2021-08-03T12:00:00Z</published>
+    <updated>2021-08-03T12:00:00Z</updated>
+    <author>
+      <name>Robert W. Pearce</name>
+      <email>me@robertwpearce.com</email>
+      <uri>https://rwp.im</uri>
+    </author>
+    <content type="html">&lt;p&gt;I had to pause writing for a bit to deal with some health issues with my wife
+and daughter that are unfortunately long-term. There were some other open source
+things I managed to knock out in 30 minute increments at night over a few of
+months, but writing like this can hardly be done well when you&#x27;re about to keel
+over.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;m resuming writing the Ramda Guide, and I&#x27;m picking back up with the
+&amp;quot;Keep Looking Up (Object Properties)&amp;quot; section.
+If you want to view the &lt;code&gt;prop&lt;&#x2F;code&gt; and &lt;code&gt;propOr&lt;&#x2F;code&gt; content I wrote in April, you can
+check that out here: &lt;a href=&quot;https:&#x2F;&#x2F;ramda.guide&#x2F;book&#x2F;reading-shallow-object-properties.html&quot;&gt;Reading Shallow Object
+Properties&lt;&#x2F;a&gt;. My
+next task is to finish that chapter by covering &lt;code&gt;props&lt;&#x2F;code&gt; and &lt;code&gt;pick&lt;&#x2F;code&gt;, and then
+move on with the rest of the core object-lookup-related chapters before checking
+back in with the world.&lt;&#x2F;p&gt;
 </content>
   </entry>
 </feed>
