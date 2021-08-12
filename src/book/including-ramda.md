@@ -1,11 +1,8 @@
 # Including Ramda in A Project
 
-Following the instructions from [Ramda's homepage](https://ramdajs.com), to
-install Ramda into a project via [NPM](https://www.npmjs.com), you run
-
-```bash
-λ npm i ramda
-```
+There are instructions on [Ramda's homepage](https://ramdajs.com) detailing how
+to install Ramda, and [deno.land's Ramda page](https://deno.land/x/ramda) has
+instructions for deno.
 
 If you're building for the frontend and are using a build tool that has
 [tree-shaking or dead-code elimination](https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking),
