@@ -13,7 +13,7 @@ programmers".
 
 ## Book Status
 
-_Updated: 2021-08-03_
+_Updated: 2021-08-12_
 
 As you can see from the navigation links, this is a work in progress. I will
 post updates to the [feed](https://ramda.guide/feed.atom) as new groups of
@@ -27,4 +27,6 @@ View [the guide's source code](https://github.com/rpearce/ramda.guide/).
 
 ## Special Thanks
 
-* Steve Purr (review, ideas) ([GitHub](https://github.com/PurrBiscuit))
+* Steve Purr (review) ([GitHub](https://github.com/PurrBiscuit))
+* Tom Wilson (review) ([GitHub](https://github.com/twilson63), [hyper cloud service](https://hyper63.com))
+* Ian Greulich (review) ([GitHub](https://github.com/igreulich))
