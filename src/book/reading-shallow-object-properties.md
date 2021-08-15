@@ -1,5 +1,8 @@
 # Reading Shallow Object Properties
 
+Let's dive (but not too _deep_!) into pulling out data at a single level from
+objects!
+
 Outline:
 
 * [`prop`](#prop)
@@ -7,9 +10,6 @@ Outline:
 * [`props`](#props)
 * [`pick`](#pick)
 * [`pluck`](#pluck)
-
-Let's dive (but not too _deep_!) into pulling out data at a single level from
-objects!
 
 In case you missed it, we'll be using [some ISS and astronaut
 data](./data-iss-location.html) as our datasets.
