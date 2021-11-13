@@ -1,5 +1,5 @@
 .DS_Store
-result
-target
-web/book
-web/news
+/result
+/target
+/web/book
+/web/news

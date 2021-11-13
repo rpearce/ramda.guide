@@ -4,7 +4,7 @@
   nixConfig.bash-prompt = "[nix]λ ";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     naersk = {
       url = "github:nmattia/naersk";
@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = { naersk, nixpkgs, rust-overlay, self, flake-utils }:
+  outputs = { self, flake-utils, naersk, nixpkgs, rust-overlay }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [
@@ -32,8 +32,7 @@
         pkgs = import nixpkgs {
           inherit system overlays;
         };
-        #rust = pkgs.rust-bin.stable.latest.default;
-        rust = pkgs.rust-bin.stable.latest.rust;
+        rust = pkgs.rust-bin.stable.latest.default;
         naersk-lib = pkgs.naersk.override {
           cargo = pkgs.rust-bin.nightly.latest.cargo;
           rustc = rust;
@@ -47,25 +46,25 @@
           ];
         };
       in rec {
-        packages = flake-utils.lib.flattenTree {
-          hull = naersk-lib.buildPackage {
-            pname = "hull";
-            root = ./.;
-          };
+        # `nix build`
+        packages.hull = naersk-lib.buildPackage {
+          pname = "hull";
+          root = ./.;
         };
-
         defaultPackage = packages.hull;
 
+        # `nix run`
         apps.hull = flake-utils.lib.mkApp {
           drv = packages.hull;
         };
-
         defaultApp = apps.hull;
 
+        # `nix develop`
         devShell = pkgs.mkShell {
           buildInputs = [
-            pkgs.rust-analyzer
+            pkgs.cargo-edit
             pkgs.cargo-watch
+            pkgs.rust-analyzer
           ];
           nativeBuildInputs = [ rust-dev ];
         };
