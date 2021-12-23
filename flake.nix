@@ -26,7 +26,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [
-          (import rust-overlay)
+          rust-overlay.overlay
           naersk.overlay
         ];
         pkgs = import nixpkgs {
