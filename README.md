@@ -10,15 +10,32 @@ _In development_
 
 ## Dev
 
-### Terminal 1
+### With Docker
+
+With `docker compose` (recommended):
+
+```sh
+docker compose build
+docker compose up
+```
+
+Without `docker compose`:
+
+```sh
+docker build . -t ramda-guide
+docker volume create ramda-guide-vol
+docker run --rm -it -v $PWD:/service ramda-guide:latest
+```
+
+### Without Docker
 
 1. [Install nix](https://nixos.org/download.html)
 1. [Install nix flakes](https://nixos.wiki/wiki/Flakes)
-1. `λ nix build --extra-experimental-features flakes`
-1. `λ nix run .#hull --extra-experimental-features flakes`
-1. `λ nix develop --extra-experimental-features flakes`
-    1. `[nix]λ cargo watch -w src/ -i src/book/book.toml -x run`
+1. `λ nix build`
+1. `λ nix run`
+1. `λ nix develop`
+    1. `[nix]λ cargo watch -w "./src/" -i "./src/book/book.toml" -x run`
 
-### Terminal 2
+### Start Dev HTTP Server
 
 1. `λ cd web && python -m SimpleHTTPServer 8000`
