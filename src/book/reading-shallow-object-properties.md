@@ -1,5 +1,9 @@
 # Reading Shallow Object Properties
 
+> Too much gravity argues a shallow mind.
+>
+> — <cite>Johann Kaspar Lavater</cite>
+
 Let's dive (but not too _deep_!) into pulling out data at a single level from
 objects!
 
