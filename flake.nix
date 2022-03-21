@@ -4,7 +4,7 @@
   nixConfig.bash-prompt = "[nix]λ ";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     naersk = {
       url = "github:nmattia/naersk";
@@ -53,11 +53,26 @@
         };
         defaultPackage = packages.hull;
 
-        # `nix run`
+        # `nix run` or `nix run .#hull`
         apps.hull = flake-utils.lib.mkApp {
           drv = packages.hull;
         };
         defaultApp = apps.hull;
+
+        # `nix run .#hull-watch`
+        apps.hull-watch = flake-utils.lib.mkApp {
+          drv = pkgs.writeShellApplication {
+            name = "hull-watch";
+            runtimeInputs = [
+              pkgs.gcc
+              rust
+              pkgs.cargo-watch
+            ];
+            text = ''
+              cargo-watch -w "./src/" -i "./src/book/book.toml" -x run
+            '';
+          };
+        };
 
         # `nix develop`
         devShell = pkgs.mkShell {

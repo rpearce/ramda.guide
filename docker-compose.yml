@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .:/service
+      - ramda-guide-vol:/var/ramda-guide-vol
+volumes:
+  ramda-guide-vol: {}
