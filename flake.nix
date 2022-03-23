@@ -57,7 +57,7 @@
         apps.app = flake-utils.lib.mkApp {
           drv = packages.hull;
         };
-        defaultApp = apps.build;
+        defaultApp = apps.app;
 
         # `nix run .#watch`
         apps.watch = flake-utils.lib.mkApp {
