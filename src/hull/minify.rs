@@ -1,4 +1,4 @@
-use minify_html::{with_friendly_error, Cfg, FriendlyError};
+use minify_html_onepass::{with_friendly_error, Cfg, FriendlyError};
 use std::{io, process::exit, str::from_utf8};
 
 pub fn html(html: String) -> Result<String, io::Error> {

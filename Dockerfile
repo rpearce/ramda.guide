@@ -7,4 +7,4 @@ COPY . /service
 
 RUN nix build
 
-CMD ["nix", "run", ".#hull-watch"]
+CMD ["nix", "run", ".#watch"]
