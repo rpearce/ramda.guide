@@ -53,23 +53,23 @@
         };
         defaultPackage = packages.hull;
 
-        # `nix run` or `nix run .#hull`
-        apps.hull = flake-utils.lib.mkApp {
+        # `nix run` or `nix run .#app`
+        apps.app = flake-utils.lib.mkApp {
           drv = packages.hull;
         };
-        defaultApp = apps.hull;
+        defaultApp = apps.build;
 
-        # `nix run .#hull-watch`
-        apps.hull-watch = flake-utils.lib.mkApp {
+        # `nix run .#watch`
+        apps.watch = flake-utils.lib.mkApp {
           drv = pkgs.writeShellApplication {
-            name = "hull-watch";
+            name = "watch";
             runtimeInputs = [
+              pkgs.cargo-watch
               pkgs.gcc
               rust
-              pkgs.cargo-watch
             ];
             text = ''
-              cargo-watch -w "./src/" -i "./src/book/book.toml" -x run
+              cargo-watch -w "./src/" -i "./src/book/book.toml" -x "run"
             '';
           };
         };
@@ -80,6 +80,7 @@
             pkgs.cargo-edit
             pkgs.cargo-watch
             pkgs.rust-analyzer
+            pkgs.neovim
           ];
           nativeBuildInputs = [ rust-dev ];
         };
