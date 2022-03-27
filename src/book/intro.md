@@ -13,7 +13,7 @@ programmers".
 
 ## Book Status
 
-_Updated: 2021-08-15_
+_Updated: 2022-03-26_
 
 As you can see from the navigation links, this is a work in progress. I will
 post updates to the [feed](https://ramda.guide/feed.atom) as new groups of

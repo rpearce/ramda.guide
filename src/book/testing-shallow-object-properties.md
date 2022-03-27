@@ -1,5 +1,11 @@
 # Testing Shallow Object Properties
 
+> Our destinations are Booleans – we reach them or we don’t – but our journeys
+> are spectrums, because there are so many paths we can take to our destination
+> that make getting there that much better.
+>
+> — <cite>A.J. Darkholme</cite>
+
 In this chapter, we'll make logical decisions in our code (`if`/`else`) by
 testing our datasets' properties with a few boolean-returning helper functions.
 
@@ -195,6 +201,138 @@ REPL.](https://tinyurl.com/ygl3tr4u)
 
 ## `propEq`
 
-## `propIs`
+One fine afternoon, our error monitoring service lets us know that our code is
+throwing errors when trying to access the latitude property from the ISS'
+location API response.
+
+We quickly realize that if there is a problem with the API, we won't get the
+data back, so `iss.iss_position.latitude` won't work, for `iss_position` is
+`undefined` in the response:
+
+```json
+{
+  "message": "error",
+  "timestamp": 1617930803
+}
+```
+
+There are many ways to handle this error safely, but we're going to address it
+by simply checking if the `message` property is `"success"` or not:
+
+```javascript
+if (iss.message === 'success') {
+  // carry on...
+}
+```
+
+Great! Call it a day!
+
+...But our solution nags at us. We are accessing a property's value and equating
+it with an expected value. What if we made this a function?
+
+```javascript
+const isMessageSuccess = data =>
+  (data || {}).message === 'success' // or `data?.message === 'success'`
+```
+
+_Note: the ramda REPL doesn't currently support optional chaining like
+`data?.message === 'success'`._
+
+Not bad, but we've simply moved the operations to a single place. What if we
+wrote a function that looked up any property on an object and then compared it
+with another value?
+
+```javascript
+const doesPropEq = (key, val, data) =>
+  (data || {})[key] === val // or `data?.[key] === val`
+```
+
+Nice! Let's try it out:
+
+```javascript
+const isMessageSuccess = data =>
+  doesPropEq('message', 'success', data)
+
+isMessageSuccess(iss) // true
+```
+
+[View `doesPropEq` and `isMessageSuccess` in the ramda
+REPL](https://tinyurl.com/yckj6vnd).
+
+Now that we understand our need for `doesPropEq`, we can swap that out with
+ramda's [`propEq`](https://ramdajs.com/docs/#propEq).
+
+```javascript
+import { propEq } from 'ramda'
+
+// ...
+
+const isMessageSuccess = data =>
+  propEq('message', 'success', data)
+
+isMessageSuccess(iss) // true
+```
+
+Stopping the `isMessageSuccess` implementation work at this point is totally
+acceptable, but we can take it a little further.
+
+Since all functions in ramda are auto-curried, that means that we can refactor
+`isMessageSuccess` like this:
+
+```javascript
+// Step 0
+const isMessageSuccess = data =>
+  propEq('message', 'success', data)
+
+// Step 1
+const isMessageSuccess = data =>
+  propEq('message', 'success')(data)
+
+// Step 2
+const isMessageSuccess =
+  propEq('message', 'success')
+
+// Step 3
+// isMessageSuccess :: ISSData -> Bool
+const isMessageSuccess =
+  propEq('message', 'success')
+```
+
+1. In Step 1, we demonstrate that `propEq` will accept our last argument as a
+   separate function call (the result of calling `propEq` the first time will
+   wait until it has all the arguments).
+2. In Step 2, we realize that accepting an argument and passing it on again is
+   redundant, and so we can remove the need for a function closure and instead
+   let the result of calling `propEq` with the first two values be what is bound
+   to `isMessageSuccess`.
+3. In Step 3. we acknowledge that implicitly forwarding a function argument
+   comes at the cost of remembering, "What am I passing in, again?" If you don't
+   have a type-checker , you can provide some pseudo-types (these ones are in a
+   Haskell style) where the data is defined in order to explain what `ISSData`
+   is:
+
+   ```javascript
+   // ISSData = { message      :: Message
+   //           , timestamp    :: UnixTimestamp
+   //           , iss_position :: LatLong
+   //           }
+   //
+   // Message = 'success' | 'error'
+   //
+   // UnixTimeStamp = Number
+   //
+   // LatLong = { latitude  :: String
+   //           , longitude :: String
+   //           }
+   ```
+
+   The whole point of Step 3 is simply to identify what the expected input and
+   output types are so that someone else (or you in 3 months) can easily
+   understand a terse function at a glance.
+
+[Check out this `propEq` usage plus these pseudo-types in the ramda
+REPL.](https://tinyurl.com/5n8p6k7f)
+
+##k`propIs`
 
 ## `propSatisfies`
