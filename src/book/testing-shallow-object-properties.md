@@ -333,6 +333,10 @@ const isMessageSuccess =
 [Check out this `propEq` usage plus these pseudo-types in the ramda
 REPL.](https://tinyurl.com/5n8p6k7f)
 
-##k`propIs`
+## `propIs`
+
+TODO
 
 ## `propSatisfies`
+
+TODO
