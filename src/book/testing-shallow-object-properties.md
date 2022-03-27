@@ -235,7 +235,7 @@ const isMessageSuccess = data =>
   (data || {}).message === 'success' // or `data?.message === 'success'`
 ```
 
-_Note: the ramda REPL doesn't currently support optional chaining like
+_Note: the Ramda REPL doesn't currently support optional chaining like
 `data?.message === 'success'`._
 
 Not bad, but we've simply moved the operations to a single place. What if we
