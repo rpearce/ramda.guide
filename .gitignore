@@ -3,3 +3,4 @@
 /target
 /web/book
 /web/news
+cachix.dhall
