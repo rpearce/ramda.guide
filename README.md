@@ -57,3 +57,7 @@ To view the output, run the following in a separate window/pane:
 ```sh
 cd web && python -m SimpleHTTPServer 8000
 ```
+
+### Updating the cachix cache
+
+https://docs.cachix.org/pushing
