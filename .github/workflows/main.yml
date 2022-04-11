@@ -30,7 +30,7 @@ jobs:
       - run: nix run .#hull
 
       - name: Artifact pages
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: pages
           path: web
