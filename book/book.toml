@@ -1,0 +1,19 @@
+[book]
+authors = ["Robert Pearce"]
+language = "en"
+multilingual = false
+src = "./"
+title = "Ramda Guide"
+description = "A guided, practical approach to learning ramda"
+
+[build]
+create-missing = false
+build-dir = "../../web/book"
+use-default-preprocessors = true
+
+[output.html]
+default-theme = "navy"
+preferred-dark-theme = "navy"
+
+[output.html.playground]
+editable = false

@@ -1,0 +1,1853 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js navy">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Ramda Guide</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A guided, practical approach to learning ramda">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">Ramda Guide</a></li><li class="chapter-item expanded affix "><li class="part-title">Preface</li><li class="chapter-item expanded "><a href="how-to-use-this-guide.html"><strong aria-hidden="true">1.</strong> How to Use This Guide</a></li><li class="chapter-item expanded "><a href="what-is-ramda.html"><strong aria-hidden="true">2.</strong> What is Ramda?</a></li><li class="chapter-item expanded "><a href="prerequisites.html"><strong aria-hidden="true">3.</strong> Suggested Prerequisite Knowledge</a></li><li class="chapter-item expanded "><a href="related-projects.html"><strong aria-hidden="true">4.</strong> Related Projects</a></li><li class="chapter-item expanded affix "><li class="part-title">A Tour of Ramda</li><li class="chapter-item expanded "><a href="including-ramda.html"><strong aria-hidden="true">5.</strong> Including Ramda In A Project</a></li><li class="chapter-item expanded "><a href="documentation.html"><strong aria-hidden="true">6.</strong> Documentation, Source Code, REPL, &amp; Cookbook</a></li><li class="chapter-item expanded "><a href="community-resources.html"><strong aria-hidden="true">7.</strong> Community Resources</a></li><li class="chapter-item expanded "><a href="where-were-going.html"><strong aria-hidden="true">8.</strong> Where We're Going</a></li><li class="chapter-item expanded affix "><li class="part-title">Weathering Our First Ramda Experience</li><li class="chapter-item expanded "><a href="converting-temperature-units.html"><strong aria-hidden="true">9.</strong> Converting Temperature Units (add, multiply, divide)</a></li><li class="chapter-item expanded "><a href="comparing-two-temperatures.html"><strong aria-hidden="true">10.</strong> Comparing Two Temperatures (min, minBy, max, maxBy)</a></li><li class="chapter-item expanded affix "><li class="part-title">Keep Looking Up (Object Properties)</li><li class="chapter-item expanded "><a href="data-iss-location.html"><strong aria-hidden="true">11.</strong> Our Data: The ISS' Location</a></li><li class="chapter-item expanded "><a href="reading-shallow-object-properties.html"><strong aria-hidden="true">12.</strong> Reading Shallow Object Properties (prop, propOr, props, pick, pluck)</a></li><li class="chapter-item expanded "><a href="testing-shallow-object-properties.html"><strong aria-hidden="true">13.</strong> Testing Shallow Object Properties (has, propEq, propIs, propSatisfies)</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">14.</strong> Reading Deeply Nested Object Properties (path, pathOr, paths)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">15.</strong> Testing Deeply Nested Object Properties (hasPath, pathEq, pathSatisfies)</div></li><li class="chapter-item expanded affix "><li class="part-title">Unshakeable Logic</li><li class="chapter-item expanded "><div><strong aria-hidden="true">16.</strong> Our Data: Earthquakes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">17.</strong> Controlling Flow (ifElse, when, unless)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">18.</strong> Functions Instead of &amp;&amp; and || (and, or)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">19.</strong> Higher-Order Conditionals (both, either)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">20.</strong> &quot;I don't not not like your faults...&quot; (not)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">21.</strong> Flipping a Functions' &quot;Truthyness&quot; or &quot;Falsyness&quot; (complement)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">22.</strong> Logic in Batches (all, allPass, anyPass)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">23.</strong> The Functional Version of a switch (cond)</div></li><li class="chapter-item expanded affix "><li class="part-title">Core Ramda Ideas</li><li class="chapter-item expanded "><div><strong aria-hidden="true">24.</strong> &quot;Same Input → Same Output&quot;</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">25.</strong> Functions' Argument Order</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.</strong> Provide Arguments When You Feel Like It (curry)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">27.</strong> Composing Functional Pipelines of Data (o, compose, composeWith, tap)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">28.</strong> Grokking the Ramda Documentation's Type Signatures</div></li><li class="chapter-item expanded affix "><li class="part-title">Updating Objects: Speaking the Lingua Ramda</li><li class="chapter-item expanded "><div><strong aria-hidden="true">29.</strong> Our Data: Languages Object</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">30.</strong> Setting Key/Value Pairs On An Object (assoc, assocPath)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">31.</strong> Omitting Keys From an Object (omit, dissoc, dissocPath)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">32.</strong> Merging Objects (mergeRight, mergeDeepRight, mergeLeft, mergeWith)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">33.</strong> Updating Values If They Exist (evolve)</div></li><li class="chapter-item expanded affix "><li class="part-title">Strings: Tying Up Loose Ends</li><li class="chapter-item expanded "><div><strong aria-hidden="true">34.</strong> Our Data: Footwear</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">35.</strong> Uppercasing &amp; Lowercasing Text (toUpper, toLower)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">36.</strong> Scanning Text for Matches (match)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">37.</strong> Sanitizing Hashtag Text (replace, trim, test, split)</div></li><li class="chapter-item expanded affix "><li class="part-title">All About ['L','i','s','t','s']</li><li class="chapter-item expanded "><div><strong aria-hidden="true">38.</strong> Our data: Nobel Prizes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">39.</strong> What is a List?</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">40.</strong> Taking &amp; Dropping Items (take, takeLast, takeWhile, drop, dropLast, dropWhile)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">41.</strong> First &amp; Last Item Groupings (head, tail, init, last)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">42.</strong> Searching for Items (filter, reject, find, indexOf, findIndex)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">43.</strong> Calling a Function On Every Item (map, forEach)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">44.</strong> Inserting, Removing, &amp; Updating Items (insert, insertAll, remove, without, update)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">45.</strong> Reversing, Reordering, &amp; Sorting Items (reverse, move, sort, sortBy)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">46.</strong> Splitting Lists (slice, splitAt, splitEvery, splitWhen)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">47.</strong> Reducing a List to a Single Value (reduce, reduceWhile, mapAccum)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">48.</strong> Getting Unique Items (uniq, uniqBy, uniqWith)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">49.</strong> Testing Lists With Conditions (includes, any, all, none, startsWith, endsWith)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">50.</strong> Combining Lists (concat, union, union, intersection, difference, symmetricDifference, symmetricDifferenceWith)</div></li><li class="chapter-item expanded affix "><li class="part-title">Through the Lens</li><li class="chapter-item expanded "><div><strong aria-hidden="true">51.</strong> Our Data: Observatories</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">52.</strong> What is a Lens? (lens, lensIndex, lensProp, lensPath)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">53.</strong> Safe Getters for Our Data (view)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">54.</strong> Safe Setters for Our Data (set, over)</div></li><li class="chapter-item expanded affix "><li class="part-title">Misc</li><li class="chapter-item expanded "><div><strong aria-hidden="true">55.</strong> Converting an Existing API Into a Functional One (invoker)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">56.</strong> Understanding Ramda Further by Recreating Parts of It</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">57.</strong> Using Ramda With TypeScript</div></li><li class="chapter-item expanded affix "><li class="part-title">Opinionated Best Practices</li><li class="chapter-item expanded "><div><strong aria-hidden="true">58.</strong> The Rule of 3</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">59.</strong> Type, Param, or Pseudo-Type Declarations</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">60.</strong> Writing Declarative Code That Tells a Story</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">61.</strong> You Might Not Need Ramda</div></li><li class="chapter-item expanded affix "><li class="part-title">Your Next Steps</li><li class="chapter-item expanded "><a href="introducing-fp-at-work.html"><strong aria-hidden="true">62.</strong> Introducing FP at Work</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">63.</strong> How to Guide Others</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">64.</strong> The Larger FP World</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ramda Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="ramda-guide"><a class="header" href="#ramda-guide">Ramda Guide</a></h1>
+<p>This is a guide to help get you mostly adequate<a href="https://github.com/MostlyAdequate/mostly-adequate-guide">1</a> with
+<a href="https://ramdajs.com">ramda.js</a>, &quot;a practical functional library for JavaScript
+programmers&quot;.</p>
+<h2 id="by-robert-w-pearce"><a class="header" href="#by-robert-w-pearce">By Robert W. Pearce</a></h2>
+<ul>
+<li><a href="https://github.com/sponsors/rpearce">Sponsor me a coffee</a></li>
+<li><a href="https://github.com/rpearce">github.com/rpearce</a></li>
+<li><a href="https://twitter.com/RobertWPearce">twitter.com/@RobertWPearce</a></li>
+<li><a href="https://linkedin.com/in/robertwpearce">linkedin.com/in/robertwpearce</a></li>
+</ul>
+<h2 id="book-status"><a class="header" href="#book-status">Book Status</a></h2>
+<p><em>Updated: 2022-03-26</em></p>
+<p>As you can see from the navigation links, this is a work in progress. I will
+post updates to the <a href="https://ramda.guide/feed.atom">feed</a> as new groups of
+content are available, you can subscribe for email updates on <a href="https://ramda.guide">the
+website</a>, or you can check the <a href="../news/index.html">news
+page</a>.</p>
+<p>View <a href="https://github.com/rpearce/ramda.guide/">the guide's source code</a>.</p>
+<h2 id="special-thanks"><a class="header" href="#special-thanks">Special Thanks</a></h2>
+<ul>
+<li>Steve Purr (review) (<a href="https://github.com/PurrBiscuit">GitHub</a>)</li>
+<li>Tom Wilson (review) (<a href="https://github.com/twilson63">GitHub</a>, <a href="https://hyper63.com">hyper cloud service</a>)</li>
+<li>Ian Greulich (review) (<a href="https://github.com/igreulich">GitHub</a>)</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="how-to-use-this-guide"><a class="header" href="#how-to-use-this-guide">How to Use This Guide</a></h1>
+<h2 id="the-content"><a class="header" href="#the-content">The Content</a></h2>
+<p>This guide's content consists of chapters grouped into related sections. Each
+section has a theme that is based on the data we use as examples.</p>
+<p>Here are some example data we'll work with:</p>
+<ul>
+<li>Weather</li>
+<li>The International Space Station's location</li>
+<li>Earthquakes</li>
+<li>Internationalization (i18n)</li>
+<li>Observatories</li>
+</ul>
+<p>Many examples include explanations <em>outside</em> and <em>inside</em> code blocks; the
+latter are done via code comments.</p>
+<h3 id="advanced-content"><a class="header" href="#advanced-content">Advanced Content</a></h3>
+<p>Content that I deemed to be advanced and perhaps not immediately relevant for
+newcomers is marked as &quot;Advanced&quot; in chapters where the advanced material is
+contained.</p>
+<h2 id="meta"><a class="header" href="#meta">Meta</a></h2>
+<p>This guide is generated via <a href="https://github.com/rust-lang/mdBook">mdBook</a>. Here
+are some quick tips:</p>
+<ul>
+<li>Open &amp; close the sidebar by mashing on the three horizontal lines (hamburger)
+icon above</li>
+<li>Change the theme by mashing on the paint brush icon above</li>
+<li>Do a text search through the entire guide by mashing on the magnifying glass
+icon above</li>
+<li>Not a fan of reading on the web? Mash the printer icon above and print it or
+save to PDF</li>
+<li>Want to link to a specific heading? Each heading is a link you can mash, and
+then you can share the URL with the world</li>
+</ul>
+<h2 id="disclaimer--personal-note"><a class="header" href="#disclaimer--personal-note">Disclaimer / Personal Note</a></h2>
+<p>Even though I've worked with Ramda since 2016, programmed professionally since
+2011, and taught programming for a while, I don't have a computer science degree
+(yet), and I am not a Category Theory expert. The opinions in this guide stem
+from my experience learning functional programming concepts through a number of
+languages and making <em>heaps</em> of mistakes along the way. There are also a lot of
+people who invested in me, and I am thankful for their guidance along the path.</p>
+<p>If you find mistakes or hold different opinions, feel free to <a href="https://github.com/rpearce/ramda.guide/issues">open an
+issue</a>, and we can publicly
+discuss things there.</p>
+<p>I'll never stop learning and being better than I was yesterday, and I hope that
+perspective provides you, dear reader, some value as you embark on your
+functional programming journey.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="what-is-ramda"><a class="header" href="#what-is-ramda">What is Ramda?</a></h1>
+<p><a href="https://ramdajs.com">Ramda.js</a> is a JS library of helper functions that have
+some cool principles baked into every function:</p>
+<ul>
+<li>never mutate the user's data</li>
+<li>always provide the same output given the same input</li>
+<li>allow users to build new functions from old ones by not supplying all of a
+function's parameters</li>
+</ul>
+<p>These ideas — regardless of what library or even language we use — allow us to
+write safe, extendable code, and the ideas are explored further in the <code>Core Ramda Ideas</code> section that starts with <a href="./core_idempotency.html">the &quot;Same Input → Same Output&quot;
+chapter</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="suggested-prerequisite-knowledge"><a class="header" href="#suggested-prerequisite-knowledge">Suggested Prerequisite Knowledge</a></h1>
+<p>The presentation of concepts in this guide assumes the reader is familiar with
+some JS fundamentals, so take a look below and see how comfortable you are with
+the concepts.</p>
+<p>If you're not comfortable with them, each section has a link to more information
+about its topic, and if that's not enough, here are some resources for learning
+more JS:</p>
+<ul>
+<li><a href="https://scrimba.com/topic/javascript">Scrimba's Courses</a></li>
+<li><a href="https://www.codecademy.com/catalog/language/javascript">Codecademy's Courses</a></li>
+<li><a href="https://wesbos.com/courses">Wes Bos' Courses</a></li>
+<li><a href="https://egghead.io/q/javascript">Egghead's Courses</a></li>
+</ul>
+<h2 id="arrow-functions"><a class="header" href="#arrow-functions">Arrow Functions</a></h2>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#arrow_functions">MDN: Arrow Functions</a></p>
+<pre><code class="language-javascript">const add = (a, b) =&gt; a + b
+
+add(4, 5) // 9
+</code></pre>
+<h2 id="nested-functions"><a class="header" href="#nested-functions">Nested Functions</a></h2>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#nested_functions_and_closures">MDN: Nested Functions and Closures</a></p>
+<pre><code class="language-javascript">const addExpr = a =&gt; b =&gt; a + b
+
+addExpr(4)(5) // 9
+
+// or
+
+function addFn(a) {
+  return function (b) {
+    return a + b
+  }
+}
+
+addFn(4)(5) // 9
+</code></pre>
+<h2 id="passing-functions-as-arguments-callbacks"><a class="header" href="#passing-functions-as-arguments-callbacks">Passing Functions as Arguments (Callbacks)</a></h2>
+<p><a href="https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function">MDN: First-Class Function</a></p>
+<pre><code class="language-javascript">const log = x =&gt; console.log(x)
+
+[1, 2, 3].forEach(log)
+// 1
+// 2
+// 3
+</code></pre>
+<h2 id="map-filter--reduce"><a class="header" href="#map-filter--reduce">Map, Filter, &amp; Reduce</a></h2>
+<p>MDN: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Map"><code>map</code></a>,
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Filter"><code>filter</code></a>,
+and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce"><code>reduce</code></a></p>
+<pre><code class="language-javascript">[1, 2, 3].map(x =&gt; x * 2)                      // [2, 4, 6]
+
+[1, 2, 3].filter(x =&gt; x % 2 !== 0)             // [1, 3]
+
+[1, 2, 3].reduce((sum, item) =&gt; sum + item, 0) // 6
+</code></pre>
+<h2 id="calling-functions"><a class="header" href="#calling-functions">Calling Functions</a></h2>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#calling_functions">MDN: Calling Functions</a></p>
+<pre><code class="language-javascript">const add5    = x =&gt; x + 5
+const times10 = x =&gt; x * 10
+const div2    = x =&gt; x / 2
+
+div2(times10(add5(15))) // 100
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="related-projects"><a class="header" href="#related-projects">Related Projects</a></h1>
+<p>Ramda is great for teams who are stepping into the functional programming in JS
+world and want to dip their toes in the water. Once you've gotten comfortable
+with writing code in a functional style, consider checking out these projects,
+as well, to take it to the next level.</p>
+<p>Each of these projects below include some amount of <a href="https://en.wikipedia.org/wiki/Algebraic_data_type">algebraic data
+types (ADTs)</a> for safety and
+expressiveness.</p>
+<p>It should also be said that there are numerous great projects out there, so
+please <a href="https://github.com/rpearce/ramda.guide/issues">open an issue</a> if you'd
+like to see others listed below.</p>
+<h2 id="sanctuary"><a class="header" href="#sanctuary">Sanctuary</a></h2>
+<p><a href="https://sanctuary.js.org">Sanctuary</a> is a successor to Ramda that is quite a
+bit stricter and more likely to be unfamiliar to web developers, for it feels
+more like <a href="https://en.wikipedia.org/wiki/ML_(programming_language)">the ML
+language family</a>.</p>
+<p>It's goal is to provide refuge from unsafe JS. Check out <a href="https://sanctuary.js.org/#section:ramda">its section on
+Ramda</a> to read about the differences.</p>
+<h2 id="crocks"><a class="header" href="#crocks">Crocks</a></h2>
+<p><a href="https://crocks.dev">Crocks</a>, like Sanctuary, has a bit of overlap with Ramda's
+functions, but it goes much deeper than Ramda by providing a variety of ADTs
+and functions for working with them.</p>
+<p>It is worth checking out at least for its <a href="https://crocks.dev/docs/crocks/Async.html"><code>Async</code>
+ADT</a> (goodbye, <code>Promise</code>)!</p>
+<h2 id="folktale"><a class="header" href="#folktale">Folktale</a></h2>
+<p><a href="https://folktale.origamitower.com">Folktale</a>, like Sanctuary and Crocks,
+includes some ADTs and other useful functions for working with a functional
+programming style in JS.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="including-ramda-in-a-project"><a class="header" href="#including-ramda-in-a-project">Including Ramda in A Project</a></h1>
+<p>There are instructions on <a href="https://ramdajs.com">Ramda's homepage</a> detailing how
+to install Ramda, and <a href="https://deno.land/x/ramda">deno.land's Ramda page</a> has
+instructions for deno.</p>
+<p>If you're building for the frontend and are using a build tool that has
+<a href="https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking">tree-shaking or dead-code elimination</a>,
+then here is how you should import functions from Ramda:</p>
+<pre><code class="language-js">import { compose, lensProp, map, over } from 'ramda'
+</code></pre>
+<p>However, if you do not have a build tool that does tree-shaking, you may want to
+import directly from the files you use to avoid importing the entire Ramda
+library when you only want to use a few functions. The two options with
+<a href="https://www.npmjs.com/package/ramda/v/0.27.1"><code>v0.27.1</code></a> are ESModules- and
+CommonJS-based.</p>
+<pre><code class="language-js">// ESModules
+import compose from 'ramda/es/compose'
+import lensProp from 'ramda/es/lensProp'
+
+// CommonJS
+const compose = require('ramda/src/compose')
+const lensProp = require('ramda/src/lensProp')
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="documentation-source-code-repl--cookbook"><a class="header" href="#documentation-source-code-repl--cookbook">Documentation, Source Code, REPL, &amp; Cookbook</a></h1>
+<p><a href="https://ramdajs.com/docs/">Ramda's documentation</a> is the place to go when you
+are looking for a function to use, trying to remember how to use a function,
+want to view a function's <a href="https://github.com/ramda/ramda/tree/master/source">source code on
+GitHub</a>, or open it in <a href="https://ramdajs.com/repl/">the
+Ramda REPL</a>.</p>
+<p><a href="https://ramdajs.com/repl/">The Ramda REPL</a> is something I used <em>all the time</em>
+when learning Ramda, for all the functions are automatically loaded in that
+environment for you to use. You can even get a link to your current state in the
+REPL and share it with others!</p>
+<p>Some official resources of additional note are <a href="https://github.com/ramda/ramda/wiki">Ramda's
+GitHub wiki</a> and the <a href="https://github.com/ramda/ramda/wiki/Cookbook">Ramda
+Cookbook</a>. The wiki contains
+numerous resources hand-picked by the Ramda folks, and the Cookbook is
+chock-a-block with Ramda recipes (helpful functions built with Ramda functions).</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="community-resources"><a class="header" href="#community-resources">Community Resources</a></h1>
+<p>There are a <em>lot</em> of great articles and resources out there, and Iain's list
+(see below) should cover most of your needs. If you'd like to see something on
+this page, feel free to <a href="https://github.com/rpearce/ramda.guide/issues">open an
+issue</a>, and we can discuss
+getting it added!</p>
+<ul>
+<li>Iain Freestone's <a href="https://dev.to/iainfreestone/ramda-my-library-of-resources-1ebm">Ramda: My library of
+resources</a> is
+an impressive compendium of blog posts, videos, podcasts, REPLs, Ramda-related
+libraries / tools, examples, and more.</li>
+<li>Dave Sancho's <a href="https://davesnx.github.io/learn-ramda/">Learn Ramda</a> project is
+fun and helpful, for it uses dropdown selects and English sentences to help you
+find a function based on your needs, and it tells you how to use it.</li>
+<li><a href="https://github.com/char0n/ramda-adjunct">ramda-adjunct</a> bills itself as &quot;the
+most popular and most comprehensive set of functional utilities for use with
+Ramda, providing a variety of useful, well tested functions with excellent
+documentation&quot;. It is filled with useful helper functions that make working
+with Ramda even easier.</li>
+<li>(Shameless plug) My <a href="https://robertwpearce.com/ramda-chops-function-currying.html">Ramda
+Chops</a> series
+has a few of articles that might help you with
+<a href="https://robertwpearce.com/ramda-chops-function-currying.html">currying</a>,
+<a href="https://robertwpearce.com/ramda-chops-function-composition.html">function composition</a>,
+<a href="https://robertwpearce.com/ramda-chops-map-filter-and-reduce.html">map, filter, &amp; reduce</a>,
+as well as a lengthy article on <a href="https://robertwpearce.com/javascript-writing-a-functional-programming-style-map-function.html">implementing your own functional
+programming-style <code>map</code> function</a>.
+We'll be covering most of that content here, as well, as it was the
+inspiration for this guide!</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="where-were-going"><a class="header" href="#where-were-going">Where We're Going</a></h1>
+<p><img src="../images/classes.jpg" alt="Meme of Doc Brown from Back to the Future in a Delorean with the text, Classes? Where we're going, we don't need classes" /></p>
+<p>Buckle up! We are about to begin our tour of Ramda.</p>
+<p>We will start small and practical, getting a feel for importing and using ramda.</p>
+<p>After some practice, we'll take a break and cover Ramda's core ideas. In this
+section, we'll answer the burning &quot;D-I-Why???&quot; questions you will surely have.</p>
+<p>Continuing on the path to enlightenment, we'll dive deep into various Ramda
+functions and concepts, melt our minds a little bit, and come out the other
+end empowered by knowledge and confident via practice.</p>
+<p>By the end of this guide, you will be able to:</p>
+<ul>
+<li>understand a majority of Ramda's most valuable functions</li>
+<li>use functional programming to start solving problems functionally at work</li>
+<li>guide others</li>
+<li>continue on your functional programming path to enlightenment, wherever it may
+lead</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="converting-temperature-units"><a class="header" href="#converting-temperature-units">Converting Temperature Units</a></h1>
+<blockquote>
+<p>Life is far too important a thing ever to talk seriously about.</p>
+<p>— <cite>Oscar Wilde, Lady Windermere's Fan</cite></p>
+</blockquote>
+<p>To kick off our Ramda journey, we're going to do something ridiculous: transform
+very clear temperature conversion functions that use JS math operators to use
+only functions for the operations!</p>
+<p>Sometimes, when we forego the obvious and choose to approach problems in
+different ways, interesting patterns may emerge that can expand our
+understanding.</p>
+<p>Let's get introduced to some perfectly fine conversion functions — one of which
+we are going to rip apart and make anew.</p>
+<pre><code class="language-javascript">function celsiusToFahrenheit(celsius) {
+  return celsius * (9 / 5) + 32
+}
+
+function fahrenheitToCelsius(fahrenheit) {
+  return 5 / 9 * (fahrenheit - 32)
+}
+
+function easyCelsiusToFahrenheit(celsius) {
+  return celsius * 2 + 30
+}
+
+function easyFahrenheitToCelsius(fahrenheit) {
+  return (fahrenheit - 30) / 2
+}
+</code></pre>
+<p>While the <code>celsiusToFahrenheit</code> and <code>fahrenheitToCelsius</code> functions are exact
+formulas, they're not practical for everyday use. I've lived in the UK and New
+Zealand, and since I'm married to a Kiwi, I need to easily convert between
+Celsius and Fahrenheit. While not exact, the <code>easyCelsiusToFahrenheit</code> and
+<code>easyFahrenheitToCelsius</code> formulas are easy to do in one's head and are close
+enough to the real values.</p>
+<p>We are going to single out <code>celsiusToFahrenheit</code> for this extended example.</p>
+<pre><code class="language-javascript">function celsiusToFahrenheit(celsius) {
+  return celsius * (9 / 5) + 32
+}
+</code></pre>
+<h2 id="enter-the-ramda"><a class="header" href="#enter-the-ramda">Enter the Ramda</a></h2>
+<p>In it, we:</p>
+<ol>
+<li>multiply the Celsius value by the result of <code>9 / 5</code></li>
+<li>add <code>32</code> to the result of the prior step(s)</li>
+</ol>
+<p>Before we go further, let's first convert it to an arrow function expression,
+for doing so will open some interesting doors.</p>
+<pre><code class="language-javascript">const celsiusToFahrenheit = celsius =&gt;
+  celsius * (9 / 5) + 32
+</code></pre>
+<p>Next, let's get Ramda pulled into the picture.</p>
+<p>Ramda has a number of math functions, namely
+<a href="https://ramdajs.com/docs/#multiply"><code>multiply</code></a>,
+<a href="https://ramdajs.com/docs/#divide"><code>divide</code></a>, and
+<a href="https://ramdajs.com/docs/#add"><code>add</code></a> that we can leverage in place of <code>*</code>,
+<code>/</code>, and <code>+</code>. Each function takes two arguments, and each function will wait to
+evaluate itself until you provide all the arguments. Check this out:</p>
+<pre><code class="language-javascript">add(1, 2)     // 3
+add(1)(2)     // 3
+add()(1, 2)   // 3
+add()(1)()(2) // 3
+</code></pre>
+<p>This is indeed weird, and we'll cover this fully in the &quot;Core Ramda Ideas&quot;
+section.</p>
+<p>For now, let's import those and use them!</p>
+<pre><code class="language-javascript">import { add, divide, multiply } from 'ramda'
+
+const celsiusToFahrenheit = celsius =&gt;
+  add(multiply(celsius, divide(9, 5)), 32)
+
+celsiusToFahrenheit(100) // 212
+</code></pre>
+<p>Woah, woah, woah! What's going on here?!</p>
+<p>It looks like we're...</p>
+<ol>
+<li>adding <code>32</code> to the result of</li>
+<li>multiplying the Celsius value by the result of dividing <code>9</code> by <code>5</code></li>
+</ol>
+<p>That's the same process we did before, but it's merely explained differently!</p>
+<p>With addition and multiplication, there's something called the
+<a href="https://www.mathsisfun.com/definitions/commutative-law.html">commutative law</a>
+that states we can provide the arguments to an addition and multiplication
+operation in any order. Let's leverage this law in order to move our variable,
+<code>celsius</code>, further toward the edge of our function to judge how it feels.</p>
+<pre><code class="language-javascript">// this is what we're starting with
+add(multiply(celsius, divide(9, 5)), 32)
+
+// first, swap `celsius` and `divide(9/5)`
+add(multiply(divide(9, 5), celsius), 32)
+//               ^------------^
+
+// next, swap the multiplication and `32`
+add(32, multiply(divide(9, 5), celsius))
+//  ^------^
+
+// the result
+const celsiusToFahrenheit = celsius =&gt;
+  add(32, multiply(divide(9, 5), celsius))
+</code></pre>
+<p>Interesting! Do you see it yet? The forwarding of a result from function to
+function? Let's look at this another way:</p>
+<pre><code class="language-javascript">const celsiusToFahrenheit = celsius =&gt; {
+  const multiplied = multiply(divide(9, 5), celsius)
+  const added = add(32, multiplied)
+
+  return added
+}
+</code></pre>
+<p>We provide <code>celsius</code> as the second argument to <code>multiply</code>, then we provide the
+result of that as the second argument to <code>add</code>. We're simply forwarding the
+evaluated result of a computation to another function; kind of like passing an
+electric guitar's signal through a few effects pedals and then out the
+amplifier.</p>
+<p>What if we had a cleaner way to link these functions together so we can easily
+understand what <code>celsiusToFahrenheit</code> is composed of and then provide the data
+at the end?</p>
+<p>It's time to take this first lesson into overdrive.</p>
+<h2 id="a-taste-of-composition"><a class="header" href="#a-taste-of-composition">A Taste of Composition</a></h2>
+<p>We need a way of passing the result of calling one function to another function
+and having that run. It'd be easier if we could abstract an API... let's try
+that.</p>
+<pre><code class="language-javascript">// this is essentially what we have
+// with our celsiusToFahrenheit
+f2(f1(value))
+
+// but we want something like this;
+// let's call it `link` because
+// we're linking functions together
+link(f2, f1)(value)
+</code></pre>
+<p>With that desired outcome in mind, let's try to write <code>link</code>!</p>
+<pre><code class="language-javascript">const link = (f2, f1) =&gt; value =&gt;
+  f2(f1(value))
+</code></pre>
+<p>Ha! We're still doing the difficult to follow <code>f2(f1(value))</code>, but now we can
+use this like <code>link(f2, f1)(value)</code>.</p>
+<p>Circling back to <code>celsiusToFahrenheit</code>, let's try to use this <code>link</code>
+abstraction:</p>
+<pre><code class="language-javascript">// before
+const celsiusToFahrenheit = celsius =&gt;
+  add(32, multiply(divide(9, 5), celsius))
+
+// after
+const celsiusToFahrenheit = celsius =&gt;
+  link(add(32), multiply(divide(9, 5)))(celsius)
+
+celsiusToFahrenheit(100) // 212
+</code></pre>
+<p>Nice! We can now do a little less inside-out reading. But something doesn't feel
+quite right... Why are we accepting the argument <code>celsius</code> in our
+<code>celsiusToFahrenheit</code> function only to turn right back around and call <code>link()</code>
+with the <code>celsius</code> value? Do we need it?</p>
+<p>Nope.</p>
+<pre><code class="language-javascript">// before
+const celsiusToFahrenheit = celsius =&gt;
+  link(add(32), multiply(divide(9, 5)))(celsius)
+
+// after
+const celsiusToFahrenheit =
+  link(add(32), multiply(divide(9, 5)))
+
+celsiusToFahrenheit(100) // 212
+</code></pre>
+<p>You may be wondering why <code>link</code> reads right to left. Two short answers are:</p>
+<ol>
+<li>Mathematics writes <code>f(x)</code> and not <code>(x)f</code></li>
+<li>Evaluation is done from right to left (inside -&gt; outside), so we are
+<a href="https://en.wikipedia.org/wiki/Operator_associativity">right-associative</a></li>
+</ol>
+<p>However, let me ease your worried mind and make a <code>linkL</code> (<code>L</code> for &quot;left&quot;)
+function for us to use:</p>
+<pre><code class="language-javascript">const linkL = (f1, f2) =&gt; value =&gt;
+  f2(f1(value))
+</code></pre>
+<p>And when we compare that to the original function, we realize that we've come
+nearly full circle but with a whole new perspective:</p>
+<pre><code class="language-javascript">// where we started
+const celsiusToFahrenheit = celsius =&gt;
+  celsius * (9 / 5) + 32
+//        ^    ^    ^
+//  multiply   |    |
+//           divide |
+//                 add
+
+// where we ended up
+const celsiusToFahrenheit =
+  linkL(multiply(divide(9, 5)), add(32))
+</code></pre>
+<p>Ramda provides a few functions, <a href="https://ramdajs.com/docs/#compose"><code>compose</code></a>
+(or <a href="https://ramdajs.com/docs/#o"><code>o</code></a>) and
+<a href="https://ramdajs.com/docs/#pipe"><code>pipe</code></a> that do the <code>link</code> and <code>linkL</code> work for
+us!</p>
+<pre><code class="language-javascript">import {
+  add,
+  compose,
+  divide,
+  multiply,
+  pipe,
+} from 'ramda'
+
+// `compose` and `o` are very similar
+const celsiusToFahrenheit =
+  compose(add(32), multiply(divide(9, 5)))
+
+// `pipe`
+const celsiusToFahrenheit =
+  pipe(multiply(divide(9, 5)), add(32))
+</code></pre>
+<p>We'll cover function composition a bit more in the &quot;Core Ramda Ideas&quot; section.</p>
+<h2 id="your-turn"><a class="header" href="#your-turn">Your Turn</a></h2>
+<p>Can you convert the remaining temperature conversion functions to use Ramda
+functions? Give them a try in <a href="https://tinyurl.com/ygbkvfj4">a pre-loaded Ramda
+REPL</a>.</p>
+<p>Here they are again, in case that link doesn't work:</p>
+<pre><code class="language-javascript">function fahrenheitToCelsius(fahrenheit) {
+  return 5 / 9 * (fahrenheit - 32)
+}
+
+function easyCelsiusToFahrenheit(celsius) {
+  return celsius * 2 + 30
+}
+
+function easyFahrenheitToCelsius(fahrenheit) {
+  return (fahrenheit - 30) / 2
+}
+
+const result = () =&gt; ({
+  '212F = 100C': fahrenheitToCelsius(212),
+  '25C ≈ 80F': easyCelsiusToFahrenheit(25),
+  '60F ≈ 15C': easyFahrenheitToCelsius(60),
+})
+
+result()
+</code></pre>
+<p>When you're done, compare them against <a href="https://tinyurl.com/yhe4pm2w">my
+solutions</a>!</p>
+<details>
+  <summary>Expand this to see my solutions if the link doesn't work</summary>
+<pre><code class="language-javascript">//function fahrenheitToCelsius(fahrenheit) {
+//  return 5 / 9 * (fahrenheit - 32)
+//}
+
+// This is the best I could do before I had to cheat... see below!
+//const fahrenheitToCelsius = fahrenheit =&gt;
+//  multiply(divide(5, 9), subtract(fahrenheit, 32))
+
+// If you're feeling clever, check this out:
+// https://ramdajs.com/docs/#__
+const fahrenheitToCelsius =
+  compose(multiply(divide(5, 9)), subtract(__, 32))
+
+// ===============================================================
+
+//function easyCelsiusToFahrenheit(celsius) {
+//  return celsius * 2 + 30
+//}
+
+// Step 1:
+//const easyCelsiusToFahrenheit = celsius =&gt;
+//  add(30, multiply(2, celsius))
+
+// Step 2:
+const easyCelsiusToFahrenheit =
+  compose(add(30), multiply(2))
+
+// ===============================================================
+
+//function easyFahrenheitToCelsius(fahrenheit) {
+//  return (fahrenheit - 30) / 2
+//}
+
+// This is the best I could do before I had to cheat... see below!
+//const easyFahrenheitToCelsius = fahrenheit =&gt;
+//  divide(subtract(fahrenheit, 30), 2)
+
+// If you're feeling clever, check this out:
+// https://ramdajs.com/docs/#__
+const easyFahrenheitToCelsius =
+  compose(divide(__, 2), subtract(__, 30))
+
+// ===============================================================
+
+const result = () =&gt; ({
+  '212F = 100C': fahrenheitToCelsius(212),
+  '25C ≈ 80F': easyCelsiusToFahrenheit(25),
+  '60F ≈ 15C': easyFahrenheitToCelsius(60),
+})
+
+result()
+</code></pre>
+</details>
+<h2 id="wrapping-up"><a class="header" href="#wrapping-up">Wrapping Up</a></h2>
+<p>This turned out to be far from a gentle introduction!</p>
+<p>We started with some addition, division, and multiplication to convert
+temperature values, and we ended up walking backwards into the heart of
+functional programming.</p>
+<p>Way to go!</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="comparing-two-temperatures"><a class="header" href="#comparing-two-temperatures">Comparing Two Temperatures</a></h1>
+<blockquote>
+<p>It doesn't matter what temperature the room is — it's always room temperature.</p>
+<p>— <cite>Steven Wright</cite></p>
+</blockquote>
+<p>We're at work, and we are tasked with writing two functions that compare any
+two temperatures:</p>
+<ul>
+<li>One that gets the minimum value</li>
+<li>One that gets the maximum value</li>
+</ul>
+<p>We're not sure why they don't use <code>Math.min</code> and <code>Math.max</code> themselves, but we
+do what they ask.</p>
+<pre><code class="language-javascript">const minTemperature = (a, b) =&gt; Math.min(a, b)
+const maxTemperature = (a, b) =&gt; Math.max(a, b)
+
+minTemperature(100, 200) // 100
+maxTemperature(100, 200) // 200
+</code></pre>
+<p>Once we share that solution, we are reminded that task is to compare
+<em>any two temperatures</em>; for example, <code>100</code>, <code>200</code>, <code>'50F'</code>, <code>'25C'</code>.</p>
+<p>Dangit... now we look silly. Okay, let's try this again to make it handle
+strings:</p>
+<pre><code class="language-javascript">const minTemperature = (a, b) =&gt; a &gt; b ? b : a
+const maxTemperature = (a, b) =&gt; a &lt; b ? b : a
+
+minTemperature(100, 200)       // 100
+maxTemperature(100, 200)       // 200
+minTemperature('200F', '100F') // '100F'
+maxTemperature('200F', '100F') // '200F'
+</code></pre>
+<p>Then we realize that Ramda has <a href="https://ramdajs.com/docs/#min"><code>min</code></a> and
+<a href="https://ramdajs.com/docs/#max"><code>max</code></a> functions, so we use those and
+pat ourselves on the back:</p>
+<pre><code class="language-javascript">import { max, min } from 'ramda'
+
+min(100, 200)       // 100
+max(100, 200)       // 200
+min('200F', '100F') // '100F'
+max('200F', '100F') // '200F'
+</code></pre>
+<p>We go back and tell our team to use Ramda's functions, but we're wrong again,
+and we realize that we probably should have asked for a thorough list of inputs.</p>
+<p>But what could we have missed?</p>
+<blockquote>
+<p>Compare any two temperatures.</p>
+</blockquote>
+<p>Oh, no... They might not be part of the same measurement system! This
+means that <code>'50F'</code> could be compared with <code>'15C'</code>! Luckily, we're told that we don't
+have to worry about Kelvin, Rankine, nor Réaumur; we only care about Celsius
+and Fahrenheit. There will also <em>never</em> be any unit-less numbers, so we can
+ignore that case.</p>
+<p>This problem just took on a whole new dimension!</p>
+<p>Good news: in <a href="http://localhost:8000/book/converting-temperature-units.html">the last
+chapter</a>, we wrote
+our <code>celsiusToFahrenheit</code> and <code>fahrenheitToCelsius</code> functions, so we have those
+functions we can use to do those calculations for us.</p>
+<p>Let's try again:</p>
+<pre><code class="language-javascript">import { max, min } from 'ramda'
+
+const celsiusToFahrenheit =
+  compose(add(32), multiply(divide(9, 5)))
+
+const minTemperature = (a, b) =&gt; {
+  const unitA = a.slice(-1) // get the last character, like C or F
+  const unitB = b.slice(-1)
+  const floatA = parseFloat(a)
+  const floatB = parseFloat(b)
+
+  // same temperature type
+  if (unitA === unitB) {
+    const maxT = min(floatA, floatB)
+    return maxT === floatA ? a : b
+  }
+
+  // a is Fahrenheit but b is Celsius
+  if (unitA === 'F') {
+    const floatBAsF = celsiusToFahrenheit(floatB)
+    const minF = min(floatA, floatBAsF)
+
+    return minF === floatA ? a : b
+  }
+
+  // a is Celsius but b is Fahrenheit
+  const floatAAsF = celsiusToFahrenheit(floatA)
+  const minF = min(floatAAsF, floatB)
+
+  return minF === floatB ? b : a
+}
+
+const maxTemperature = (a, b) =&gt; {
+  const unitA = a.slice(-1) // get the last character, like C or F
+  const unitB = b.slice(-1)
+  const floatA = parseFloat(a)
+  const floatB = parseFloat(b)
+
+  // same temperature type
+  if (unitA === unitB) {
+    const maxT = max(floatA, floatB)
+    return maxT === floatA ? a : b
+  }
+
+  // a is Fahrenheit but b is Celsius
+  if (unitA === 'F') {
+    const floatBAsF = celsiusToFahrenheit(floatB)
+    const maxF = max(floatA, floatBAsF)
+
+    return maxF === floatA ? a : b
+  }
+
+  // a is Celsius but b is Fahrenheit
+  const floatAAsF = celsiusToFahrenheit(floatA)
+  const maxF = max(floatAAsF, floatB)
+
+  return maxF === floatB ? b : a
+}
+
+minTemperature('200F', '100F') // '100F'
+maxTemperature('200F', '100F') // '200F'
+minTemperature('50F', '25C')   // '50F'
+maxTemperature('50F', '25C')   // '25C'
+</code></pre>
+<p>(<a href="https://tinyurl.com/yhpevc5c">View this large min/max temperature example in the Ramda
+REPL</a>)</p>
+<p>Goodness gracious! While we could extract some common functionality into many
+small functions, there must be a simpler way. After all, isn't functional
+programming supposed to help us simplify things?</p>
+<p>(Hint: yes!)</p>
+<p>Ramda has <a href="https://ramdajs.com/docs/#minBy"><code>minBy</code></a> and
+<a href="https://ramdajs.com/docs/#maxBy"><code>maxBy</code></a> functions that will compare two
+values <em>after</em> they have been transformed by some transformation function.
+Here's their example from the docs:</p>
+<pre><code class="language-javascript">import { maxBy } from 'ramda'
+
+const square = n =&gt; n * n
+maxBy(square, -3, 2) // -3
+</code></pre>
+<p>In this example, <code>maxBy</code> will call <code>square</code> with <code>-3</code> and <code>2</code>, and it will then
+compare each of <em>those</em> results. Whatever value has the largest result after
+being applied to <code>square</code> will be the returned value. Here, <code>-3 * -3</code> is <code>9</code>,
+whereas <code>2 * 2</code> is <code>4</code>, so since <code>9 &gt; 4</code>, <code>-3</code> is our result.</p>
+<p>Let's refactor our functions:</p>
+<pre><code class="language-javascript">import { maxBy, minBy } from 'ramda'
+
+const asF = x =&gt; {
+  if (x.slice(-1) === 'C') {
+    return celsiusToFahrenheit(parseFloat(x))
+  }
+
+  return x
+}
+
+const minTemperature = (a, b) =&gt; minBy(asF, a, b)
+const maxTemperature = (a, b) =&gt; maxBy(asF, a, b)
+
+minTemperature('200F', '100F') // '100F'
+maxTemperature('200F', '100F') // '200F'
+minTemperature('50F', '25C')   // '50F'
+maxTemperature('50F', '25C')   // '25C'
+maxTemperature('50C', '25C')   // '50C'
+</code></pre>
+<p>(<a href="https://tinyurl.com/yex7k5y5">View this v1 minBy/maxBy temperature example in the Ramda
+REPL</a>)</p>
+<p>By casting all temperatures as a single unit (I chose Fahrenheit here), we can
+compare any temperatures and get back their original values! <code>25C</code> is indeed
+hotter than <code>50F</code>!</p>
+<p>But wait – there's more.</p>
+<p>Just like we noticed in the last chapter, our <code>minTemperature</code> and
+<code>maxTemperature</code> functions are taking in <code>(a, b)</code> and are merely forwarding
+those arguments on. If you recall, Ramda doesn't care <em>when</em> you provide
+arguments, so check this out...</p>
+<pre><code class="language-javascript">// before
+const minTemperature = (a, b) =&gt; minBy(asF, a, b)
+const maxTemperature = (a, b) =&gt; maxBy(asF, a, b)
+
+// after
+const minTemperature = minBy(asF)
+const maxTemperature = maxBy(asF)
+</code></pre>
+<p>(<a href="https://tinyurl.com/ygk3lg7y">View this v2 minBy/maxBy temperature example in the Ramda
+REPL</a>)</p>
+<p>Oh, and one more thing; here's a preview of some upcoming chapters' content
+retroactively applied to making our <code>asF</code> function cleaner:</p>
+<pre><code class="language-javascript">// before
+const asF = x =&gt; {
+  if (x.slice(-1) === 'C') {
+    return celsiusToFahrenheit(parseFloat(x))
+  }
+
+  return x
+}
+
+// after
+
+// Celsius     = String // &quot;100C&quot;
+// Fahrenheit  = String // &quot;100F&quot;
+// Temperature = Celsius | Fahrenheit
+
+// isC :: Temperature -&gt; Bool
+const isC = compose(equals('C'), slice(-1))
+
+// stringCToF :: Celsius -&gt; Number
+const stringCToF = compose(celsiusToFahrenheit, parseFloat)
+
+// asF :: Temperature -&gt; Fahrenheit
+const asF = when(isC, stringCToF)
+</code></pre>
+<p>And here is what all of the new functions together could look like!</p>
+<pre><code class="language-javascript">// Celsius     = String // &quot;100C&quot;
+// Fahrenheit  = String // &quot;100F&quot;
+// Temperature = Celsius | Fahrenheit
+
+// isC :: Temperature -&gt; Bool
+const isC = compose(equals('C'), slice(-1))
+
+// stringCToF :: Celsius -&gt; Number
+const stringCToF = compose(celsiusToFahrenheit, parseFloat)
+
+// asF :: Temperature -&gt; Fahrenheit
+const asF = when(isC, stringCToF)
+
+// minTemperature :: Temperature -&gt; Temperature -&gt; Temperature
+const minTemperature = minBy(asF)
+
+// maxTemperature :: Temperature -&gt; Temperature -&gt; Temperature
+const maxTemperature = maxBy(asF)
+</code></pre>
+<p>(<a href="https://tinyurl.com/yhb4g6dh">View this v3 minBy/maxBy temperature example in the Ramda
+REPL</a>)</p>
+<p>Cool, right?</p>
+<p>Fear not! We'll cover <a href="https://ramdajs.com/docs/#when"><code>when</code></a> in the
+&quot;Unshakeable Logic&quot; section, <a href="https://ramdajs.com/docs/#when"><code>slice</code></a> in the
+&quot;All About ['L','i','s','t','s']&quot; section, and the pseudo-type signatures in the
+&quot;Core Ramda Ideas&quot; section, but you should know the pseudo-types are optional,
+not exact, and aren't a substitute for tools like <a href="https://jsdoc.app">jsdoc</a>.</p>
+<h2 id="wrapping-up-1"><a class="header" href="#wrapping-up-1">Wrapping Up</a></h2>
+<p>The person who requested these functions is going to be blown away!</p>
+<p>What started as a simple &quot;which temperature is smaller or larger?&quot; question
+turned out to be an exercise in asking good questions about requirements up
+front.</p>
+<p>We also walked through implementing a naïve solution and refactored it to a more
+elegant one by leveraging Ramda and functional programming.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="our-data-the-iss-location"><a class="header" href="#our-data-the-iss-location">Our Data: The ISS' Location</a></h1>
+<blockquote>
+<p>In life, and in the universe, it's always best to keep looking up.</p>
+<p>— <cite>Neil deGrasse Tyson</cite></p>
+</blockquote>
+<p>In this section, we're going to <em>look up</em> object properties in all sorts of
+ways, and what better data could we ask for than data for something that is
+orbiting our world?</p>
+<p>The <a href="https://github.com/jdorfman/Awesome-JSON-Datasets">Awesome JSON
+Datasets</a> repository has
+<a href="https://github.com/jdorfman/Awesome-JSON-Datasets#nasa">a NASA section</a> that
+links to Open Notify's <a href="http://open-notify.org/Open-Notify-API/ISS-Location-Now/">ISS Now</a>
+and <a href="http://open-notify.org/Open-Notify-API/People-In-Space/">How Many People Are In Space Right
+Now?</a> endpoints.</p>
+<p>Here is an example response that shares where on Earth the International Space
+Station is right now:</p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;timestamp&quot;: 1617930803,
+  &quot;iss_position&quot;: {
+    &quot;latitude&quot;: &quot;27.7270&quot;,
+    &quot;longitude&quot;: &quot;133.2581&quot;
+  }
+}
+</code></pre>
+<p>And here is an example of &quot;How Many People Are In Space Right Now?&quot; as of
+2021-04-08:</p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;number&quot;: 7,
+  &quot;people&quot;: [
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Sergey Ryzhikov&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Kate Rubins&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Sergey Kud-Sverchkov&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Mike Hopkins&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Victor Glover&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Shannon Walker&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Soichi Noguchi&quot;
+    }
+  ]
+}
+</code></pre>
+<p>We'll use these simple datasets to show off a number of very helpful Ramda
+functions that deal with looking up object properties.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reading-shallow-object-properties"><a class="header" href="#reading-shallow-object-properties">Reading Shallow Object Properties</a></h1>
+<blockquote>
+<p>Too much gravity argues a shallow mind.</p>
+<p>— <cite>Johann Kaspar Lavater</cite></p>
+</blockquote>
+<p>Let's dive (but not too <em>deep</em>!) into pulling out data at a single level from
+objects!</p>
+<p>Outline:</p>
+<ul>
+<li><a href="reading-shallow-object-properties.html#prop"><code>prop</code></a></li>
+<li><a href="reading-shallow-object-properties.html#propor"><code>propOr</code></a></li>
+<li><a href="reading-shallow-object-properties.html#props"><code>props</code></a></li>
+<li><a href="reading-shallow-object-properties.html#pick"><code>pick</code></a></li>
+<li><a href="reading-shallow-object-properties.html#pluck"><code>pluck</code></a></li>
+</ul>
+<p>In case you missed it, we'll be using <a href="./data-iss-location.html">some ISS and astronaut
+data</a> as our datasets.</p>
+<details><summary>ISS' Current Location</summary>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;timestamp&quot;: 1617930803,
+  &quot;iss_position&quot;: {
+    &quot;latitude&quot;: &quot;27.7270&quot;,
+    &quot;longitude&quot;: &quot;133.2581&quot;
+  }
+}
+</code></pre>
+</details>
+<details><summary>"How Many People Are In Space Right Now?"</summary>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;number&quot;: 7,
+  &quot;people&quot;: [
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Sergey Ryzhikov&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Kate Rubins&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Sergey Kud-Sverchkov&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Mike Hopkins&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Victor Glover&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Shannon Walker&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Soichi Noguchi&quot;
+    }
+  ]
+}
+</code></pre>
+</details>
+<p>We will assume we're storing those objects as variables named <code>iss</code> and
+<code>astros</code>.</p>
+<h2 id="prop"><a class="header" href="#prop"><code>prop</code></a></h2>
+<p>In vanilla JS, we can get the <code>timestamp</code> key off the ISS object like this:</p>
+<pre><code class="language-javascript">iss.timestamp
+
+// or
+
+iss['timestamp']
+</code></pre>
+<p>If that's the only functionality we'll ever need, then that's great! We can stop
+here.</p>
+<p>But what if we want to do more? For example,</p>
+<ol>
+<li>get the <code>timestamp</code></li>
+<li>multiply the timestamp by <code>1000</code> to convert it to milliseconds</li>
+<li>convert it to a <code>Date</code> string</li>
+</ol>
+<p>Our first attempt might be to do this inline:</p>
+<pre><code class="language-javascript">new Date(iss.timestamp * 1000)
+// &quot;Sat Apr 10 2021 15:06:50 GMT+0000 (Coordinated Universal Time)&quot;
+</code></pre>
+<p>Then we realize that we want to do this for many different ISS location objects,
+so we write a function:</p>
+<pre><code class="language-javascript">const issTimeToDate = data =&gt;
+  new Date(data.timestamp * 1000)
+
+issTimeToDate(iss)
+// &quot;Sat Apr 10 2021 15:06:50 GMT+0000 (Coordinated Universal Time)&quot;
+</code></pre>
+<p>It is totally acceptable to stop at this point.</p>
+<p>Maybe we should, but we don't.</p>
+<p>Squinting at that code a little harder, we notice that there are three
+transformations happening:</p>
+<ol>
+<li>from the ISS object, we get the shallow property, <code>timestamp</code></li>
+<li>we multiply that value by <code>1000</code></li>
+<li>we instantiate a new <code>Date</code> with the prior result</li>
+</ol>
+<p>And we also notice that if <code>data</code> is ever <code>undefined</code> or <code>null</code> (or anything
+that isn't an instance of <code>Object</code>), we're going to have a problem!</p>
+<pre><code class="language-javascript">issTimeToDate(null)
+// Uncaught TypeError: can't access property &quot;timestamp&quot;, data is null
+</code></pre>
+<p>As you may recall from our <a href="/converting-temperature-units.html#a-taste-of-composition">&quot;First Taste of
+Composition&quot;</a>, if we
+extract each operation into its own function, there is a way we can &quot;link&quot; these
+fuctions together: <a href="https://ramdajs.com/docs/#compose"><code>compose</code></a>!</p>
+<pre><code class="language-javascript">// Here we create a reusable function that
+// receives an object property, then returns
+// a function that accepts an object, then
+// tries to access that property on the object
+const getProp = property =&gt; data =&gt; {
+  if (data instanceof Object) {
+    return data[property]
+  }
+}
+
+const toMilliseconds = n =&gt; n * 1000
+const toDate         = n =&gt; new Date(n)
+
+const issTimeToDate =
+  compose(toDate, toMilliseconds, getProp('timestamp'))
+
+issTimeToDate(iss)
+// &quot;Sat Apr 10 2021 15:06:50 GMT+0000 (Coordinated Universal Time)&quot;
+</code></pre>
+<p><a href="https://tinyurl.com/yz93mlt6">View this <code>getProp</code> with <code>compose</code> example in the Ramda
+REPL.</a></p>
+<p>While this doesn't handle all edge cases, at least passing <code>null</code> to
+<code>issTimeToDate</code> will give us an <code>Invalid Date</code> message.</p>
+<p>That <code>getProp</code> function looks like it's fairly generic, but could it handle an
+<code>Array</code>? Could we leverage it to figure out who the first astronaut is in the
+<code>astros.people</code> list?</p>
+<pre><code class="language-javascript">compose(getProp(0), getProp('people'))(astros)
+// {
+//   &quot;craft&quot;: &quot;ISS&quot;,
+//   &quot;name&quot;: &quot;Sergey Ryzhikov&quot;
+// }
+
+// which can be refactored and reused
+// with any group of astronauts
+
+const getFirstAstro =
+  compose(getProp(0), getProp('people'))
+
+getFirstAstro(astros)
+
+// and if you really want to get some
+// reusable functions
+
+const getPeople     = getProp('people')
+const getFirst      = getProp(0)
+const getFirstAstro = compose(getFirst, getPeople)
+
+getFirstAstro(astros)
+// {
+//   &quot;craft&quot;: &quot;ISS&quot;,
+//   &quot;name&quot;: &quot;Sergey Ryzhikov&quot;
+// }
+</code></pre>
+<p><a href="https://tinyurl.com/ye4ja9b9">View this <code>getFirstAstro</code> example in the Ramda
+REPL.</a></p>
+<p>It can handle an <code>Array</code>! Why?</p>
+<pre><code class="language-javascript">[] instanceof Object // true
+</code></pre>
+<p>An <code>Array</code> of <code>[5, 10, 15]</code> is an <code>Object</code> instance whose keys are <code>Array</code>
+indices!</p>
+<pre><code class="language-javascript">Array(3) {
+  0: 5,
+  1: 10,
+  2: 15,
+  length: 3
+}
+</code></pre>
+<p>This means <code>getProp(1)([5, 10, 15]) === 10</code>. Neat!</p>
+<p>As you probably guessed by now, Ramda has a
+<a href="https://ramdajs.com/docs/#prop"><code>prop</code></a> function that does what our <code>getProp</code>
+function does (and more), and there are a couple of other functions we could
+pull in to help us. Let's refactor!</p>
+<p>The ISS example:</p>
+<pre><code class="language-javascript">import { compose, multiply, prop } from 'ramda'
+
+const getTimestamp   = prop('timestamp')
+const toMilliseconds = multiply(1000)
+const toDate         = n =&gt; new Date(n)
+
+const issTimeToDate =
+  compose(toDate, toMilliseconds, getTimestamp)
+
+issTimeToDate(iss)
+// &quot;Sat Apr 10 2021 15:06:50 GMT+0000 (Coordinated Universal Time)&quot;
+</code></pre>
+<p><a href="https://tinyurl.com/yzqgh9qs">View this final <code>issTimeToDate</code> example in the Ramda
+REPL.</a></p>
+<p>Finding the first astronaut example:</p>
+<pre><code class="language-javascript">import { compose, head, prop } from 'ramda'
+
+const getPeople     = prop('people')
+const getFirst      = prop(0)
+const getFirstAstro = compose(getFirst, getPeople)
+
+getFirstAstro(astros)
+// {
+//   &quot;craft&quot;: &quot;ISS&quot;,
+//   &quot;name&quot;: &quot;Sergey Ryzhikov&quot;
+// }
+</code></pre>
+<p><a href="https://tinyurl.com/yzzfuo2y">View this final <code>getFirstAstro</code> example in the Ramda
+REPL.</a></p>
+<p>But beware: if the property doesn't exist, or it returns <code>null</code> or <code>undefined</code>,
+then your composed functions will also need to be able to handle those
+scenarios or risk throwing an error.</p>
+<h2 id="propor"><a class="header" href="#propor"><code>propOr</code></a></h2>
+<p>When dealing with code or data that can give us back <code>null</code> or
+<code>undefined</code> values, we often try to be safe. Consider this code trying to access
+the ISS data:</p>
+<pre><code class="language-javascript">iss.iss_position.latitude
+</code></pre>
+<p>That doesn't look so bad, does it? But what happens if the API endpoint changes
+its response on us or is having a bad day? Consider what would happen if the
+endpoint returned an empty object, <code>{}</code>, and that was our <code>iss</code> value:</p>
+<pre><code class="language-javascript">iss.iss_position.latitude
+// Uncaught TypeError: can't access property &quot;latitude&quot;, iss.iss_position is undefined
+</code></pre>
+<p>Okay, so let's make that a little more fault tolerant:</p>
+<pre><code class="language-javascript">(iss.iss_position || {}).latitude
+// undefined
+</code></pre>
+<p>At least we're not throwing an error right now... but what if the response is
+<code>null</code> instead of <code>{}</code>?</p>
+<pre><code class="language-javascript">(iss.iss_position || {}).latitude
+// Uncaught TypeError: null is not a function
+</code></pre>
+<p>Argh! We need to do the same thing for <code>iss.iss_position</code>:</p>
+<pre><code class="language-javascript">((iss || {}).iss_position || {}).latitude
+// undefined
+</code></pre>
+<p>We're now able to handle these edge cases, but imagine two new requirements
+arise:</p>
+<ol>
+<li>we need to have the <code>latitude</code> fall back to a previous <code>latitude</code>
+value if the current one is unattainable</li>
+<li>the value needs to be a floating point <code>number</code> and not a <code>string</code></li>
+</ol>
+<pre><code class="language-javascript">const prevLatitude = '-44.7894'
+parseFloat(((iss || {}).iss_position || {}).latitude || prevLatitude)
+// 27.7270
+</code></pre>
+<p>This is starting to get messy, so we think breaking it into variables will help:</p>
+<pre><code class="language-javascript">const prevLatitude = '-44.7894'
+const issObj = iss || {}
+const issPosition = issObj.iss_position || {}
+const issLatitude = issPosition.latitude || prevLatitude
+parseFloat(issLatitude)
+// 27.7270
+</code></pre>
+<p>Not bad, but there must be a cleaner way to do this!</p>
+<p>The <a href="https://ramdajs.com/docs/#propOr"><code>propOr</code></a> function, whose signature is
+<code>a → String → Object → a</code>, takes the following arguments:</p>
+<ol>
+<li>a fallback value of some type <code>a</code></li>
+<li>a property name as a <code>String</code></li>
+<li>some <code>Object</code> to look the property up on</li>
+</ol>
+<p>and then returns some value which is also of some type <code>a</code>.</p>
+<p>Let's convert our variables to use <code>propOr</code> and walk things back from there:</p>
+<pre><code class="language-javascript">const prevLatitude = '-44.7894'
+// no need for `issObj` anymore
+const issPosition = propOr({}, 'iss_position', iss)
+const issLatitude = propOr(prevLatitude, 'latitude', issPosition)
+parseFloat(issLatitude)
+// 27.7270
+</code></pre>
+<p>While we removed the <code>issObj</code> line of code, it looks like we have almost the
+same amount of code. The difference, though, is what we can now do with this.</p>
+<p>Do you see how these lines all basically use the return value from the line
+above? We've got a composition on our hands again!</p>
+<pre><code class="language-javascript">const prevLatitude = '-44.7894'
+
+const latitudeOrPrevLatitude =
+  compose(
+    parseFloat,
+    propOr(prevLatitude, 'latitude'),
+    propOr({}, 'iss_position')
+  )
+
+latitudeOrPrevLatitude(iss)       // 27.727
+latitudeOrPrevLatitude({})        // -44.7894
+latitudeOrPrevLatitude(null)      // -44.7894
+latitudeOrPrevLatitude(undefined) // -44.7894
+</code></pre>
+<p><a href="https://tinyurl.com/yf48n6lv">View this <code>latitudeOrPrevLatitude</code> example in the Ramda
+REPL.</a></p>
+<p>Let's quickly walk through what passing <code>undefined</code> would have each line result
+in.</p>
+<pre><code class="language-javascript">const latitudeOrPrevLatitude =
+  compose(
+    parseFloat,                       // 3. converts string to -44.7894
+    propOr(prevLatitude, 'latitude'), // 2. falls back to &quot;-44.7894&quot;
+    propOr({}, 'iss_position')        // 1. falls back to `{}`
+  )
+</code></pre>
+<p>If you have good, generic fallbacks, you can then take it a step further and
+simplify:</p>
+<pre><code class="language-javascript">const safeIssPosition = propOr({}, 'iss_position')
+const safeLatitude = propOr(prevLatitude, 'latitude')
+
+const latitudeOrPrevLatitude =
+  compose(parseFloat, safeLatitude, safeIssPosition)
+</code></pre>
+<h2 id="props"><a class="header" href="#props"><code>props</code></a></h2>
+<p>There may be times where we'd like to apply <code>prop</code>'s functionality to more than
+a single prop; naturally, Ramda calls this
+<a href="https://ramdajs.com/docs/#props"><code>props</code></a>.</p>
+<p>Our <code>iss</code> object has the following keys:</p>
+<ul>
+<li><code>message</code></li>
+<li><code>timestamp</code></li>
+<li><code>iss_position</code></li>
+</ul>
+<p>We've been told that we need to report on the success or failure of the API
+request, and we need the timestamp of when it happened in a format like
+<code>&quot;success @ 1617930803&quot;</code>. In this case, we don't need the position of the ISS,
+so we can ignore it.</p>
+<p>Without getting fancy, here's our first attempt:</p>
+<pre><code class="language-javascript">// responseToStatus :: IssResponse -&gt; String
+const responseToStatus = ({ message, timestamp }) =&gt;
+  `${message} @ ${timestamp}`
+</code></pre>
+<p>This is great, and for this simple example, we could probably stop here;
+however, let's see if we can take this a few steps further.</p>
+<p>Here's how we can use <code>props</code> to get the values of only <code>message</code> and
+<code>timestamp</code>:</p>
+<pre><code class="language-javascript">props(['message', 'timestamp'], iss)
+// [&quot;success&quot;, 1617930803]
+</code></pre>
+<p>We can then join these together and accomplish our goal with <code>.join(' @ ')</code></p>
+<pre><code class="language-javascript">props(['message', 'timestamp'], iss).join(' @ ')
+// &quot;success @ 1617930803&quot;
+</code></pre>
+<p>This <code>.join()</code> dot notation might be starting to feel a little funny after we've
+been exposed to &quot;linking&quot; functions together with <code>compose</code>, so let's use
+Ramda's <a href="https://ramdajs.com/docs/#join"><code>join</code></a> function to clean this up:</p>
+<pre><code class="language-javascript">const responseToStatus =
+  compose(join(' @ '), props(['message', 'timestamp']))
+
+responseToStatus(iss) // &quot;success @ 1617930803&quot;
+</code></pre>
+<p><a href="https://tinyurl.com/yggfjkeu">View this <code>responseToStatus</code> example in the Ramda
+REPL.</a></p>
+<p>While this use case is admittedly small, there are times where we'll want to
+select only a few values from an object and have them in array format, and
+<code>props</code> is the right tool for helping us do that.</p>
+<h2 id="pick"><a class="header" href="#pick"><code>pick</code></a></h2>
+<p>Here's a new scenario for us to work with: our colleague needs an array of all
+the astronauts' names, but each array item must be an object with a key of
+<code>name</code> only.</p>
+<p>Think we're up for the task? You bet!</p>
+<pre><code class="language-javascript">astros.people.map(({ name }) =&gt; ({ name }))
+// [
+//  { name: &quot;Sergey Ryzhikov&quot; },
+//  { name: &quot;Kate Rubins&quot; },
+//  { name&quot;: &quot;Sergey Kud-Sverchkov&quot; },
+//  { name: &quot;Mike Hopkins&quot; },
+//  { name: &quot;Victor Glover&quot; },
+//  { name: &quot;Shannon Walker&quot; },
+//  { name: &quot;Soichi Noguchi&quot; }
+// ]
+</code></pre>
+<p>This seems like a generic enough task that Ramda must surely have a helper
+function!</p>
+<p>For the times we want to select a subset of keys and values from an object, we
+can use <a href="https://ramdajs.com/docs/#pick"><code>pick</code></a>.</p>
+<p>Similar to <code>props</code>, <code>pick</code> takes an array of keys and selects each key and its
+value from an object. Instead of returning an array of values, however, <code>pick</code>
+returns an object containing the keys and values you asked for.</p>
+<p>This is great, for example, for whittling down an object in a data pipeline to
+only the properties that you need. Sending too many properties to a function can
+sometimes lead to confusion and even bugs!</p>
+<p>Let's take our original implementation and use <code>pick</code>:</p>
+<pre><code class="language-javascript">astros.people.map(pick(['name']))
+</code></pre>
+<p><a href="https://tinyurl.com/ydwn3vaz">View this initial <code>pick</code> example in the Ramda
+REPL.</a></p>
+<p>Nice! But we're also doing the work of accessing the <code>people</code> property and
+calling <code>map</code> – both generic operations – so let's see if we can use Ramda's
+<code>propOr</code> and <code>map</code> helpers to <code>compose</code> something together.</p>
+<pre><code class="language-javascript">const getAstroNames =
+  compose(map(pick(['name'])), propOr([], 'people'))
+
+getAstroNames(astros)
+</code></pre>
+<p><a href="https://tinyurl.com/yzay2ssb">View this <code>getAstroNames</code> composition in the Ramda
+REPL.</a></p>
+<p>While we're here, let's extract the reusable functions outo of this for
+potential future use:</p>
+<pre><code class="language-javascript">const pickName      = pick(['name'])
+const pickNames     = map(pickName)
+const getPeople     = propOr([], 'people')
+const getAstroNames = compose(pickNames, getPeople)
+
+getAstroNames(astros)
+</code></pre>
+<p><a href="https://tinyurl.com/yzqng9fn">View this refactored <code>getAstroNames</code> group of functions in the Ramda
+REPL.</a></p>
+<h2 id="pluck"><a class="header" href="#pluck"><code>pluck</code></a></h2>
+<p>Someone from marketing is trying to update our organization's emoji game, and
+they want us to display the astronauts' names separated by rocket ships (🚀).
+Here's what they want:</p>
+<blockquote>
+<p>&quot;Sergey Ryzhikov 🚀 Kate Rubins 🚀 Sergey Kud-Sverchkov 🚀 Mike Hopkins 🚀 Victor Glover 🚀 Shannon Walker 🚀 Soichi Noguchi&quot;</p>
+</blockquote>
+<p>Without thinking too hard about it, we come up with a simple solution:</p>
+<pre><code class="language-javascript">astros.people.map(x =&gt; x.name).join(' 🚀 ')
+// &quot;Sergey Ryzhikov 🚀 Kate Rubins 🚀 ...&quot;
+</code></pre>
+<p>We've been introduced to <a href="https://ramdajs.com/docs/#prop"><code>prop</code></a>, so let's
+update that <code>map</code>:</p>
+<pre><code class="language-javascript">astros.people.map(prop('name')).join(' 🚀 ')
+</code></pre>
+<p>As we hop on this refactor train, we wonder:</p>
+<p><em>&quot;What if we want to <code>map</code> a property other than <code>name</code>, and what if we want to
+call this <code>map(prop('whatever'))</code> on any list of objects?&quot;</em></p>
+<p>Thinking in generic terms, we establish that our list and our object key could
+be variable, so we make them variables in our function we'll call <code>pluckKey</code>:</p>
+<pre><code class="language-javascript">const pluckKey = (key, xs) =&gt; xs.map(x =&gt; x[key])
+
+// or with some nice ramda functions
+
+const pluckKey = (key, xs) =&gt; map(prop(key), xs)
+
+// and with some manual function currying
+// (we'll cover this in depth in another chapter)
+
+const pluckKey = key =&gt; xs =&gt; map(prop(key), xs)
+
+// example
+pluckKey('name')(astros.people)
+</code></pre>
+<p>With that last <code>pluckKey</code> function definition, we can link together a few
+functions to get the same result:</p>
+<pre><code class="language-javascript">const pluckKey = key =&gt; xs =&gt; map(prop(key), xs)
+
+const astrosPeopleWithRockets =
+  compose(join(' 🚀 '), pluckKey('name'), propOr([], 'people'))
+
+astrosPeopleWithRockets(astros)
+</code></pre>
+<p>Like before, we can pull those composed functions into named variables:</p>
+<pre><code class="language-javascript">const joinRocket = join(' 🚀 ')
+const pluckName  = pluckKey('name')
+const getPeople  = propOr([], 'people')
+
+const astrosPeopleWithRockets =
+  compose(joinRocket, pluckName, getPeople)
+</code></pre>
+<p>This is looking pretty clean!</p>
+<p>Naturally, this <code>pluckKey</code> function we so cleverly made has already been
+included in Ramda, and it's called <code>pluck</code>. It is equivalent to <code>map(prop(key), list)</code>, just like our function definition, so we can delete our function and
+replace <code>pluckKey('name')</code> with Ramda's <code>pluck</code>. Here it is in its entirety:</p>
+<pre><code class="language-javascript">const joinRocket = join(' 🚀 ')
+const pluckName  = pluck('name')
+const getPeople  = propOr([], 'people')
+
+const astrosPeopleWithRockets =
+  compose(joinRocket, pluckName, getPeople)
+
+astrosPeopleWithRockets(astros)
+// &quot;Sergey Ryzhikov 🚀 Kate Rubins 🚀 ...&quot;
+</code></pre>
+<p><a href="https://tinyurl.com/ygjjq5gt">View the <code>pluck</code> and <code>astrosPeopleWithRockets</code> set of functions in the Ramda
+REPL.</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="testing-shallow-object-properties"><a class="header" href="#testing-shallow-object-properties">Testing Shallow Object Properties</a></h1>
+<blockquote>
+<p>Our destinations are Booleans – we reach them or we don’t – but our journeys
+are spectrums, because there are so many paths we can take to our destination
+that make getting there that much better.</p>
+<p>— <cite>A.J. Darkholme</cite></p>
+</blockquote>
+<p>In this chapter, we'll make logical decisions in our code (<code>if</code>/<code>else</code>) by
+testing our datasets' properties with a few boolean-returning helper functions.</p>
+<p>Outline:</p>
+<ul>
+<li><a href="testing-shallow-object-properties.html#has"><code>has</code></a></li>
+<li><a href="testing-shallow-object-properties.html#propeq"><code>propEq</code></a></li>
+<li><a href="testing-shallow-object-properties.html#propis"><code>propIs</code></a></li>
+<li><a href="testing-shallow-object-properties.html#propsatisfies"><code>propSatisfies</code></a></li>
+</ul>
+<p>In case you missed it, we'll be using <a href="./data-iss-location.html">some ISS and astronaut
+data</a> as our datasets.</p>
+<details><summary>ISS' Current Location</summary>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;timestamp&quot;: 1617930803,
+  &quot;iss_position&quot;: {
+    &quot;latitude&quot;: &quot;27.7270&quot;,
+    &quot;longitude&quot;: &quot;133.2581&quot;
+  }
+}
+</code></pre>
+</details>
+<details><summary>"How Many People Are In Space Right Now?"</summary>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;number&quot;: 7,
+  &quot;people&quot;: [
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Sergey Ryzhikov&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Kate Rubins&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Sergey Kud-Sverchkov&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Mike Hopkins&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Victor Glover&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Shannon Walker&quot;
+    },
+    {
+      &quot;craft&quot;: &quot;ISS&quot;,
+      &quot;name&quot;: &quot;Soichi Noguchi&quot;
+    }
+  ]
+}
+</code></pre>
+</details>
+<p>We will assume we're storing those objects as variables named <code>iss</code> and
+<code>astros</code>.</p>
+<h2 id="has"><a class="header" href="#has"><code>has</code></a></h2>
+<p>We're working one morning, eating scones and refactoring some code, when a
+fellow developer, who lives in Iceland and started work a few hours before we
+did today, pings us with the following message:</p>
+<blockquote>
+<p>Hjálp!</p>
+<p>We shipped some astronaut code this morning that puts a method, <code>toString</code>, on
+some <code>astros</code> objects, and it joins all the astronauts' names together with
+rocket ships like this:</p>
+<p>&quot;Sergey Ryzhikov 🚀 Kate Rubins 🚀 ...&quot;</p>
+<p>Pretty cool, right?</p>
+<p>We only want to use this method on the <code>astros</code> objects where it's
+defined, but we forgot that <code>toString</code> is already a defined method defined on
+an <code>Object</code> instance, so some <code>astros</code> objects are calling that method and
+returning <code>&quot;[object Object]&quot;</code> when we want them to do something else!</p>
+<p>Can you help us? Takk!</p>
+</blockquote>
+<p>Our Icelandic coworker then sends us the code:</p>
+<pre><code class="language-javascript">const astrosWithToString = {
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;number&quot;: 7,
+  &quot;people&quot;: [/* omitted for brevity */],
+  toString() {
+    return astrosPeopleWithRockets(this)
+  }
+}
+
+const astrosWithoutToString = {
+  &quot;message&quot;: &quot;success&quot;,
+  &quot;number&quot;: 7,
+  &quot;people&quot;: [/* omitted for brevity */],
+}
+
+const astrosToString = data =&gt; {
+  if ('toString' in data) { // THIS IS WHERE THE BUG HAPPENS!
+    return data.toString()
+  }
+
+  return `There are ${data.number} astronauts`
+}
+
+// astrosToString(astrosWithToString) // this works
+astrosToString(astrosWithoutToString) // this doesn't!
+</code></pre>
+<p><a href="https://tinyurl.com/yzqnul84">View this buggy <code>astrosToString</code> code in the Ramda
+REPL.</a></p>
+<p><em>The <code>astrosPeopleWithRockets</code> code comes from the prior lesson on <a href="./reading-shallow-object-properties.html">&quot;Reading
+Shallow Object Properties&quot;</a>, so check
+that out to see how we arrived at the nifty little helper functions you'll find
+in the REPL linked above.</em></p>
+<p>Aha! We see where the misunderstanding happened. The <code>'toString' in data</code> code
+is checking that there is a property defined on the object called <code>toString</code> —
+whether or not it inherited that property! All object instances have a
+<code>.toString()</code> method that they inherit, so it'll always have <code>toString</code> defined
+no matter what. What we want is to check if <code>toString</code> was explicitly defined by
+us on the <code>astros</code> object.</p>
+<p>We first confirm our assumption and fix the bug by making this change:</p>
+<pre><code class="language-javascript">// before
+if ('toString' in data) {/*...*/}
+
+// after
+if (Object.prototype.hasOwnProperty.call(data, 'toString')) {/*...*/}
+</code></pre>
+<p>The <code>hasOwnProperty</code> exists on all objects, but it could be overwritten like
+<code>toString</code> was, so we use an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty"><em>external</em> <code>hasOwnProperty</code></a>
+to do our check.</p>
+<p>This check seems rather lengthy, so let's convert that to a function named
+<code>hasProp</code>:</p>
+<pre><code class="language-javascript">const hasProp = (prop, obj) =&gt;
+  Object.prototype.hasOwnProperty.call(obj, prop)
+</code></pre>
+<p>Surprise! Ramda already has a helper for this,
+<a href="https://ramdajs.com/docs/#has"><code>has</code></a>, so we can replace our <code>hasProp</code> with
+<code>has</code>.</p>
+<p>We then write a message back to our Icelandic colleague:</p>
+<blockquote>
+<p>Hæ!</p>
+<p>We found the issue, and it's a matter of testing whether <em>we</em> defined the
+object property or not. Here you go!</p>
+<p>Eigðu góðan dag!</p>
+</blockquote>
+<pre><code class="language-javascript">import { has } from 'ramda'
+
+// ...
+
+const astrosToString = data =&gt; {
+  if (has('toString', data)) {
+    return data.toString()
+  }
+
+  return `There are ${data.number} astronauts`
+}
+</code></pre>
+<p><a href="https://tinyurl.com/ygl3tr4u">View the updated <code>astrosToString</code> and <code>hasProp</code> functions in the Ramda
+REPL.</a></p>
+<h2 id="propeq"><a class="header" href="#propeq"><code>propEq</code></a></h2>
+<p>One fine afternoon, our error monitoring service lets us know that our code is
+throwing errors when trying to access the latitude property from the ISS'
+location API response.</p>
+<p>We quickly realize that if there is a problem with the API, we won't get the
+data back, so <code>iss.iss_position.latitude</code> won't work, for <code>iss_position</code> is
+<code>undefined</code> in the response:</p>
+<pre><code class="language-json">{
+  &quot;message&quot;: &quot;error&quot;,
+  &quot;timestamp&quot;: 1617930803
+}
+</code></pre>
+<p>There are many ways to handle this error safely, but we're going to address it
+by simply checking if the <code>message</code> property is <code>&quot;success&quot;</code> or not:</p>
+<pre><code class="language-javascript">if (iss.message === 'success') {
+  // carry on...
+}
+</code></pre>
+<p>Great! Call it a day!</p>
+<p>...But our solution nags at us. We are accessing a property's value and equating
+it with an expected value. What if we made this a function?</p>
+<pre><code class="language-javascript">const isMessageSuccess = data =&gt;
+  (data || {}).message === 'success' // or `data?.message === 'success'`
+</code></pre>
+<p><em>Note: the Ramda REPL doesn't currently support optional chaining like
+<code>data?.message === 'success'</code>.</em></p>
+<p>Not bad, but we've simply moved the operations to a single place. What if we
+wrote a function that looked up any property on an object and then compared it
+with another value?</p>
+<pre><code class="language-javascript">const doesPropEq = (key, val, data) =&gt;
+  (data || {})[key] === val // or `data?.[key] === val`
+</code></pre>
+<p>Nice! Let's try it out:</p>
+<pre><code class="language-javascript">const isMessageSuccess = data =&gt;
+  doesPropEq('message', 'success', data)
+
+isMessageSuccess(iss) // true
+</code></pre>
+<p><a href="https://tinyurl.com/yckj6vnd">View <code>doesPropEq</code> and <code>isMessageSuccess</code> in the ramda
+REPL</a>.</p>
+<p>Now that we understand our need for <code>doesPropEq</code>, we can swap that out with
+ramda's <a href="https://ramdajs.com/docs/#propEq"><code>propEq</code></a>.</p>
+<pre><code class="language-javascript">import { propEq } from 'ramda'
+
+// ...
+
+const isMessageSuccess = data =&gt;
+  propEq('message', 'success', data)
+
+isMessageSuccess(iss) // true
+</code></pre>
+<p>Stopping the <code>isMessageSuccess</code> implementation work at this point is totally
+acceptable, but we can take it a little further.</p>
+<p>Since all functions in ramda are auto-curried, that means that we can refactor
+<code>isMessageSuccess</code> like this:</p>
+<pre><code class="language-javascript">// Step 0
+const isMessageSuccess = data =&gt;
+  propEq('message', 'success', data)
+
+// Step 1
+const isMessageSuccess = data =&gt;
+  propEq('message', 'success')(data)
+
+// Step 2
+const isMessageSuccess =
+  propEq('message', 'success')
+
+// Step 3
+// isMessageSuccess :: ISSData -&gt; Bool
+const isMessageSuccess =
+  propEq('message', 'success')
+</code></pre>
+<ol>
+<li>
+<p>In Step 1, we demonstrate that <code>propEq</code> will accept our last argument as a
+separate function call (the result of calling <code>propEq</code> the first time will
+wait until it has all the arguments).</p>
+</li>
+<li>
+<p>In Step 2, we realize that accepting an argument and passing it on again is
+redundant, and so we can remove the need for a function closure and instead
+let the result of calling <code>propEq</code> with the first two values be what is bound
+to <code>isMessageSuccess</code>.</p>
+</li>
+<li>
+<p>In Step 3. we acknowledge that implicitly forwarding a function argument
+comes at the cost of remembering, &quot;What am I passing in, again?&quot; If you don't
+have a type-checker , you can provide some pseudo-types (these ones are in a
+Haskell style) where the data is defined in order to explain what <code>ISSData</code>
+is:</p>
+<pre><code class="language-javascript">// ISSData = { message      :: Message
+//           , timestamp    :: UnixTimestamp
+//           , iss_position :: LatLong
+//           }
+//
+// Message = 'success' | 'error'
+//
+// UnixTimeStamp = Number
+//
+// LatLong = { latitude  :: String
+//           , longitude :: String
+//           }
+</code></pre>
+<p>The whole point of Step 3 is simply to identify what the expected input and
+output types are so that someone else (or you in 3 months) can easily
+understand a terse function at a glance.</p>
+</li>
+</ol>
+<p><a href="https://tinyurl.com/5n8p6k7f">Check out this <code>propEq</code> usage plus these pseudo-types in the ramda
+REPL.</a></p>
+<h2 id="propis"><a class="header" href="#propis"><code>propIs</code></a></h2>
+<p>TODO</p>
+<h2 id="propsatisfies"><a class="header" href="#propsatisfies"><code>propSatisfies</code></a></h2>
+<p>TODO</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introducing-fp-at-work"><a class="header" href="#introducing-fp-at-work">Introducing FP at Work</a></h1>
+<p>If your team isn't on the functional programming train already, it can be
+difficult to start using tools that introduce different paradigms like <a href="https://en.wikipedia.org/wiki/Function_composition_(computer_science)">function
+composition</a>,
+<a href="https://en.wikipedia.org/wiki/Algebraic_data_type">algebraic data types</a>, and
+the heaps of <a href="https://github.com/hemanth/functional-programming-jargon">function programming
+jargon</a>.</p>
+<p>One way of introducting functional programming concepts at your organization is
+by starting small: introduce a few functions and concepts at a time and keep
+things as familiar as possible.</p>
+<p>For example, instead of writing code like</p>
+<pre><code class="language-js">user.name || 'N/A'
+</code></pre>
+<p>you could include <code>propOr</code> like</p>
+<pre><code class="language-js">import { propOr } from 'ramda'
+
+propOr('N/A', 'name', user)
+</code></pre>
+<p>And then when you're mapping over a list of users to retrieve their names, you
+might think you could do the same thing,</p>
+<pre><code class="language-js">users.map(x =&gt; x.name)
+
+// changes to...
+
+users.map(propOr('N/A', 'user'))
+</code></pre>
+<p>but then you realize that you might have a reusable function on your hands!</p>
+<pre><code class="language-js">import { propOr } from 'ramda'
+
+const nameOrDefault = propOr('N/A', 'name')
+
+nameOrDefault(user)       // 'Fred'
+users.map(nameOrDefault) // ['Fred', 'Wilma', 'N/A']
+</code></pre>
+<p>Taking this even further, what if we have two lists of users, <code>users</code> and
+<code>otherUsers</code>? Let's pull in <code>map</code>, as well!</p>
+<pre><code class="language-js">import { map } from 'ramda'
+
+map(nameOrDefault, users)      // ['Fred', 'Wilma', 'N/A']
+map(nameOrDefault, otherUsers) // ['Wonder Woman', 'N/A', 'Batman']
+
+// which can then be refactored to
+
+const mapNameOrDefault = map(nameOrDefault)
+mapNameOrDefault(users)      // ['Fred', 'Wilma', 'N/A']
+mapNameOrDefault(otherUsers) // ['Wonder Woman', 'N/A', 'Batman']
+</code></pre>
+<p>Before you know it, you're finding quick and convincingly effective ways to
+bring Ramda (or whatever tool) into your day-to-day work.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>

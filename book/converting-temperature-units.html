@@ -1,0 +1,493 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js navy">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Converting Temperature Units (add, multiply, divide) - Ramda Guide</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A guided, practical approach to learning ramda">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">Ramda Guide</a></li><li class="chapter-item expanded affix "><li class="part-title">Preface</li><li class="chapter-item expanded "><a href="how-to-use-this-guide.html"><strong aria-hidden="true">1.</strong> How to Use This Guide</a></li><li class="chapter-item expanded "><a href="what-is-ramda.html"><strong aria-hidden="true">2.</strong> What is Ramda?</a></li><li class="chapter-item expanded "><a href="prerequisites.html"><strong aria-hidden="true">3.</strong> Suggested Prerequisite Knowledge</a></li><li class="chapter-item expanded "><a href="related-projects.html"><strong aria-hidden="true">4.</strong> Related Projects</a></li><li class="chapter-item expanded affix "><li class="part-title">A Tour of Ramda</li><li class="chapter-item expanded "><a href="including-ramda.html"><strong aria-hidden="true">5.</strong> Including Ramda In A Project</a></li><li class="chapter-item expanded "><a href="documentation.html"><strong aria-hidden="true">6.</strong> Documentation, Source Code, REPL, &amp; Cookbook</a></li><li class="chapter-item expanded "><a href="community-resources.html"><strong aria-hidden="true">7.</strong> Community Resources</a></li><li class="chapter-item expanded "><a href="where-were-going.html"><strong aria-hidden="true">8.</strong> Where We're Going</a></li><li class="chapter-item expanded affix "><li class="part-title">Weathering Our First Ramda Experience</li><li class="chapter-item expanded "><a href="converting-temperature-units.html" class="active"><strong aria-hidden="true">9.</strong> Converting Temperature Units (add, multiply, divide)</a></li><li class="chapter-item expanded "><a href="comparing-two-temperatures.html"><strong aria-hidden="true">10.</strong> Comparing Two Temperatures (min, minBy, max, maxBy)</a></li><li class="chapter-item expanded affix "><li class="part-title">Keep Looking Up (Object Properties)</li><li class="chapter-item expanded "><a href="data-iss-location.html"><strong aria-hidden="true">11.</strong> Our Data: The ISS' Location</a></li><li class="chapter-item expanded "><a href="reading-shallow-object-properties.html"><strong aria-hidden="true">12.</strong> Reading Shallow Object Properties (prop, propOr, props, pick, pluck)</a></li><li class="chapter-item expanded "><a href="testing-shallow-object-properties.html"><strong aria-hidden="true">13.</strong> Testing Shallow Object Properties (has, propEq, propIs, propSatisfies)</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">14.</strong> Reading Deeply Nested Object Properties (path, pathOr, paths)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">15.</strong> Testing Deeply Nested Object Properties (hasPath, pathEq, pathSatisfies)</div></li><li class="chapter-item expanded affix "><li class="part-title">Unshakeable Logic</li><li class="chapter-item expanded "><div><strong aria-hidden="true">16.</strong> Our Data: Earthquakes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">17.</strong> Controlling Flow (ifElse, when, unless)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">18.</strong> Functions Instead of &amp;&amp; and || (and, or)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">19.</strong> Higher-Order Conditionals (both, either)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">20.</strong> &quot;I don't not not like your faults...&quot; (not)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">21.</strong> Flipping a Functions' &quot;Truthyness&quot; or &quot;Falsyness&quot; (complement)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">22.</strong> Logic in Batches (all, allPass, anyPass)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">23.</strong> The Functional Version of a switch (cond)</div></li><li class="chapter-item expanded affix "><li class="part-title">Core Ramda Ideas</li><li class="chapter-item expanded "><div><strong aria-hidden="true">24.</strong> &quot;Same Input → Same Output&quot;</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">25.</strong> Functions' Argument Order</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.</strong> Provide Arguments When You Feel Like It (curry)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">27.</strong> Composing Functional Pipelines of Data (o, compose, composeWith, tap)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">28.</strong> Grokking the Ramda Documentation's Type Signatures</div></li><li class="chapter-item expanded affix "><li class="part-title">Updating Objects: Speaking the Lingua Ramda</li><li class="chapter-item expanded "><div><strong aria-hidden="true">29.</strong> Our Data: Languages Object</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">30.</strong> Setting Key/Value Pairs On An Object (assoc, assocPath)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">31.</strong> Omitting Keys From an Object (omit, dissoc, dissocPath)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">32.</strong> Merging Objects (mergeRight, mergeDeepRight, mergeLeft, mergeWith)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">33.</strong> Updating Values If They Exist (evolve)</div></li><li class="chapter-item expanded affix "><li class="part-title">Strings: Tying Up Loose Ends</li><li class="chapter-item expanded "><div><strong aria-hidden="true">34.</strong> Our Data: Footwear</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">35.</strong> Uppercasing &amp; Lowercasing Text (toUpper, toLower)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">36.</strong> Scanning Text for Matches (match)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">37.</strong> Sanitizing Hashtag Text (replace, trim, test, split)</div></li><li class="chapter-item expanded affix "><li class="part-title">All About ['L','i','s','t','s']</li><li class="chapter-item expanded "><div><strong aria-hidden="true">38.</strong> Our data: Nobel Prizes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">39.</strong> What is a List?</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">40.</strong> Taking &amp; Dropping Items (take, takeLast, takeWhile, drop, dropLast, dropWhile)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">41.</strong> First &amp; Last Item Groupings (head, tail, init, last)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">42.</strong> Searching for Items (filter, reject, find, indexOf, findIndex)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">43.</strong> Calling a Function On Every Item (map, forEach)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">44.</strong> Inserting, Removing, &amp; Updating Items (insert, insertAll, remove, without, update)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">45.</strong> Reversing, Reordering, &amp; Sorting Items (reverse, move, sort, sortBy)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">46.</strong> Splitting Lists (slice, splitAt, splitEvery, splitWhen)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">47.</strong> Reducing a List to a Single Value (reduce, reduceWhile, mapAccum)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">48.</strong> Getting Unique Items (uniq, uniqBy, uniqWith)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">49.</strong> Testing Lists With Conditions (includes, any, all, none, startsWith, endsWith)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">50.</strong> Combining Lists (concat, union, union, intersection, difference, symmetricDifference, symmetricDifferenceWith)</div></li><li class="chapter-item expanded affix "><li class="part-title">Through the Lens</li><li class="chapter-item expanded "><div><strong aria-hidden="true">51.</strong> Our Data: Observatories</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">52.</strong> What is a Lens? (lens, lensIndex, lensProp, lensPath)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">53.</strong> Safe Getters for Our Data (view)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">54.</strong> Safe Setters for Our Data (set, over)</div></li><li class="chapter-item expanded affix "><li class="part-title">Misc</li><li class="chapter-item expanded "><div><strong aria-hidden="true">55.</strong> Converting an Existing API Into a Functional One (invoker)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">56.</strong> Understanding Ramda Further by Recreating Parts of It</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">57.</strong> Using Ramda With TypeScript</div></li><li class="chapter-item expanded affix "><li class="part-title">Opinionated Best Practices</li><li class="chapter-item expanded "><div><strong aria-hidden="true">58.</strong> The Rule of 3</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">59.</strong> Type, Param, or Pseudo-Type Declarations</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">60.</strong> Writing Declarative Code That Tells a Story</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">61.</strong> You Might Not Need Ramda</div></li><li class="chapter-item expanded affix "><li class="part-title">Your Next Steps</li><li class="chapter-item expanded "><a href="introducing-fp-at-work.html"><strong aria-hidden="true">62.</strong> Introducing FP at Work</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">63.</strong> How to Guide Others</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">64.</strong> The Larger FP World</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ramda Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="converting-temperature-units"><a class="header" href="#converting-temperature-units">Converting Temperature Units</a></h1>
+<blockquote>
+<p>Life is far too important a thing ever to talk seriously about.</p>
+<p>— <cite>Oscar Wilde, Lady Windermere's Fan</cite></p>
+</blockquote>
+<p>To kick off our Ramda journey, we're going to do something ridiculous: transform
+very clear temperature conversion functions that use JS math operators to use
+only functions for the operations!</p>
+<p>Sometimes, when we forego the obvious and choose to approach problems in
+different ways, interesting patterns may emerge that can expand our
+understanding.</p>
+<p>Let's get introduced to some perfectly fine conversion functions — one of which
+we are going to rip apart and make anew.</p>
+<pre><code class="language-javascript">function celsiusToFahrenheit(celsius) {
+  return celsius * (9 / 5) + 32
+}
+
+function fahrenheitToCelsius(fahrenheit) {
+  return 5 / 9 * (fahrenheit - 32)
+}
+
+function easyCelsiusToFahrenheit(celsius) {
+  return celsius * 2 + 30
+}
+
+function easyFahrenheitToCelsius(fahrenheit) {
+  return (fahrenheit - 30) / 2
+}
+</code></pre>
+<p>While the <code>celsiusToFahrenheit</code> and <code>fahrenheitToCelsius</code> functions are exact
+formulas, they're not practical for everyday use. I've lived in the UK and New
+Zealand, and since I'm married to a Kiwi, I need to easily convert between
+Celsius and Fahrenheit. While not exact, the <code>easyCelsiusToFahrenheit</code> and
+<code>easyFahrenheitToCelsius</code> formulas are easy to do in one's head and are close
+enough to the real values.</p>
+<p>We are going to single out <code>celsiusToFahrenheit</code> for this extended example.</p>
+<pre><code class="language-javascript">function celsiusToFahrenheit(celsius) {
+  return celsius * (9 / 5) + 32
+}
+</code></pre>
+<h2 id="enter-the-ramda"><a class="header" href="#enter-the-ramda">Enter the Ramda</a></h2>
+<p>In it, we:</p>
+<ol>
+<li>multiply the Celsius value by the result of <code>9 / 5</code></li>
+<li>add <code>32</code> to the result of the prior step(s)</li>
+</ol>
+<p>Before we go further, let's first convert it to an arrow function expression,
+for doing so will open some interesting doors.</p>
+<pre><code class="language-javascript">const celsiusToFahrenheit = celsius =&gt;
+  celsius * (9 / 5) + 32
+</code></pre>
+<p>Next, let's get Ramda pulled into the picture.</p>
+<p>Ramda has a number of math functions, namely
+<a href="https://ramdajs.com/docs/#multiply"><code>multiply</code></a>,
+<a href="https://ramdajs.com/docs/#divide"><code>divide</code></a>, and
+<a href="https://ramdajs.com/docs/#add"><code>add</code></a> that we can leverage in place of <code>*</code>,
+<code>/</code>, and <code>+</code>. Each function takes two arguments, and each function will wait to
+evaluate itself until you provide all the arguments. Check this out:</p>
+<pre><code class="language-javascript">add(1, 2)     // 3
+add(1)(2)     // 3
+add()(1, 2)   // 3
+add()(1)()(2) // 3
+</code></pre>
+<p>This is indeed weird, and we'll cover this fully in the &quot;Core Ramda Ideas&quot;
+section.</p>
+<p>For now, let's import those and use them!</p>
+<pre><code class="language-javascript">import { add, divide, multiply } from 'ramda'
+
+const celsiusToFahrenheit = celsius =&gt;
+  add(multiply(celsius, divide(9, 5)), 32)
+
+celsiusToFahrenheit(100) // 212
+</code></pre>
+<p>Woah, woah, woah! What's going on here?!</p>
+<p>It looks like we're...</p>
+<ol>
+<li>adding <code>32</code> to the result of</li>
+<li>multiplying the Celsius value by the result of dividing <code>9</code> by <code>5</code></li>
+</ol>
+<p>That's the same process we did before, but it's merely explained differently!</p>
+<p>With addition and multiplication, there's something called the
+<a href="https://www.mathsisfun.com/definitions/commutative-law.html">commutative law</a>
+that states we can provide the arguments to an addition and multiplication
+operation in any order. Let's leverage this law in order to move our variable,
+<code>celsius</code>, further toward the edge of our function to judge how it feels.</p>
+<pre><code class="language-javascript">// this is what we're starting with
+add(multiply(celsius, divide(9, 5)), 32)
+
+// first, swap `celsius` and `divide(9/5)`
+add(multiply(divide(9, 5), celsius), 32)
+//               ^------------^
+
+// next, swap the multiplication and `32`
+add(32, multiply(divide(9, 5), celsius))
+//  ^------^
+
+// the result
+const celsiusToFahrenheit = celsius =&gt;
+  add(32, multiply(divide(9, 5), celsius))
+</code></pre>
+<p>Interesting! Do you see it yet? The forwarding of a result from function to
+function? Let's look at this another way:</p>
+<pre><code class="language-javascript">const celsiusToFahrenheit = celsius =&gt; {
+  const multiplied = multiply(divide(9, 5), celsius)
+  const added = add(32, multiplied)
+
+  return added
+}
+</code></pre>
+<p>We provide <code>celsius</code> as the second argument to <code>multiply</code>, then we provide the
+result of that as the second argument to <code>add</code>. We're simply forwarding the
+evaluated result of a computation to another function; kind of like passing an
+electric guitar's signal through a few effects pedals and then out the
+amplifier.</p>
+<p>What if we had a cleaner way to link these functions together so we can easily
+understand what <code>celsiusToFahrenheit</code> is composed of and then provide the data
+at the end?</p>
+<p>It's time to take this first lesson into overdrive.</p>
+<h2 id="a-taste-of-composition"><a class="header" href="#a-taste-of-composition">A Taste of Composition</a></h2>
+<p>We need a way of passing the result of calling one function to another function
+and having that run. It'd be easier if we could abstract an API... let's try
+that.</p>
+<pre><code class="language-javascript">// this is essentially what we have
+// with our celsiusToFahrenheit
+f2(f1(value))
+
+// but we want something like this;
+// let's call it `link` because
+// we're linking functions together
+link(f2, f1)(value)
+</code></pre>
+<p>With that desired outcome in mind, let's try to write <code>link</code>!</p>
+<pre><code class="language-javascript">const link = (f2, f1) =&gt; value =&gt;
+  f2(f1(value))
+</code></pre>
+<p>Ha! We're still doing the difficult to follow <code>f2(f1(value))</code>, but now we can
+use this like <code>link(f2, f1)(value)</code>.</p>
+<p>Circling back to <code>celsiusToFahrenheit</code>, let's try to use this <code>link</code>
+abstraction:</p>
+<pre><code class="language-javascript">// before
+const celsiusToFahrenheit = celsius =&gt;
+  add(32, multiply(divide(9, 5), celsius))
+
+// after
+const celsiusToFahrenheit = celsius =&gt;
+  link(add(32), multiply(divide(9, 5)))(celsius)
+
+celsiusToFahrenheit(100) // 212
+</code></pre>
+<p>Nice! We can now do a little less inside-out reading. But something doesn't feel
+quite right... Why are we accepting the argument <code>celsius</code> in our
+<code>celsiusToFahrenheit</code> function only to turn right back around and call <code>link()</code>
+with the <code>celsius</code> value? Do we need it?</p>
+<p>Nope.</p>
+<pre><code class="language-javascript">// before
+const celsiusToFahrenheit = celsius =&gt;
+  link(add(32), multiply(divide(9, 5)))(celsius)
+
+// after
+const celsiusToFahrenheit =
+  link(add(32), multiply(divide(9, 5)))
+
+celsiusToFahrenheit(100) // 212
+</code></pre>
+<p>You may be wondering why <code>link</code> reads right to left. Two short answers are:</p>
+<ol>
+<li>Mathematics writes <code>f(x)</code> and not <code>(x)f</code></li>
+<li>Evaluation is done from right to left (inside -&gt; outside), so we are
+<a href="https://en.wikipedia.org/wiki/Operator_associativity">right-associative</a></li>
+</ol>
+<p>However, let me ease your worried mind and make a <code>linkL</code> (<code>L</code> for &quot;left&quot;)
+function for us to use:</p>
+<pre><code class="language-javascript">const linkL = (f1, f2) =&gt; value =&gt;
+  f2(f1(value))
+</code></pre>
+<p>And when we compare that to the original function, we realize that we've come
+nearly full circle but with a whole new perspective:</p>
+<pre><code class="language-javascript">// where we started
+const celsiusToFahrenheit = celsius =&gt;
+  celsius * (9 / 5) + 32
+//        ^    ^    ^
+//  multiply   |    |
+//           divide |
+//                 add
+
+// where we ended up
+const celsiusToFahrenheit =
+  linkL(multiply(divide(9, 5)), add(32))
+</code></pre>
+<p>Ramda provides a few functions, <a href="https://ramdajs.com/docs/#compose"><code>compose</code></a>
+(or <a href="https://ramdajs.com/docs/#o"><code>o</code></a>) and
+<a href="https://ramdajs.com/docs/#pipe"><code>pipe</code></a> that do the <code>link</code> and <code>linkL</code> work for
+us!</p>
+<pre><code class="language-javascript">import {
+  add,
+  compose,
+  divide,
+  multiply,
+  pipe,
+} from 'ramda'
+
+// `compose` and `o` are very similar
+const celsiusToFahrenheit =
+  compose(add(32), multiply(divide(9, 5)))
+
+// `pipe`
+const celsiusToFahrenheit =
+  pipe(multiply(divide(9, 5)), add(32))
+</code></pre>
+<p>We'll cover function composition a bit more in the &quot;Core Ramda Ideas&quot; section.</p>
+<h2 id="your-turn"><a class="header" href="#your-turn">Your Turn</a></h2>
+<p>Can you convert the remaining temperature conversion functions to use Ramda
+functions? Give them a try in <a href="https://tinyurl.com/ygbkvfj4">a pre-loaded Ramda
+REPL</a>.</p>
+<p>Here they are again, in case that link doesn't work:</p>
+<pre><code class="language-javascript">function fahrenheitToCelsius(fahrenheit) {
+  return 5 / 9 * (fahrenheit - 32)
+}
+
+function easyCelsiusToFahrenheit(celsius) {
+  return celsius * 2 + 30
+}
+
+function easyFahrenheitToCelsius(fahrenheit) {
+  return (fahrenheit - 30) / 2
+}
+
+const result = () =&gt; ({
+  '212F = 100C': fahrenheitToCelsius(212),
+  '25C ≈ 80F': easyCelsiusToFahrenheit(25),
+  '60F ≈ 15C': easyFahrenheitToCelsius(60),
+})
+
+result()
+</code></pre>
+<p>When you're done, compare them against <a href="https://tinyurl.com/yhe4pm2w">my
+solutions</a>!</p>
+<details>
+  <summary>Expand this to see my solutions if the link doesn't work</summary>
+<pre><code class="language-javascript">//function fahrenheitToCelsius(fahrenheit) {
+//  return 5 / 9 * (fahrenheit - 32)
+//}
+
+// This is the best I could do before I had to cheat... see below!
+//const fahrenheitToCelsius = fahrenheit =&gt;
+//  multiply(divide(5, 9), subtract(fahrenheit, 32))
+
+// If you're feeling clever, check this out:
+// https://ramdajs.com/docs/#__
+const fahrenheitToCelsius =
+  compose(multiply(divide(5, 9)), subtract(__, 32))
+
+// ===============================================================
+
+//function easyCelsiusToFahrenheit(celsius) {
+//  return celsius * 2 + 30
+//}
+
+// Step 1:
+//const easyCelsiusToFahrenheit = celsius =&gt;
+//  add(30, multiply(2, celsius))
+
+// Step 2:
+const easyCelsiusToFahrenheit =
+  compose(add(30), multiply(2))
+
+// ===============================================================
+
+//function easyFahrenheitToCelsius(fahrenheit) {
+//  return (fahrenheit - 30) / 2
+//}
+
+// This is the best I could do before I had to cheat... see below!
+//const easyFahrenheitToCelsius = fahrenheit =&gt;
+//  divide(subtract(fahrenheit, 30), 2)
+
+// If you're feeling clever, check this out:
+// https://ramdajs.com/docs/#__
+const easyFahrenheitToCelsius =
+  compose(divide(__, 2), subtract(__, 30))
+
+// ===============================================================
+
+const result = () =&gt; ({
+  '212F = 100C': fahrenheitToCelsius(212),
+  '25C ≈ 80F': easyCelsiusToFahrenheit(25),
+  '60F ≈ 15C': easyFahrenheitToCelsius(60),
+})
+
+result()
+</code></pre>
+</details>
+<h2 id="wrapping-up"><a class="header" href="#wrapping-up">Wrapping Up</a></h2>
+<p>This turned out to be far from a gentle introduction!</p>
+<p>We started with some addition, division, and multiplication to convert
+temperature values, and we ended up walking backwards into the heart of
+functional programming.</p>
+<p>Way to go!</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="where-were-going.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="comparing-two-temperatures.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="where-were-going.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="comparing-two-temperatures.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

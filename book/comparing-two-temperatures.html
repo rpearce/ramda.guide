@@ -1,0 +1,437 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js navy">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Comparing Two Temperatures (min, minBy, max, maxBy) - Ramda Guide</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A guided, practical approach to learning ramda">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="intro.html">Ramda Guide</a></li><li class="chapter-item expanded affix "><li class="part-title">Preface</li><li class="chapter-item expanded "><a href="how-to-use-this-guide.html"><strong aria-hidden="true">1.</strong> How to Use This Guide</a></li><li class="chapter-item expanded "><a href="what-is-ramda.html"><strong aria-hidden="true">2.</strong> What is Ramda?</a></li><li class="chapter-item expanded "><a href="prerequisites.html"><strong aria-hidden="true">3.</strong> Suggested Prerequisite Knowledge</a></li><li class="chapter-item expanded "><a href="related-projects.html"><strong aria-hidden="true">4.</strong> Related Projects</a></li><li class="chapter-item expanded affix "><li class="part-title">A Tour of Ramda</li><li class="chapter-item expanded "><a href="including-ramda.html"><strong aria-hidden="true">5.</strong> Including Ramda In A Project</a></li><li class="chapter-item expanded "><a href="documentation.html"><strong aria-hidden="true">6.</strong> Documentation, Source Code, REPL, &amp; Cookbook</a></li><li class="chapter-item expanded "><a href="community-resources.html"><strong aria-hidden="true">7.</strong> Community Resources</a></li><li class="chapter-item expanded "><a href="where-were-going.html"><strong aria-hidden="true">8.</strong> Where We're Going</a></li><li class="chapter-item expanded affix "><li class="part-title">Weathering Our First Ramda Experience</li><li class="chapter-item expanded "><a href="converting-temperature-units.html"><strong aria-hidden="true">9.</strong> Converting Temperature Units (add, multiply, divide)</a></li><li class="chapter-item expanded "><a href="comparing-two-temperatures.html" class="active"><strong aria-hidden="true">10.</strong> Comparing Two Temperatures (min, minBy, max, maxBy)</a></li><li class="chapter-item expanded affix "><li class="part-title">Keep Looking Up (Object Properties)</li><li class="chapter-item expanded "><a href="data-iss-location.html"><strong aria-hidden="true">11.</strong> Our Data: The ISS' Location</a></li><li class="chapter-item expanded "><a href="reading-shallow-object-properties.html"><strong aria-hidden="true">12.</strong> Reading Shallow Object Properties (prop, propOr, props, pick, pluck)</a></li><li class="chapter-item expanded "><a href="testing-shallow-object-properties.html"><strong aria-hidden="true">13.</strong> Testing Shallow Object Properties (has, propEq, propIs, propSatisfies)</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">14.</strong> Reading Deeply Nested Object Properties (path, pathOr, paths)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">15.</strong> Testing Deeply Nested Object Properties (hasPath, pathEq, pathSatisfies)</div></li><li class="chapter-item expanded affix "><li class="part-title">Unshakeable Logic</li><li class="chapter-item expanded "><div><strong aria-hidden="true">16.</strong> Our Data: Earthquakes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">17.</strong> Controlling Flow (ifElse, when, unless)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">18.</strong> Functions Instead of &amp;&amp; and || (and, or)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">19.</strong> Higher-Order Conditionals (both, either)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">20.</strong> &quot;I don't not not like your faults...&quot; (not)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">21.</strong> Flipping a Functions' &quot;Truthyness&quot; or &quot;Falsyness&quot; (complement)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">22.</strong> Logic in Batches (all, allPass, anyPass)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">23.</strong> The Functional Version of a switch (cond)</div></li><li class="chapter-item expanded affix "><li class="part-title">Core Ramda Ideas</li><li class="chapter-item expanded "><div><strong aria-hidden="true">24.</strong> &quot;Same Input → Same Output&quot;</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">25.</strong> Functions' Argument Order</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">26.</strong> Provide Arguments When You Feel Like It (curry)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">27.</strong> Composing Functional Pipelines of Data (o, compose, composeWith, tap)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">28.</strong> Grokking the Ramda Documentation's Type Signatures</div></li><li class="chapter-item expanded affix "><li class="part-title">Updating Objects: Speaking the Lingua Ramda</li><li class="chapter-item expanded "><div><strong aria-hidden="true">29.</strong> Our Data: Languages Object</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">30.</strong> Setting Key/Value Pairs On An Object (assoc, assocPath)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">31.</strong> Omitting Keys From an Object (omit, dissoc, dissocPath)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">32.</strong> Merging Objects (mergeRight, mergeDeepRight, mergeLeft, mergeWith)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">33.</strong> Updating Values If They Exist (evolve)</div></li><li class="chapter-item expanded affix "><li class="part-title">Strings: Tying Up Loose Ends</li><li class="chapter-item expanded "><div><strong aria-hidden="true">34.</strong> Our Data: Footwear</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">35.</strong> Uppercasing &amp; Lowercasing Text (toUpper, toLower)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">36.</strong> Scanning Text for Matches (match)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">37.</strong> Sanitizing Hashtag Text (replace, trim, test, split)</div></li><li class="chapter-item expanded affix "><li class="part-title">All About ['L','i','s','t','s']</li><li class="chapter-item expanded "><div><strong aria-hidden="true">38.</strong> Our data: Nobel Prizes</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">39.</strong> What is a List?</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">40.</strong> Taking &amp; Dropping Items (take, takeLast, takeWhile, drop, dropLast, dropWhile)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">41.</strong> First &amp; Last Item Groupings (head, tail, init, last)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">42.</strong> Searching for Items (filter, reject, find, indexOf, findIndex)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">43.</strong> Calling a Function On Every Item (map, forEach)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">44.</strong> Inserting, Removing, &amp; Updating Items (insert, insertAll, remove, without, update)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">45.</strong> Reversing, Reordering, &amp; Sorting Items (reverse, move, sort, sortBy)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">46.</strong> Splitting Lists (slice, splitAt, splitEvery, splitWhen)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">47.</strong> Reducing a List to a Single Value (reduce, reduceWhile, mapAccum)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">48.</strong> Getting Unique Items (uniq, uniqBy, uniqWith)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">49.</strong> Testing Lists With Conditions (includes, any, all, none, startsWith, endsWith)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">50.</strong> Combining Lists (concat, union, union, intersection, difference, symmetricDifference, symmetricDifferenceWith)</div></li><li class="chapter-item expanded affix "><li class="part-title">Through the Lens</li><li class="chapter-item expanded "><div><strong aria-hidden="true">51.</strong> Our Data: Observatories</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">52.</strong> What is a Lens? (lens, lensIndex, lensProp, lensPath)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">53.</strong> Safe Getters for Our Data (view)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">54.</strong> Safe Setters for Our Data (set, over)</div></li><li class="chapter-item expanded affix "><li class="part-title">Misc</li><li class="chapter-item expanded "><div><strong aria-hidden="true">55.</strong> Converting an Existing API Into a Functional One (invoker)</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">56.</strong> Understanding Ramda Further by Recreating Parts of It</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">57.</strong> Using Ramda With TypeScript</div></li><li class="chapter-item expanded affix "><li class="part-title">Opinionated Best Practices</li><li class="chapter-item expanded "><div><strong aria-hidden="true">58.</strong> The Rule of 3</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">59.</strong> Type, Param, or Pseudo-Type Declarations</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">60.</strong> Writing Declarative Code That Tells a Story</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">61.</strong> You Might Not Need Ramda</div></li><li class="chapter-item expanded affix "><li class="part-title">Your Next Steps</li><li class="chapter-item expanded "><a href="introducing-fp-at-work.html"><strong aria-hidden="true">62.</strong> Introducing FP at Work</a></li><li class="chapter-item expanded "><div><strong aria-hidden="true">63.</strong> How to Guide Others</div></li><li class="chapter-item expanded "><div><strong aria-hidden="true">64.</strong> The Larger FP World</div></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Ramda Guide</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="comparing-two-temperatures"><a class="header" href="#comparing-two-temperatures">Comparing Two Temperatures</a></h1>
+<blockquote>
+<p>It doesn't matter what temperature the room is — it's always room temperature.</p>
+<p>— <cite>Steven Wright</cite></p>
+</blockquote>
+<p>We're at work, and we are tasked with writing two functions that compare any
+two temperatures:</p>
+<ul>
+<li>One that gets the minimum value</li>
+<li>One that gets the maximum value</li>
+</ul>
+<p>We're not sure why they don't use <code>Math.min</code> and <code>Math.max</code> themselves, but we
+do what they ask.</p>
+<pre><code class="language-javascript">const minTemperature = (a, b) =&gt; Math.min(a, b)
+const maxTemperature = (a, b) =&gt; Math.max(a, b)
+
+minTemperature(100, 200) // 100
+maxTemperature(100, 200) // 200
+</code></pre>
+<p>Once we share that solution, we are reminded that task is to compare
+<em>any two temperatures</em>; for example, <code>100</code>, <code>200</code>, <code>'50F'</code>, <code>'25C'</code>.</p>
+<p>Dangit... now we look silly. Okay, let's try this again to make it handle
+strings:</p>
+<pre><code class="language-javascript">const minTemperature = (a, b) =&gt; a &gt; b ? b : a
+const maxTemperature = (a, b) =&gt; a &lt; b ? b : a
+
+minTemperature(100, 200)       // 100
+maxTemperature(100, 200)       // 200
+minTemperature('200F', '100F') // '100F'
+maxTemperature('200F', '100F') // '200F'
+</code></pre>
+<p>Then we realize that Ramda has <a href="https://ramdajs.com/docs/#min"><code>min</code></a> and
+<a href="https://ramdajs.com/docs/#max"><code>max</code></a> functions, so we use those and
+pat ourselves on the back:</p>
+<pre><code class="language-javascript">import { max, min } from 'ramda'
+
+min(100, 200)       // 100
+max(100, 200)       // 200
+min('200F', '100F') // '100F'
+max('200F', '100F') // '200F'
+</code></pre>
+<p>We go back and tell our team to use Ramda's functions, but we're wrong again,
+and we realize that we probably should have asked for a thorough list of inputs.</p>
+<p>But what could we have missed?</p>
+<blockquote>
+<p>Compare any two temperatures.</p>
+</blockquote>
+<p>Oh, no... They might not be part of the same measurement system! This
+means that <code>'50F'</code> could be compared with <code>'15C'</code>! Luckily, we're told that we don't
+have to worry about Kelvin, Rankine, nor Réaumur; we only care about Celsius
+and Fahrenheit. There will also <em>never</em> be any unit-less numbers, so we can
+ignore that case.</p>
+<p>This problem just took on a whole new dimension!</p>
+<p>Good news: in <a href="http://localhost:8000/book/converting-temperature-units.html">the last
+chapter</a>, we wrote
+our <code>celsiusToFahrenheit</code> and <code>fahrenheitToCelsius</code> functions, so we have those
+functions we can use to do those calculations for us.</p>
+<p>Let's try again:</p>
+<pre><code class="language-javascript">import { max, min } from 'ramda'
+
+const celsiusToFahrenheit =
+  compose(add(32), multiply(divide(9, 5)))
+
+const minTemperature = (a, b) =&gt; {
+  const unitA = a.slice(-1) // get the last character, like C or F
+  const unitB = b.slice(-1)
+  const floatA = parseFloat(a)
+  const floatB = parseFloat(b)
+
+  // same temperature type
+  if (unitA === unitB) {
+    const maxT = min(floatA, floatB)
+    return maxT === floatA ? a : b
+  }
+
+  // a is Fahrenheit but b is Celsius
+  if (unitA === 'F') {
+    const floatBAsF = celsiusToFahrenheit(floatB)
+    const minF = min(floatA, floatBAsF)
+
+    return minF === floatA ? a : b
+  }
+
+  // a is Celsius but b is Fahrenheit
+  const floatAAsF = celsiusToFahrenheit(floatA)
+  const minF = min(floatAAsF, floatB)
+
+  return minF === floatB ? b : a
+}
+
+const maxTemperature = (a, b) =&gt; {
+  const unitA = a.slice(-1) // get the last character, like C or F
+  const unitB = b.slice(-1)
+  const floatA = parseFloat(a)
+  const floatB = parseFloat(b)
+
+  // same temperature type
+  if (unitA === unitB) {
+    const maxT = max(floatA, floatB)
+    return maxT === floatA ? a : b
+  }
+
+  // a is Fahrenheit but b is Celsius
+  if (unitA === 'F') {
+    const floatBAsF = celsiusToFahrenheit(floatB)
+    const maxF = max(floatA, floatBAsF)
+
+    return maxF === floatA ? a : b
+  }
+
+  // a is Celsius but b is Fahrenheit
+  const floatAAsF = celsiusToFahrenheit(floatA)
+  const maxF = max(floatAAsF, floatB)
+
+  return maxF === floatB ? b : a
+}
+
+minTemperature('200F', '100F') // '100F'
+maxTemperature('200F', '100F') // '200F'
+minTemperature('50F', '25C')   // '50F'
+maxTemperature('50F', '25C')   // '25C'
+</code></pre>
+<p>(<a href="https://tinyurl.com/yhpevc5c">View this large min/max temperature example in the Ramda
+REPL</a>)</p>
+<p>Goodness gracious! While we could extract some common functionality into many
+small functions, there must be a simpler way. After all, isn't functional
+programming supposed to help us simplify things?</p>
+<p>(Hint: yes!)</p>
+<p>Ramda has <a href="https://ramdajs.com/docs/#minBy"><code>minBy</code></a> and
+<a href="https://ramdajs.com/docs/#maxBy"><code>maxBy</code></a> functions that will compare two
+values <em>after</em> they have been transformed by some transformation function.
+Here's their example from the docs:</p>
+<pre><code class="language-javascript">import { maxBy } from 'ramda'
+
+const square = n =&gt; n * n
+maxBy(square, -3, 2) // -3
+</code></pre>
+<p>In this example, <code>maxBy</code> will call <code>square</code> with <code>-3</code> and <code>2</code>, and it will then
+compare each of <em>those</em> results. Whatever value has the largest result after
+being applied to <code>square</code> will be the returned value. Here, <code>-3 * -3</code> is <code>9</code>,
+whereas <code>2 * 2</code> is <code>4</code>, so since <code>9 &gt; 4</code>, <code>-3</code> is our result.</p>
+<p>Let's refactor our functions:</p>
+<pre><code class="language-javascript">import { maxBy, minBy } from 'ramda'
+
+const asF = x =&gt; {
+  if (x.slice(-1) === 'C') {
+    return celsiusToFahrenheit(parseFloat(x))
+  }
+
+  return x
+}
+
+const minTemperature = (a, b) =&gt; minBy(asF, a, b)
+const maxTemperature = (a, b) =&gt; maxBy(asF, a, b)
+
+minTemperature('200F', '100F') // '100F'
+maxTemperature('200F', '100F') // '200F'
+minTemperature('50F', '25C')   // '50F'
+maxTemperature('50F', '25C')   // '25C'
+maxTemperature('50C', '25C')   // '50C'
+</code></pre>
+<p>(<a href="https://tinyurl.com/yex7k5y5">View this v1 minBy/maxBy temperature example in the Ramda
+REPL</a>)</p>
+<p>By casting all temperatures as a single unit (I chose Fahrenheit here), we can
+compare any temperatures and get back their original values! <code>25C</code> is indeed
+hotter than <code>50F</code>!</p>
+<p>But wait – there's more.</p>
+<p>Just like we noticed in the last chapter, our <code>minTemperature</code> and
+<code>maxTemperature</code> functions are taking in <code>(a, b)</code> and are merely forwarding
+those arguments on. If you recall, Ramda doesn't care <em>when</em> you provide
+arguments, so check this out...</p>
+<pre><code class="language-javascript">// before
+const minTemperature = (a, b) =&gt; minBy(asF, a, b)
+const maxTemperature = (a, b) =&gt; maxBy(asF, a, b)
+
+// after
+const minTemperature = minBy(asF)
+const maxTemperature = maxBy(asF)
+</code></pre>
+<p>(<a href="https://tinyurl.com/ygk3lg7y">View this v2 minBy/maxBy temperature example in the Ramda
+REPL</a>)</p>
+<p>Oh, and one more thing; here's a preview of some upcoming chapters' content
+retroactively applied to making our <code>asF</code> function cleaner:</p>
+<pre><code class="language-javascript">// before
+const asF = x =&gt; {
+  if (x.slice(-1) === 'C') {
+    return celsiusToFahrenheit(parseFloat(x))
+  }
+
+  return x
+}
+
+// after
+
+// Celsius     = String // &quot;100C&quot;
+// Fahrenheit  = String // &quot;100F&quot;
+// Temperature = Celsius | Fahrenheit
+
+// isC :: Temperature -&gt; Bool
+const isC = compose(equals('C'), slice(-1))
+
+// stringCToF :: Celsius -&gt; Number
+const stringCToF = compose(celsiusToFahrenheit, parseFloat)
+
+// asF :: Temperature -&gt; Fahrenheit
+const asF = when(isC, stringCToF)
+</code></pre>
+<p>And here is what all of the new functions together could look like!</p>
+<pre><code class="language-javascript">// Celsius     = String // &quot;100C&quot;
+// Fahrenheit  = String // &quot;100F&quot;
+// Temperature = Celsius | Fahrenheit
+
+// isC :: Temperature -&gt; Bool
+const isC = compose(equals('C'), slice(-1))
+
+// stringCToF :: Celsius -&gt; Number
+const stringCToF = compose(celsiusToFahrenheit, parseFloat)
+
+// asF :: Temperature -&gt; Fahrenheit
+const asF = when(isC, stringCToF)
+
+// minTemperature :: Temperature -&gt; Temperature -&gt; Temperature
+const minTemperature = minBy(asF)
+
+// maxTemperature :: Temperature -&gt; Temperature -&gt; Temperature
+const maxTemperature = maxBy(asF)
+</code></pre>
+<p>(<a href="https://tinyurl.com/yhb4g6dh">View this v3 minBy/maxBy temperature example in the Ramda
+REPL</a>)</p>
+<p>Cool, right?</p>
+<p>Fear not! We'll cover <a href="https://ramdajs.com/docs/#when"><code>when</code></a> in the
+&quot;Unshakeable Logic&quot; section, <a href="https://ramdajs.com/docs/#when"><code>slice</code></a> in the
+&quot;All About ['L','i','s','t','s']&quot; section, and the pseudo-type signatures in the
+&quot;Core Ramda Ideas&quot; section, but you should know the pseudo-types are optional,
+not exact, and aren't a substitute for tools like <a href="https://jsdoc.app">jsdoc</a>.</p>
+<h2 id="wrapping-up"><a class="header" href="#wrapping-up">Wrapping Up</a></h2>
+<p>The person who requested these functions is going to be blown away!</p>
+<p>What started as a simple &quot;which temperature is smaller or larger?&quot; question
+turned out to be an exercise in asking good questions about requirements up
+front.</p>
+<p>We also walked through implementing a naïve solution and refactored it to a more
+elegant one by leveraging Ramda and functional programming.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="converting-temperature-units.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="data-iss-location.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="converting-temperature-units.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="data-iss-location.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
